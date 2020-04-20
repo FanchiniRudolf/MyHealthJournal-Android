@@ -13,9 +13,6 @@
         <activity android:name=".CrearEntrada" />
         <activity android:name=".OverviewEntradas" />
         <activity android:name=".MainActivity" />
-        <activity
-            android:name=".NavBar"
-            android:label="@string/title_activity_nav_bar" />
     </application>
 
 </manifest>
