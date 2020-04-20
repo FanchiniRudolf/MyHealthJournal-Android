@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".CrearEntrada" />
-        <activity android:name=".OverviewEntradas" />
         <activity android:name=".MainActivity" />
     </application>
 
