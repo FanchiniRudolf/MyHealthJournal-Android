@@ -3,7 +3,7 @@ package mx.lifehealthsolutions.myhealthjournal
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import mx.lifehealthsolutions.myhealthjournal.ui.home.HomeFragment
+
 
 class MainActivity : AppCompatActivity() {
 
