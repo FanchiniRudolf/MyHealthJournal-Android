@@ -9,12 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CrearEntrada"></activity>
+        <activity android:name=".NuevaEntradaAsma"></activity>
+        <activity android:name=".CrearEntrada" />
         <activity android:name=".OverviewEntradas" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".NavBar"
-            android:label="@string/title_activity_nav_bar"></activity>
+            android:label="@string/title_activity_nav_bar" />
     </application>
 
 </manifest>
