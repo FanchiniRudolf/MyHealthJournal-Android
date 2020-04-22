@@ -35,13 +35,7 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         rootView = inflater.inflate(R.layout.fragment_diary, container, false);
         configurarRecycler()
 
-
-        rootView.btnNewEvent.setOnClickListener { rootView ->
-            //Log.w("btnNewEvent", "selected")
-            //println("asuuu presionaste el boton")
-            val intCrearEntrada = Intent(activity, CreateEntryActiv::class.java)
-            startActivity(intCrearEntrada)
-        }
+        
 
 
         return inflater.inflate(R.layout.fragment_diary, container, false)
