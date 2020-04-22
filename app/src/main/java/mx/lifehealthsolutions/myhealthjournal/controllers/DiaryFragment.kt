@@ -1,27 +1,23 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_diary.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.interfaces.ListenerRecycler
 import mx.lifehealthsolutions.myhealthjournal.models.AdapterViewCondition
 import mx.lifehealthsolutions.myhealthjournal.models.AdapterViewEntry
+import mx.lifehealthsolutions.myhealthjournal.models.Condition
 import mx.lifehealthsolutions.myhealthjournal.models.Entry
 
 /**
  * A simple [Fragment] subclass.
  */
 class DiaryFragment : Fragment(), ListenerRecycler {
-    var adaptadorEntrada: AdapterViewEntry = AdapterViewEntry(Entry.arrEntradas)
     lateinit var recyclerView: RecyclerView
     protected lateinit var rootView: View
 
@@ -31,21 +27,21 @@ class DiaryFragment : Fragment(), ListenerRecycler {
     ): View? {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_diary, container, false);
+        recyclerView = rootView.findViewById(R.id.recyclerEntradas)
         configurarRecycler()
+
         return inflater.inflate(R.layout.fragment_diary, container, false)
     }
+
+
     private fun configurarRecycler() {
-        recyclerView = rootView.findViewById(R.id.recyclerEntradas)
 
-        adaptadorEntrada = AdapterViewEntry(Entry.arrEntradas)
-        val layout = LinearLayoutManager(activity)
-        layout.orientation = LinearLayoutManager.VERTICAL
-        recyclerView.layoutManager = layout
-
+        var adaptadorEntrada = AdapterViewEntry(Entry.arrEntradas)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.setHasFixedSize(true)
 
         adaptadorEntrada?.listener =  this
         recyclerView.adapter =  adaptadorEntrada
-
 
 
     }
