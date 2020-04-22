@@ -5,12 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.renglon_entrada.view.*
 import mx.lifehealthsolutions.myhealthjournal.interfaces.ListenerRecycler
 import mx.lifehealthsolutions.myhealthjournal.R
 
-class AdapterViewEntry(private val contexto: Context,var arrEntradas:Array<Entry>): RecyclerView.Adapter<AdapterViewEntry.RenglonEntrada>() {
+class AdapterViewEntry(var arrEntradas:Array<Entry>): RecyclerView.Adapter<AdapterViewEntry.RenglonEntrada>() {
 
     var listener: ListenerRecycler? = null
+
+    init{
+        notifyDataSetChanged()
+    }
 
     inner class RenglonEntrada(var vistaRenglon: View): RecyclerView.ViewHolder(vistaRenglon)
     {
@@ -18,7 +23,7 @@ class AdapterViewEntry(private val contexto: Context,var arrEntradas:Array<Entry
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RenglonEntrada {
-        val vista = LayoutInflater.from(contexto).inflate(R.layout.renglon_entrada, parent, false)
+        val vista = LayoutInflater.from(parent.context).inflate(R.layout.renglon_entrada, parent, false)
         return RenglonEntrada(vista)
     }
 
@@ -27,9 +32,10 @@ class AdapterViewEntry(private val contexto: Context,var arrEntradas:Array<Entry
     }
 
     override fun onBindViewHolder(holder: RenglonEntrada, position: Int) {
-        val entrada = arrEntradas[position] // arrPaises.get(position)
-        //holder.vistaRenglon.tvFechaEntrada = entrada.fecha
-        //holder.vistaRenglon.tvTipoEntrada = entrada.tipo
+        val entrada = arrEntradas[position]
+
+        holder.vistaRenglon.tvFechaEntrada.text = entrada.date.toString()
+        holder.vistaRenglon.tvTipoEntrada.text = entrada.condition.toString()
 
         holder.vistaRenglon.setOnClickListener{
             listener?.itemClicked(position)

@@ -1,12 +1,21 @@
 package mx.lifehealthsolutions.myhealthjournal.models
 
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 class Condition(val name: String) {
 
     val entry_values =  ArrayList<Entry>()
     val severity_values = ArrayList<String>()
 
-
+    companion object {
+        val arrCondiciones = arrayOf(
+            Condition("Asma"),
+            Condition("Migraña"),
+            Condition("COVID-19")
+        )
+    }
 
     fun graph(){
         //TODO add later
