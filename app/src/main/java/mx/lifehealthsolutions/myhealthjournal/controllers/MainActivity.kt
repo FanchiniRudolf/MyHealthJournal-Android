@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                         .addToBackStack(null)
                         .commit()
-                    setClimate()
                 }
 
                 R.id.navigation_reminders -> {
@@ -89,6 +88,11 @@ class MainActivity : AppCompatActivity(), LocationListener {
             }
             
 
+
+
+            if (menuItem.itemId == R.id.navigation_home){
+                setClimate()
+            }
             true
         }
 
@@ -132,6 +136,9 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     val  aqi = response?.getJSONObject("data")?.getString("aqi")
                     val pmo10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
                     textView15.setText("pmo10: $pmo10, aqi: $aqi")
+                    println("******************************************************")
+                    println("done")
+                    println("******************************************************")
 
                 }
 
