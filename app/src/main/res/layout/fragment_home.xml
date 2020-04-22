@@ -17,21 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homeRecycler"
-        android:layout_width="359dp"
-        android:layout_height="375dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvHomeTitle">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
@@ -44,4 +29,76 @@
         app:backgroundTint="#213AC3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout12"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHomeTitle">
+
+        <TextView
+            android:id="@+id/tvCalidadAire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calidad del Aire:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="pm10: 111                 aqi: 123" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout13"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
+
+        <TextView
+            android:id="@+id/tvUltimaEntrada"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Última Entrada:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
+
+        <TextView
+            android:id="@+id/tvProximaMedicina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Próxima Medicina:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
