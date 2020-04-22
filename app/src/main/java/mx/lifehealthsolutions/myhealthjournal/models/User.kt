@@ -1,6 +1,9 @@
 package mx.lifehealthsolutions.myhealthjournal.models
 
 class User (val nombre: String, val email: String, val password: String): Comparable<User> {
+
+    val conditions_list =  ArrayList<Condition>()
+
     override fun compareTo(other: User): Int {
         return nombre.compareTo(other.nombre)
     }
