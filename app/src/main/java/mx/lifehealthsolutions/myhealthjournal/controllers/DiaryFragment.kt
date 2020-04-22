@@ -35,13 +35,7 @@ class DiaryFragment : Fragment(), ListenerRecycler {
             val intent = Intent(activity, CreateEntryActiv::class.java)
             startActivity(intent)
         }
-
-        // Return the fragment view/layout
-        return view
-
-    }
-    private fun configurarRecycler() {
-        recyclerView = rootView.findViewById(R.id.recyclerEntradas)
+        recyclerView = view.recyclerEntradas
 
         adaptadorEntrada = AdapterViewEntry(Entry.arrEntradas)
         val layout = LinearLayoutManager(activity)
@@ -50,6 +44,8 @@ class DiaryFragment : Fragment(), ListenerRecycler {
 
         adaptadorEntrada?.listener =  this
         recyclerView.adapter =  adaptadorEntrada
+        // Return the fragment view/layout
+        return view
 
     }
 
