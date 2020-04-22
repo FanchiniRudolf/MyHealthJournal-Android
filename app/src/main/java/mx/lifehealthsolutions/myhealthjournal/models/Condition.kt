@@ -1,7 +1,5 @@
 package mx.lifehealthsolutions.myhealthjournal.models
 
-import mx.lifehealthsolutions.myhealthjournal.controllers.FilterType
-
 
 class Condition(val name: String) {
 
