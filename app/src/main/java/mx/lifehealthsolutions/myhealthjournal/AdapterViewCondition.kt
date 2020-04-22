@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.renglon_sintoma.view.*
 
 class AdapterViewCondition(private val contexto: Context, var arrCondiciones:Array<Condition>): RecyclerView.Adapter<AdapterViewCondition.RenglonCondicion>() {
     var listener: ListenerRecycler? = null
