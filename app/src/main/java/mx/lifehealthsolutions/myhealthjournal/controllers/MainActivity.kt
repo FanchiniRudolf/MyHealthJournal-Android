@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                         .addToBackStack(null)
                         .commit()
+                    setClimate()
                 }
 
                 R.id.navigation_reminders -> {
@@ -120,7 +121,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
         gps.removeUpdates(this)
     }
 
-
     private fun setClimate() {
         val latitud = position.latitude
         val longitude = position.longitude
@@ -175,7 +175,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
     override fun onLocationChanged(location: Location?) {
         if(location != null){
             position = location
-            setClimate()
+
         }
     }
 
