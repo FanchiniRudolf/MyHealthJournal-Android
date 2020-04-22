@@ -4,6 +4,7 @@ import java.util.*
 
 class Entry(val condition: Condition, val date: Date, val scale: Int, val comment:String, val eventTime: String): Comparable<Entry>{
 
+
     override fun compareTo(other: Entry): Int {
         return date.compareTo(other.date)
     }
