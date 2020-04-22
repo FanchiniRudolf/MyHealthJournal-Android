@@ -51,7 +51,7 @@
             android:id="@+id/textView15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="pm10: 111                 aqi: 123" />
+            android:text="pm10: NAN                 aqi: NAN" />
     </LinearLayout>
 
     <LinearLayout

@@ -88,6 +88,11 @@ class MainActivity : AppCompatActivity(), LocationListener {
             }
             
 
+
+
+            if (menuItem.itemId == R.id.navigation_home){
+                setClimate()
+            }
             true
         }
 
@@ -120,7 +125,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
         gps.removeUpdates(this)
     }
 
-
     private fun setClimate() {
         val latitud = position.latitude
         val longitude = position.longitude
@@ -132,6 +136,9 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     val  aqi = response?.getJSONObject("data")?.getString("aqi")
                     val pmo10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
                     textView15.setText("pmo10: $pmo10, aqi: $aqi")
+                    println("******************************************************")
+                    println("done")
+                    println("******************************************************")
 
                 }
 
@@ -175,7 +182,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
     override fun onLocationChanged(location: Location?) {
         if(location != null){
             position = location
-            setClimate()
+
         }
     }
 
