@@ -1,7 +1,8 @@
-package mx.lifehealthsolutions.myhealthjournal
+package mx.lifehealthsolutions.myhealthjournal.controllers
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import mx.lifehealthsolutions.myhealthjournal.R
 
 class CrearEntrada : AppCompatActivity() {
 

@@ -1,10 +1,12 @@
-package mx.lifehealthsolutions.myhealthjournal
+package mx.lifehealthsolutions.myhealthjournal.models
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import mx.lifehealthsolutions.myhealthjournal.interfaces.ListenerRecycler
+import mx.lifehealthsolutions.myhealthjournal.R
 
 class AdapterViewEntry(private val contexto: Context,var arrEntradas:Array<Entry>): RecyclerView.Adapter<AdapterViewEntry.RenglonEntrada>() {
 

@@ -1,6 +1,6 @@
-package mx.lifehealthsolutions.myhealthjournal
+package mx.lifehealthsolutions.myhealthjournal.models
 
-import kotlin.random.Random
+import mx.lifehealthsolutions.myhealthjournal.controllers.FilterType
 
 
 class Condition(val name: String) {
@@ -30,7 +30,7 @@ class Condition(val name: String) {
         entry_values.removeAt(index)
     }
 
-    fun filter(filter:FilterType){
+    fun filter(filter: FilterType){
         //Todo make different comparators
     }
 }
