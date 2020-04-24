@@ -34,7 +34,6 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_diary, container, false);
         configurarRecycler()
-
         
 
 
