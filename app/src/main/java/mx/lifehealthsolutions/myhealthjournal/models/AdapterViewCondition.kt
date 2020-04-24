@@ -1,14 +1,14 @@
 package mx.lifehealthsolutions.myhealthjournal.models
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import mx.lifehealthsolutions.myhealthjournal.interfaces.ListenerRecycler
 import mx.lifehealthsolutions.myhealthjournal.R
 
-class AdapterViewCondition(private val contexto: Context, var arrCondiciones:Array<Condition>): RecyclerView.Adapter<AdapterViewCondition.RenglonCondicion>() {
+class AdapterViewCondition(var contexto: FragmentActivity?, var arrCondiciones:Array<Condition>): RecyclerView.Adapter<AdapterViewCondition.RenglonCondicion>() {
     var listener: ListenerRecycler? = null
 
     inner class RenglonCondicion(var vistaRenglon: View): RecyclerView.ViewHolder(vistaRenglon)
@@ -17,7 +17,7 @@ class AdapterViewCondition(private val contexto: Context, var arrCondiciones:Arr
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RenglonCondicion {
-        val vista = LayoutInflater.from(contexto).inflate(R.layout.renglon_sintoma, parent, false)
+        val vista = LayoutInflater.from(parent.context).inflate(R.layout.renglon_sintoma, parent, false)
         return RenglonCondicion(vista)
     }
 
