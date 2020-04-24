@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
                 }
 
                 else ->
-                    println("esto no deberia pasar salu2")
+                    println("Impossible")
             }
             
 
