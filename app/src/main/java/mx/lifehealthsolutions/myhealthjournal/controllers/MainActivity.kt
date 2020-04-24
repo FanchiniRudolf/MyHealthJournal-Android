@@ -130,8 +130,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
             .getAsJSONObject(object: JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject?) {
                     val  aqi = response?.getJSONObject("data")?.getString("aqi")
-                    val pmo10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
-                    textView15.setText("pmo10: $pmo10, aqi: $aqi")
+                    //val pmo10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
+                    //textView15.setText("pmo10: $pmo10, aqi: $aqi")
 
                 }
 
