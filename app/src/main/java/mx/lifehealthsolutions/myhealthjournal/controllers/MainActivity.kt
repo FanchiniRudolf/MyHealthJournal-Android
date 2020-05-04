@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
     private val GPS_PERMIT: Int = 200
     private lateinit var gps: LocationManager
     private lateinit var position: Location
+    private lateinit var fragHome: HomeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +39,11 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         AndroidNetworking.initialize(this)
         // Initial frament (shown when app is launched)
-        val fragHome = HomeFragment()
+        fragHome = HomeFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.contenedorFragmentos, fragHome)
             .commit()
+
 
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                         .addToBackStack(null)
                         .commit()
+                    setClimate()
                 }
 
                 R.id.navigation_reminders -> {
@@ -98,6 +101,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
     override fun onStart() {
         super.onStart()
         configureGPS()
+
     }
 
     override fun onResume() {
@@ -113,6 +117,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), GPS_PERMIT)
         }
+
     }
 
     override fun onPause() {
@@ -129,9 +134,13 @@ class MainActivity : AppCompatActivity(), LocationListener {
             .build()
             .getAsJSONObject(object: JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject?) {
+                    println(response)
                     val  aqi = response?.getJSONObject("data")?.getString("aqi")
-                    //val pmo10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
+                    val pmo10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
+                    println(aqi)
+                    println(pmo10)
                     //textView15.setText("pmo10: $pmo10, aqi: $aqi")
+                    fragHome.setData("pmo10: $pmo10, aqi: $aqi")
 
                 }
 
