@@ -27,9 +27,6 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-
         val view: View = inflater!!.inflate(R.layout.fragment_diary, container, false)
 
         view.btnNewEvent.setOnClickListener { view ->
@@ -47,7 +44,6 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         recyclerView.adapter =  adaptadorEntrada
         // Return the fragment view/layout
         return view
-
     }
 
     override fun itemClicked(position: Int) {
