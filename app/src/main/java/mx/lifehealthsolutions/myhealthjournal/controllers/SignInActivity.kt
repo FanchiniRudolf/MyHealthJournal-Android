@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -51,6 +52,11 @@ class SignInActivity : AppCompatActivity() {
                 // ...
             }
         }
+    }
+
+    fun register(v: View){
+        val regIntent = Intent(this, SignUpActivity::class.java)
+        startActivity(regIntent)
     }
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
 
