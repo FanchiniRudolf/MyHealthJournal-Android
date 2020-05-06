@@ -18,7 +18,10 @@ import androidx.fragment.app.FragmentTransaction
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_home.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.models.Condition
@@ -33,18 +36,27 @@ class MainActivity : AppCompatActivity(), LocationListener {
     private lateinit var position: Location
     private lateinit var fragHome: HomeFragment
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         AndroidNetworking.initialize(this)
-        // Initial frament (shown when app is launched)
+
+
+
+
         fragHome = HomeFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.contenedorFragmentos, fragHome)
             .commit()
 
-
+        if(FirebaseAuth.getInstance().getCurrentUser() == null){
+            val signinIntent = Intent(this, SignInActivity::class.java)
+            startActivity(signinIntent)
+            finish()
+        }
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
