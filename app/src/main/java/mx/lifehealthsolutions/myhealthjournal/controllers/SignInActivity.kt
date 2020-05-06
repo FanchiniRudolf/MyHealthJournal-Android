@@ -3,21 +3,22 @@ package mx.lifehealthsolutions.myhealthjournal.controllers
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import mx.lifehealthsolutions.myhealthjournal.R
 
 class SignInActivity : AppCompatActivity() {
     val RC_SIGN_IN = 123
     private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
@@ -34,6 +35,10 @@ class SignInActivity : AppCompatActivity() {
             startActivityForResult(signInIntent, RC_SIGN_IN);
 
         };
+
+        buttonIniciar.setOnClickListener{
+            signIn()
+        }
 
     }
 
@@ -52,6 +57,29 @@ class SignInActivity : AppCompatActivity() {
                 // ...
             }
         }
+    }
+
+    fun signIn(){
+        var email = semail.text.toString()
+        var password = spassword.text.toString()
+        if(email != null && password != null){
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) {
+
+                    //Verificamos que la tarea se ejecutó correctamente
+                        task ->
+                    if (task.isSuccessful) {
+                        // Si se inició correctamente la sesión vamos a la vista Home de la aplicación
+                        val mainIntent = Intent(this, MainActivity::class.java)
+                        startActivity(mainIntent)
+                    } else {
+                        // sino le avisamos el usuairo que orcurrio un problema
+                        Toast.makeText(this, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
+        }
+
     }
 
     fun register(v: View){

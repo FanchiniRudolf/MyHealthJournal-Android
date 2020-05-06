@@ -5,10 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import mx.lifehealthsolutions.myhealthjournal.R
@@ -34,20 +30,29 @@ class SignUpActivity : AppCompatActivity() {
         if(cpassword != password){
             // Toast "Passwords do not match!
         }
-        else{
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) {
-                    //Verificamos que la tarea se ejecutó correctamente
-                        task ->
+        else {
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Si se inició correctamente la sesión vamos a la vista Home de la aplicación
-                        Toast.makeText(this, "Authentication success.",
-                            Toast.LENGTH_SHORT).show()
+                        // Sign in success, update UI with the signed-in user's information
+
+                        Toast.makeText(
+                            baseContext, "Authentication success.",
+
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        val user = auth.currentUser
+                        val  mainIntent = Intent(this, MainActivity::class.java)
+                        startActivity(mainIntent)
                     } else {
-                        // sino le avisamos el usuairo que orcurrio un problema
-                        Toast.makeText(this, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show()
+                        // If sign in fails, display a message to the user.
+                        Toast.makeText(
+                            baseContext, "Authentication failed.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
+
+                    // ...
                 }
         }
     }
