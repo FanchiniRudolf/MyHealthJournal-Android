@@ -59,6 +59,7 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+
     fun signIn(){
         var email = semail.text.toString()
         var password = spassword.text.toString()
@@ -79,13 +80,15 @@ class SignInActivity : AppCompatActivity() {
                     }
                 }
         }
-
     }
+
 
     fun register(v: View){
         val regIntent = Intent(this, SignUpActivity::class.java)
         startActivity(regIntent)
     }
+
+
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
 
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
@@ -106,7 +109,6 @@ class SignInActivity : AppCompatActivity() {
                 // ...
             }
     }
-
 
 
     override fun onStart() {
