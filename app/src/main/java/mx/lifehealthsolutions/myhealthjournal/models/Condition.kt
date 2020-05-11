@@ -7,7 +7,7 @@ import kotlin.collections.ArrayList
 class Condition(val name: String) {
 
     val entry_values =  ArrayList<Entry>()
-    val severity_values = ArrayList<String>()
+    val severity_values = ArrayList<String>() //todo remove list is already on enrty
 
     companion object {
         val arrCondiciones = arrayOf(
