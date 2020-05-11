@@ -28,7 +28,10 @@ class SignUpActivity : AppCompatActivity() {
         var cpassword = cpassword.text.toString()
 
         if(cpassword != password){
-            // Toast "Passwords do not match!
+            Toast.makeText(
+                baseContext, " Passwords do not match.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
         else {
             auth.createUserWithEmailAndPassword(email, password)
