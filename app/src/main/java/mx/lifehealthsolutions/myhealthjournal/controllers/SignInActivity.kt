@@ -90,7 +90,7 @@ class SignInActivity : AppCompatActivity() {
             "email" to email
         )
         val db = FirebaseFirestore.getInstance()
-        db.collection("cities").document("LA")
+        db.collection("Users").document("{$email}")
             .set(user)
     }
 
