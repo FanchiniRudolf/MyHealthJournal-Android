@@ -36,8 +36,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
     private lateinit var position: Location
     private lateinit var fragHome: HomeFragment
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -106,8 +104,9 @@ class MainActivity : AppCompatActivity(), LocationListener {
             true
         }
 
-        val test_user = User("John Doe", "johndoe@gmail.com", "1234abcd")
+        val test_user = User
         test_user.conditions_list.add(Condition("asma"))
+        val docRef = test_user.download()
     }
 
     override fun onStart() {

@@ -1,9 +1,17 @@
 package mx.lifehealthsolutions.myhealthjournal.models
 
-class User (val nombre: String, val email: String, val password: String): Comparable<User> {
+import android.content.ContentValues.TAG
+import android.util.Log
+import com.google.firebase.firestore.FirebaseFirestore
+
+object User: Comparable<User> {
 
     val conditions_list =  ArrayList<Condition>()
     val medicine_list = ArrayList<Medicine>()
+    lateinit var nombre: String
+    lateinit var email: String
+    lateinit var password: String
+    var db = FirebaseFirestore.getInstance()
 
     override fun compareTo(other: User): Int {
         return nombre.compareTo(other.nombre)
@@ -11,10 +19,22 @@ class User (val nombre: String, val email: String, val password: String): Compar
 
     fun upload(){
         //upload to the cloud
+
     }
 
     fun download(){
         //download from the cloud
+        db.collection("Users/{$email}")
+            .whereEqualTo("email", true)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
     }
 
     fun delete(){
@@ -35,30 +55,5 @@ class User (val nombre: String, val email: String, val password: String): Compar
 
     fun removeMedicine(medicine: Medicine){
         medicine_list.remove(medicine)
-    }
-
-    companion object {
-        val arrUsuarios = arrayOf(
-            User(
-                "Bobby",
-                "bobby@itesm.mx",
-                "12345678"
-            ),
-            User(
-                "Irving",
-                "irving@itesm.mx",
-                "12345678"
-            ),
-            User(
-                "Luis",
-                "luis@itesm.mx",
-                "12345678"
-            ),
-            User(
-                "Rudy",
-                "rudy@itesm.mx",
-                "12345678"
-            )
-        )
     }
 }
