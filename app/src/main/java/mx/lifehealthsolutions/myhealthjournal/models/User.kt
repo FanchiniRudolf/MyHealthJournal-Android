@@ -9,6 +9,14 @@ class User (val nombre: String, val email: String, val password: String): Compar
         return nombre.compareTo(other.nombre)
     }
 
+    fun upload(){
+        //upload to the cloud
+    }
+
+    fun dowload(){
+        //download from the cloud
+    }
+
     fun delete(){
         //todo make a function that deletes from firebase
     }
