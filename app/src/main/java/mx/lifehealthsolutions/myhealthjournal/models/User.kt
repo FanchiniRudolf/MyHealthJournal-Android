@@ -22,8 +22,9 @@ object User: Comparable<User> {
 
     }
 
-    fun download(){
+    fun download(email: String){
         //download from the cloud
+        this.email = email
         db.collection("Users/{$email}")
             .whereEqualTo("email", true)
             .get()

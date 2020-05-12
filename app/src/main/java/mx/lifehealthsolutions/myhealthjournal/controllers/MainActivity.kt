@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         val test_user = User
         test_user.conditions_list.add(Condition("asma"))
-        val docRef = test_user.download()
+        val docRef = test_user.download() //todo get email from login
     }
 
     override fun onStart() {
