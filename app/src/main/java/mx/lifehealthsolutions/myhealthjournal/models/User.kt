@@ -13,7 +13,7 @@ class User (val nombre: String, val email: String, val password: String): Compar
         //upload to the cloud
     }
 
-    fun dowload(){
+    fun download(){
         //download from the cloud
     }
 
