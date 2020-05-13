@@ -16,6 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import mx.lifehealthsolutions.myhealthjournal.R
+import mx.lifehealthsolutions.myhealthjournal.models.User
 
 class SignInActivity : AppCompatActivity() {
     val RC_SIGN_IN = 123
@@ -29,7 +30,6 @@ class SignInActivity : AppCompatActivity() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build();
-
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         sign_in_button.setOnClickListener{
@@ -75,6 +75,7 @@ class SignInActivity : AppCompatActivity() {
                         // Si se inició correctamente la sesión vamos a la vista Home de la aplicación
                         val mainIntent = Intent(this, MainActivity::class.java)
                         startActivity(mainIntent)
+
                     } else {
                         // sino le avisamos el usuairo que orcurrio un problema
                         Toast.makeText(this, "Authentication failed.",
@@ -119,7 +120,7 @@ class SignInActivity : AppCompatActivity() {
 
                 } else {
                     // If sign in fails, display a message to the user.
-
+                    
                 }
 
                 // ...
