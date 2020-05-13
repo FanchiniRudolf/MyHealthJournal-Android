@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:ems="10"
+                android:hint="2020/01/01"
                 android:inputType="date" />
         </LinearLayout>
 
@@ -176,7 +177,8 @@
             android:id="@+id/spinnerSeveridad"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:entries="@array/arrSeverityValues" />
 
     </LinearLayout>
 
@@ -203,7 +205,8 @@
         <Spinner
             android:id="@+id/spinnerTiempoEvento"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:entries="@array/arrEventTimeValues" />
 
         <TextView
             android:id="@+id/tvHelperText"
