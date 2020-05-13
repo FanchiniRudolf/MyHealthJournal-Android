@@ -16,14 +16,15 @@ class AdapterViewCondition(var email: String?): RecyclerView.Adapter<AdapterView
     var listener: ListenerRecycler? = null
     var conditions:Array<Condition>? =  null
     var arrCondiciones: Array<Condition> ?= null
+    var arrConditions  =  mutableListOf<Condition>()
+
     init {
-        downloadConditions()
+
         notifyDataSetChanged()
-        conditions  = arrayOf(
+        arrCondiciones  = arrayOf(
             Condition("Asma"),
             Condition("Migraña"),
-            Condition("COVID-19"),
-            Condition("New")
+            Condition("COVID-19")
         )
     }
 
@@ -31,21 +32,21 @@ class AdapterViewCondition(var email: String?): RecyclerView.Adapter<AdapterView
         val db = FirebaseFirestore.getInstance()
         val user = FirebaseAuth.getInstance().currentUser?.email
         var userStr =  "{${email}}"
-        var arrConditions  =  mutableListOf<Condition>()
         db.collection("Users/$userStr/Conditions")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                    var temp = document.id
                     arrConditions.add(Condition(document.id))
                 }
-                conditions =  arrConditions.toTypedArray()
-                notifyDataSetChanged()
+
 
             }
             .addOnFailureListener { exception ->
                 Log.w(ContentValues.TAG, "Error getting documents: ", exception)
             }
+        conditions = arrConditions.toTypedArray<Condition>()
     }
 
     inner class RenglonCondicion(var vistaRenglon: View): RecyclerView.ViewHolder(vistaRenglon)
@@ -59,10 +60,7 @@ class AdapterViewCondition(var email: String?): RecyclerView.Adapter<AdapterView
     }
 
     override fun getItemCount(): Int {
-        if  (arrCondiciones  != null)  return arrCondiciones!!.size
-        else{
-            return 0
-        }
+        return arrCondiciones?.size!!
 
     }
 
