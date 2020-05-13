@@ -1,13 +1,13 @@
 package mx.lifehealthsolutions.myhealthjournal.models
 
-class User (val nombre: String, val email: String, val password: String): Comparable<User> {
+object User  {
+    lateinit var name: String
+    lateinit var email: String
+    lateinit var password: String
 
     val conditions_list =  ArrayList<Condition>()
     val medicine_list = ArrayList<Medicine>()
 
-    override fun compareTo(other: User): Int {
-        return nombre.compareTo(other.nombre)
-    }
 
     fun delete(){
         //todo make a function that deletes from firebase
@@ -29,28 +29,5 @@ class User (val nombre: String, val email: String, val password: String): Compar
         medicine_list.remove(medicine)
     }
 
-    companion object {
-        val arrUsuarios = arrayOf(
-            User(
-                "Bobby",
-                "bobby@itesm.mx",
-                "12345678"
-            ),
-            User(
-                "Irving",
-                "irving@itesm.mx",
-                "12345678"
-            ),
-            User(
-                "Luis",
-                "luis@itesm.mx",
-                "12345678"
-            ),
-            User(
-                "Rudy",
-                "rudy@itesm.mx",
-                "12345678"
-            )
-        )
-    }
+
 }
