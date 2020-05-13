@@ -1,7 +1,11 @@
 package mx.lifehealthsolutions.myhealthjournal.models
 
+import android.R
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 
 object User: Comparable<User> {
@@ -22,19 +26,23 @@ object User: Comparable<User> {
 
     }
 
-    fun download(email: String){
+    fun download(email: String,context: Context){
         //download from the cloud
         this.email = email
-        db.collection("Users/{$email}")
-            .whereEqualTo("email", true)
+        db.collection("Users/$email/Conditions")
             .get()
             .addOnSuccessListener { documents ->
+                var conditions_string = ArrayList<String>()
                 for (document in documents) {
                     Log.d(TAG, "${document.id} => ${document.data}")
+                    conditions_string.add(document.id)
                 }
+                var adapter = ArrayAdapter(context, R.layout.simple_spinner_item, conditions_string) as SpinnerAdapter
             }
             .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents: ", exception)
+                var exceptionString = ArrayList<String>()
+                exceptionString.add("No conditions found")
+                var adapter = ArrayAdapter(context, R.layout.simple_spinner_item, exceptionString) as SpinnerAdapter
             }
     }
 
