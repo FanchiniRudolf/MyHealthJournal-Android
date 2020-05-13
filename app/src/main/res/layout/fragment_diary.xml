@@ -116,7 +116,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"
-            android:text="Mis entradas:"
+            android:text="Mis condiciones:"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <androidx.recyclerview.widget.RecyclerView
