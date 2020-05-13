@@ -39,14 +39,14 @@
                 android:id="@+id/spassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="contraseña" />
+                android:hint="contraseña"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/buttonIniciar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="signIn"
             android:text="Iniciar sesión" />
 
     </LinearLayout>
