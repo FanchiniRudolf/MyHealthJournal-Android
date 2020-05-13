@@ -26,24 +26,27 @@ object User: Comparable<User> {
 
     }
 
-    fun download(email: String,context: Context){
+    fun downloadConditionNames(context: Context): SpinnerAdapter {
         //download from the cloud
-        this.email = email
+        var adapter: SpinnerAdapter
+        var conditions_string = ArrayList<String>()
+        conditions_string.add("Conditions")
         db.collection("Users/$email/Conditions")
             .get()
             .addOnSuccessListener { documents ->
-                var conditions_string = ArrayList<String>()
+
                 for (document in documents) {
                     Log.d(TAG, "${document.id} => ${document.data}")
                     conditions_string.add(document.id)
                 }
-                var adapter = ArrayAdapter(context, R.layout.simple_spinner_item, conditions_string) as SpinnerAdapter
             }
             .addOnFailureListener { exception ->
-                var exceptionString = ArrayList<String>()
-                exceptionString.add("No conditions found")
-                var adapter = ArrayAdapter(context, R.layout.simple_spinner_item, exceptionString) as SpinnerAdapter
+
+                conditions_string.add("No conditions found")
+
             }
+        adapter = ArrayAdapter(context, R.layout.simple_spinner_item, conditions_string) as SpinnerAdapter
+        return adapter
     }
 
     fun delete(){
