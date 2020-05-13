@@ -57,6 +57,9 @@ class SignInActivity : AppCompatActivity() {
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 // ...
+                print("**************************************")
+                print(e)
+                print("**************************************")
             }
         }
     }
@@ -119,7 +122,7 @@ class SignInActivity : AppCompatActivity() {
 
                 } else {
                     // If sign in fails, display a message to the user.
-                    
+                    print("bitconeeeeeeeeect")
                 }
 
                 // ...
