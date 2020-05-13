@@ -29,13 +29,6 @@ class ReminderFragment : Fragment() {
         // Inflate the layout for this fragment
         val view: View = inflater!!.inflate(R.layout.fragment_reminder, container, false)
 
-        // spinner condition
-        var arr = ArrayList<String>() //todo irving
-        arr.add("Asma")
-        arr.add("Sars")
-        arr.add("Covid")
-        arr.add("asdfasdf")
-
         spinner = view.conditionSpinner
         var adapter = User.downloadConditionNames(this.requireActivity())
         spinner.adapter = adapter
