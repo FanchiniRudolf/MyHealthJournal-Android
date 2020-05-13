@@ -5,19 +5,41 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.SpinnerAdapter
+import kotlinx.android.synthetic.main.fragment_reminder.*
+import kotlinx.android.synthetic.main.fragment_reminder.view.*
+import kotlinx.android.synthetic.main.fragment_reminder.view.conditionSpinner
 import mx.lifehealthsolutions.myhealthjournal.R
+import mx.lifehealthsolutions.myhealthjournal.models.Condition
 
 /**
  * A simple [Fragment] subclass.
  */
 class ReminderFragment : Fragment() {
 
+    lateinit var spinner: Spinner
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reminder, container, false)
+        val view: View = inflater!!.inflate(R.layout.fragment_reminder, container, false)
+
+        var arr = ArrayList<String>() //todo irving
+        arr.add("Asma")
+        arr.add("Sars")
+        arr.add("Covid")
+        arr.add("asdfasdf")
+
+        spinner = view.conditionSpinner
+        var adapter = ArrayAdapter(this.requireActivity(), android.R.layout.simple_spinner_item, arr) as SpinnerAdapter
+        spinner.adapter = adapter
+        //todo add spinner elements form array array adapter
+
+        return view
     }
 
 }
