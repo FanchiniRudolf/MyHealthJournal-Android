@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.fragment_diary.view.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.interfaces.ListenerRecycler
@@ -35,6 +38,10 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         }
         recyclerView = view.recyclerEntradas
 
+
+        val user = FirebaseAuth.getInstance().currentUser
+            user?.email?.let { getEntries(it) }
+
         adaptadorEntrada = AdapterViewEntry(Entry.arrEntradas)
         val layout = LinearLayoutManager(activity)
         layout.orientation = LinearLayoutManager.VERTICAL
@@ -44,6 +51,31 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         recyclerView.adapter =  adaptadorEntrada
         // Return the fragment view/layout
         return view
+    }
+
+    fun getEntries(email: String){
+        val db = FirebaseFirestore.getInstance()
+        val user = FirebaseAuth.getInstance().currentUser?.email
+        var userStr =  "{${user}}"
+        var arrEntradas  =  ArrayList<Entry>()
+        var userRef = db.collection("Users").document(userStr).collection("Entries")
+        userRef.get().addOnSuccessListener { documents ->
+            if(documents != null){
+                // Si hubo informacion
+                for(document in documents){
+                    println("/////////////////////////////////////")
+                    println("${document.id}=>${document.data}")
+                    println("/////////////////////////////////////")
+                }
+
+            } else {
+
+            }
+        }
+            .addOnFailureListener{ exception ->
+                // Hubo un error
+            }
+
     }
 
     override fun itemClicked(position: Int) {
