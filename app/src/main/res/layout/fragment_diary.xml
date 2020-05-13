@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Proxima cita" />
+                android:text="Próxima cita" />
 
             <TextView
                 android:id="@+id/tvProximaCita"
@@ -105,34 +105,29 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="No hay por el momento" />
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="16dp"
+            android:text="Mis entradas:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerEntradas"
+            android:layout_width="401dp"
+            android:layout_height="519dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:scrollbars="vertical" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Mis entradas:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerEntradas"
-        android:layout_width="397dp"
-        android:layout_height="572dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
