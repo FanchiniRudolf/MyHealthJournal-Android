@@ -21,6 +21,7 @@ import mx.lifehealthsolutions.myhealthjournal.models.User
 class SignInActivity : AppCompatActivity() {
     val RC_SIGN_IN = 123
     private lateinit var auth: FirebaseAuth
+    val TAG: String = "SignInActivity";
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +59,8 @@ class SignInActivity : AppCompatActivity() {
                 // Google Sign In failed, update UI appropriately
                 // ...
                 print("**************************************")
+                Log.w(TAG,
+                    "***************************\n"+e+"\n***************************")
                 print(e)
                 print("**************************************")
             }
