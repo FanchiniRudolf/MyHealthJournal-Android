@@ -164,7 +164,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/condDescription"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="10"
