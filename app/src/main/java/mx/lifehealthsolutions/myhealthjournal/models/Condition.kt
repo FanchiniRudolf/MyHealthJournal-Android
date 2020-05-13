@@ -28,7 +28,4 @@ class Condition(val name: String) {
         entry_values.removeAt(index)
     }
 
-    fun filter(filter: FilterType){
-        //Todo make different comparators
-    }
 }

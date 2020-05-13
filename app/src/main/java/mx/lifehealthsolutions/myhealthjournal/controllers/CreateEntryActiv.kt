@@ -6,14 +6,20 @@ import android.os.Bundle
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import android.widget.Spinner
 import kotlinx.android.synthetic.main.activity_crear_entrada.*
 import mx.lifehealthsolutions.myhealthjournal.R
+import mx.lifehealthsolutions.myhealthjournal.models.User
 
 class CreateEntryActiv : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_entrada)
+        val spinner: Spinner = findViewById(R.id.spinnerTipo)
+        val adapter = User.downloadConditionNames(this)
+        spinnerTipo.adapter = adapter
+
     }
 
     fun registerEntryDB() {
