@@ -27,9 +27,7 @@ class SignUpActivity : AppCompatActivity() {
         var email = email.text.toString()
         var password = password.text.toString()
         var cpassword = cpassword.text.toString()
-        var name = name.text.toString()
-        var age = age.text.toString()
-        var weight = weight.text.toString()
+
 
 
         if(cpassword != password){
@@ -50,9 +48,8 @@ class SignUpActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                         val user = auth.currentUser
-                        val  mainIntent = Intent(this, MainActivity::class.java)
-                        registerUserDB(email, user?.displayName)
-                        startActivity(mainIntent)
+                        val  setupIntent = Intent(this, StartupSetup::class.java).putExtra("email",email)
+                        startActivity(setupIntent)
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(
@@ -64,18 +61,5 @@ class SignUpActivity : AppCompatActivity() {
                     // ...
                 }
         }
-    }
-
-    private fun registerUserDB(email: String, displayName: String?) {
-        val user = hashMapOf(
-            "name" to name,
-            "email" to email,
-            "age" to age,
-            "weight" to weight,
-            "height" to height
-        )
-        val db = FirebaseFirestore.getInstance()
-        db.collection("Users").document("{$email}")
-            .set(user)
     }
 }
