@@ -39,9 +39,6 @@ class ReminderFragment : Fragment() {
         spinner = view.conditionSpinner
         var adapter = User.downloadConditionNames(this.requireActivity())
         spinner.adapter = adapter
-        //todo add spinner elements form array array adapter
-        // -------------------
-
         return view
     }
 
