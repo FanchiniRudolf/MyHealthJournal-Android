@@ -175,7 +175,9 @@
                 android:id="@+id/button4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Terminado" />
+                android:text="Terminado"
+                android:background="@drawable/button_color_light_blue"
+                />
 
         </LinearLayout>
     </ScrollView>
