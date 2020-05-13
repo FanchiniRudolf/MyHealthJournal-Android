@@ -1,6 +1,7 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,20 +33,16 @@ class AboutFragment : Fragment() {
             startActivity(mainIntent)
 
         }
+
+        view.btn_privacy.setOnClickListener { view ->
+            val url= Uri.parse("https://fanchinirudolf.github.io/MyHealthJournal/Privacy-Policy.html")
+            val intBrowser = Intent(Intent.ACTION_VIEW, url)
+
+            startActivity(intBrowser)
+
+        }
+
         return view
     }
 
-    /*
-    fun signOut(v: View){
-        var email = semail.text.toString()
-        var password = spassword.text.toString()
-        if(email != null && password != null){
-            auth.signOut()
-            val mainIntent = Intent(this, MainActivity::class.java)
-            startActivity(mainIntent)
-            finish()
-
-        }
-    }
-    */
 }
