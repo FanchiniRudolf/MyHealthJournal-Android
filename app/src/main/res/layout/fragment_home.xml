@@ -75,7 +75,7 @@
             android:id="@+id/textView17"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="No hay registros aún." />
     </LinearLayout>
 
     <LinearLayout
@@ -98,7 +98,7 @@
             android:id="@+id/textView19"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Ninguna pendiente por el día de hoy." />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
