@@ -48,6 +48,7 @@
         android:padding="10dp"
         android:text="Cerrar sesión"
         android:textAllCaps="false"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -61,6 +62,7 @@
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
         android:text="Aviso de privacidad"
+        android:background="@drawable/button_color_light_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
