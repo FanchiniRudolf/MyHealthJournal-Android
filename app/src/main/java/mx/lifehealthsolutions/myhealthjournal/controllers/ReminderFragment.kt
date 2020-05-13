@@ -28,6 +28,7 @@ class ReminderFragment : Fragment() {
         // Inflate the layout for this fragment
         val view: View = inflater!!.inflate(R.layout.fragment_reminder, container, false)
 
+        // spinner condition
         var arr = ArrayList<String>() //todo irving
         arr.add("Asma")
         arr.add("Sars")
@@ -38,8 +39,15 @@ class ReminderFragment : Fragment() {
         var adapter = ArrayAdapter(this.requireActivity(), android.R.layout.simple_spinner_item, arr) as SpinnerAdapter
         spinner.adapter = adapter
         //todo add spinner elements form array array adapter
+        // -------------------
 
         return view
+    }
+
+    // ---
+
+    fun registerMedicineDB(v: View) {
+
     }
 
 }
