@@ -1,10 +1,14 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -58,24 +62,20 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         val user = FirebaseAuth.getInstance().currentUser?.email
         var userStr =  "{${user}}"
         var arrEntradas  =  ArrayList<Entry>()
-        var userRef = db.collection("Users").document(userStr).collection("Entries")
-        userRef.get().addOnSuccessListener { documents ->
-            if(documents != null){
-                // Si hubo informacion
-                for(document in documents){
-                    println("/////////////////////////////////////")
-                    println("${document.id}=>${document.data}")
-                    println("/////////////////////////////////////")
+        var userRef = db.collection("Users/{$user}/Entries")
+            .get()
+            .addOnSuccessListener { documents ->
+                var entries_string = ArrayList<String>()
+                for (document in documents) {
+                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                    entries_string.add(document.id)
                 }
-
-            } else {
-
             }
-        }
-            .addOnFailureListener{ exception ->
-                // Hubo un error
+            .addOnFailureListener { exception ->
+                var exceptionString = ArrayList<String>()
+                exceptionString.add("No entries found")
+                var adapter = ArrayAdapter(this.requireActivity(), android.R.layout.simple_spinner_item, exceptionString) as SpinnerAdapter
             }
-
     }
 
     override fun itemClicked(position: Int) {
