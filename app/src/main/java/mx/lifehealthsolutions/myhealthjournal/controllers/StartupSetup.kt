@@ -12,14 +12,7 @@ import mx.lifehealthsolutions.myhealthjournal.R
 
 class StartupSetup : AppCompatActivity() {
 
-    var usrName = name.text.toString()
-    var usrAge = age.text.toString()
-    var usrWeight = weight.text.toString()
-    var usrHeight = height.text.toString()
-    var email = intent.getStringExtra("email")
-    var usrGender = getGender()
-    var usrCondition = txtCondition.text.toString()
-    var conditionDescription = txtCondition.text.toString()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +30,15 @@ class StartupSetup : AppCompatActivity() {
     }
 
     fun registerUserDB(v: View) {
+        var usrName = name.text.toString()
+        var usrAge = age.text.toString()
+        var usrWeight = weight.text.toString()
+        var usrHeight = height.text.toString()
+        var email = intent.getStringExtra("email")
+        var usrGender = getGender()
+        var usrCondition = txtCondition.text.toString()
+        var conditionDescription = txtCondition.text.toString()
+
         if (usrName != null && usrAge != null && usrWeight != null && usrHeight != null && usrGender != null && usrCondition != null && conditionDescription != null) {
             val user = hashMapOf(
                 "name" to usrName,
