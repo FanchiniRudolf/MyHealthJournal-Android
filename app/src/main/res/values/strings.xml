@@ -12,6 +12,17 @@
         <item>THRICE A WEEK</item>
         <item>DAILY</item>
     </array>
+    <array name="arrSeverityValues">
+        <item>😊</item>
+        <item>😐</item>
+        <item>😖</item>
+        <item>😭</item>
+    </array>
+    <array name="arrEventTimeValues">
+        <item>Before</item>
+        <item>During</item>
+        <item>After</item>
+    </array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
