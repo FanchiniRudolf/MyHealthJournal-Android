@@ -35,12 +35,17 @@ class ReminderFragment : Fragment() {
         spinner = view.conditionSpinner
         var adapter = User.downloadConditionNames(this.requireActivity())
         spinner.adapter = adapter
+
+        view.registerBtn.setOnClickListener { view ->
+            registerMedicineDB()
+        }
+
         return view
     }
 
     // ---
 
-    fun registerMedicineDB(v: View) {
+    fun registerMedicineDB() {
         var startDate = startDateET.text.toString()
         var finishDate = finishDate.text.toString()
         var medicine = inputMedicine.text.toString()
