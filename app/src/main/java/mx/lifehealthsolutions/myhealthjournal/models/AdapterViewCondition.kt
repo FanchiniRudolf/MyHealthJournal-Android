@@ -6,20 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.renglon_sintoma.view.*
 import mx.lifehealthsolutions.myhealthjournal.interfaces.ListenerRecycler
 import mx.lifehealthsolutions.myhealthjournal.R
 
-class AdapterViewCondition(var arrCondiciones: Array<Condition>, var email: String): RecyclerView.Adapter<AdapterViewCondition.RenglonCondicion>() {
+class AdapterViewCondition(var email: String?): RecyclerView.Adapter<AdapterViewCondition.RenglonCondicion>() {
     var listener: ListenerRecycler? = null
     var conditions:Array<Condition>? =  null
-
+    var arrCondiciones: Array<Condition> ?= null
     init {
         downloadConditions()
         notifyDataSetChanged()
+        conditions  = arrayOf(
+            Condition("Asma"),
+            Condition("Migraña"),
+            Condition("COVID-19"),
+            Condition("New")
+        )
     }
 
     private fun downloadConditions() {
@@ -54,12 +59,16 @@ class AdapterViewCondition(var arrCondiciones: Array<Condition>, var email: Stri
     }
 
     override fun getItemCount(): Int {
-        return arrCondiciones.size
+        if  (arrCondiciones  != null)  return arrCondiciones!!.size
+        else{
+            return 0
+        }
+
     }
 
     override fun onBindViewHolder(holder: RenglonCondicion, position: Int) {
-        val condicion = arrCondiciones[position] // arrPaises.get(position)
-        holder.vistaRenglon.tvSintoma.text = condicion.name
+        val condicion = arrCondiciones?.get(position) // arrPaises.get(position)
+        holder.vistaRenglon.tvSintoma.text = condicion?.name
         //holder.vistaRenglon.tInputSintoma.toString()
         holder.vistaRenglon.setOnClickListener{
             listener?.itemClicked(position)

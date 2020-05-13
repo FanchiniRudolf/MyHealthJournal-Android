@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.fragment_diary.view.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.interfaces.ListenerRecycler
@@ -24,7 +23,7 @@ import mx.lifehealthsolutions.myhealthjournal.models.Condition
  * A simple [Fragment] subclass.
  */
 class DiaryFragment : Fragment(), ListenerRecycler {
-    var adaptadorCondition: AdapterViewCondition ?= null
+    var adaptadorCondition: AdapterViewCondition = AdapterViewCondition(FirebaseAuth.getInstance().currentUser?.email)
     lateinit var recyclerView: RecyclerView
     protected lateinit var rootView: View
 
@@ -41,13 +40,9 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         recyclerView = view.recyclerEntradas
 
 
-        val user = FirebaseAuth.getInstance().currentUser
+        val user = FirebaseAuth.getInstance().currentUser?.email
 
-        adaptadorCondition = FirebaseAuth.getInstance().currentUser?.email?.let {
-            AdapterViewCondition(Condition.arrCondiciones,
-                it
-            )
-        }
+        adaptadorCondition = AdapterViewCondition(user)
 
 
         val layout = LinearLayoutManager(activity)
@@ -59,25 +54,27 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         // Return the fragment view/layout
 
         downloadConditions()
-
+        adaptadorCondition?.conditions =  Condition.arrCondiciones
+        adaptadorCondition?.notifyDataSetChanged()
         return view
     }
 
     fun downloadConditions() {
         val db = FirebaseFirestore.getInstance()
         val user = FirebaseAuth.getInstance().currentUser?.email
-        var userStr =  "{${email}}"
+        var userStr =  "{${user}}"
         var arrConditions  =  mutableListOf<Condition>()
         db.collection("Users/$userStr/Conditions")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-                    arrConditions.add(Condition(document.id))
+                    var temp  = document.id
+                    arrConditions.add(Condition(temp))
+
                 }
                 adaptadorCondition?.conditions =  arrConditions.toTypedArray()
                 adaptadorCondition?.notifyDataSetChanged()
-
             }
             .addOnFailureListener { exception ->
                 Log.w(ContentValues.TAG, "Error getting documents: ", exception)
