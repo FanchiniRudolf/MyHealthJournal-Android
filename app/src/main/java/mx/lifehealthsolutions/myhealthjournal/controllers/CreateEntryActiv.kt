@@ -81,5 +81,5 @@ class CreateEntryActiv : AppCompatActivity() {
     fun exitWithoutSavingData(v: View) {
         mostrarMensaje()
     }
-    
+
 }
