@@ -55,7 +55,14 @@
         <Spinner
             android:id="@+id/spinner5"
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:entries="@array/arrFrequencyValues" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Añadir Recordatorio" />
 
     </LinearLayout>
 
