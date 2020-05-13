@@ -8,6 +8,7 @@ import android.widget.Spinner
 import kotlinx.android.synthetic.main.activity_crear_entrada.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.models.User
+import java.util.*
 
 class CreateEntryActiv : AppCompatActivity() {
 
@@ -17,6 +18,12 @@ class CreateEntryActiv : AppCompatActivity() {
         val spinner: Spinner = findViewById(R.id.spinnerTipo)
         val adapter = User.downloadConditionNames(this)
         spinnerTipo.adapter = adapter
+        val thisMoment = Date()
+        val todayDate = "${thisMoment.year+1900}/${thisMoment.month}/${thisMoment.date}"
+        val currentTime = "${thisMoment.hours}:${thisMoment.minutes}"
+        etFecha.setText(todayDate)
+        etHora.setText(currentTime)
+
 
     }
 
