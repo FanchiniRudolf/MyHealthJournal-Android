@@ -6,11 +6,10 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_nav_bar">NavBar</string>
     <array name="arrFrequencyValues">
-        <item>WEEKLY</item>
-        <item>MONTHLY</item>
-        <item>TWICE A WEEK</item>
-        <item>THRICE A WEEK</item>
-        <item>DAILY</item>
+        <item>4 HORAS</item>
+        <item>8 HORAS</item>
+        <item>12 HORAS</item>
+        <item>24 HORAS</item>
     </array>
     <array name="arrSeverityValues">
         <item>😊</item>

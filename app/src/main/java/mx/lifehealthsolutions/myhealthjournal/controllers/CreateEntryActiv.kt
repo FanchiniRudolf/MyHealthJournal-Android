@@ -1,5 +1,6 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,9 +8,11 @@ import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import android.widget.Spinner
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_crear_entrada.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.models.User
+import java.util.*
 
 class CreateEntryActiv : AppCompatActivity() {
 
@@ -19,6 +22,12 @@ class CreateEntryActiv : AppCompatActivity() {
         val spinner: Spinner = findViewById(R.id.spinnerTipo)
         val adapter = User.downloadConditionNames(this)
         spinnerTipo.adapter = adapter
+        val thisMoment = Date()
+        val todayDate = "${thisMoment.year+1900}/${thisMoment.month}/${thisMoment.date}"
+        val currentTime = "${thisMoment.hours}:${thisMoment.minutes}"
+        etFecha.setText(todayDate)
+        etHora.setText(currentTime)
+
 
     }
 
@@ -49,20 +58,27 @@ class CreateEntryActiv : AppCompatActivity() {
     }
 
 
-
-
     fun exitSavingData(v: View) {
-        println("******************************************************")
-        println("salio guardando datos")
-        println("******************************************************")
         registerEntryDB()
         finish()
     }
 
+
+    private fun mostrarMensaje() {
+        val alerta = AlertDialog.Builder(this)
+        alerta.setMessage("¿Realmente deseas salir?\nNo se guardará la entrada.")
+            .setPositiveButton("Sí", DialogInterface.OnClickListener{
+                    dialog, which ->
+                finish()
+            })
+            .setNegativeButton("No", null)
+            .setCancelable(false)
+            .create()
+        alerta.show()
+    }
+
+
     fun exitWithoutSavingData(v: View) {
-        println("******************************************************")
-        println("salio SIN guardar datos")
-        println("******************************************************")
-        finish()
+        mostrarMensaje()
     }
 }
