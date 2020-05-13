@@ -3,6 +3,7 @@ package mx.lifehealthsolutions.myhealthjournal.controllers
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -11,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import mx.lifehealthsolutions.myhealthjournal.R
@@ -83,6 +85,16 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+    fun registerUserDB(email: String?, name: String?){
+        val user = hashMapOf(
+            "name" to name,
+            "email" to email
+        )
+        val db = FirebaseFirestore.getInstance()
+        db.collection("Users").document("{$email}")
+            .set(user)
+    }
+
 
     fun register(v: View){
         val regIntent = Intent(this, SignUpActivity::class.java)
@@ -98,7 +110,11 @@ class SignInActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
+                    val email = user?.email
+                    val name = user?.displayName
                     val mainActivity = Intent(this, MainActivity::class.java)
+
+                    registerUserDB(email, name)
                     startActivity(mainActivity)
                     finish()
 

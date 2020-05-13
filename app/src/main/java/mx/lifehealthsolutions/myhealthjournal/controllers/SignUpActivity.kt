@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import mx.lifehealthsolutions.myhealthjournal.R
 
@@ -26,6 +27,10 @@ class SignUpActivity : AppCompatActivity() {
         var email = email.text.toString()
         var password = password.text.toString()
         var cpassword = cpassword.text.toString()
+        var name = name.text.toString()
+        var age = age.text.toString()
+        var weight = weight.text.toString()
+
 
         if(cpassword != password){
             Toast.makeText(
@@ -46,6 +51,7 @@ class SignUpActivity : AppCompatActivity() {
                         ).show()
                         val user = auth.currentUser
                         val  mainIntent = Intent(this, MainActivity::class.java)
+                        registerUserDB(email, user?.displayName)
                         startActivity(mainIntent)
                     } else {
                         // If sign in fails, display a message to the user.
@@ -58,5 +64,18 @@ class SignUpActivity : AppCompatActivity() {
                     // ...
                 }
         }
+    }
+
+    private fun registerUserDB(email: String, displayName: String?) {
+        val user = hashMapOf(
+            "name" to name,
+            "email" to email,
+            "age" to age,
+            "weight" to weight,
+            "height" to height
+        )
+        val db = FirebaseFirestore.getInstance()
+        db.collection("Users").document("{$email}")
+            .set(user)
     }
 }

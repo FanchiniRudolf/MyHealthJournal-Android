@@ -1,13 +1,42 @@
 package mx.lifehealthsolutions.myhealthjournal.models
 
-object User  {
-    lateinit var name: String
-    lateinit var email: String
-    lateinit var password: String
+import android.content.ContentValues.TAG
+import android.util.Log
+import com.google.firebase.firestore.FirebaseFirestore
+
+object User: Comparable<User> {
 
     val conditions_list =  ArrayList<Condition>()
     val medicine_list = ArrayList<Medicine>()
+    lateinit var nombre: String
+    lateinit var email: String
+    lateinit var password: String
+    var db = FirebaseFirestore.getInstance()
 
+    override fun compareTo(other: User): Int {
+        return nombre.compareTo(other.nombre)
+    }
+
+    fun upload(){
+        //upload to the cloud
+
+    }
+
+    fun download(email: String){
+        //download from the cloud
+        this.email = email
+        db.collection("Users/{$email}")
+            .whereEqualTo("email", true)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
+    }
 
     fun delete(){
         //todo make a function that deletes from firebase
@@ -28,6 +57,4 @@ object User  {
     fun removeMedicine(medicine: Medicine){
         medicine_list.remove(medicine)
     }
-
-
 }
