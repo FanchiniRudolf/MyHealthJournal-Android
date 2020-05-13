@@ -13,10 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="Second prototype by:\n \n Irving Fuentes \n Roberto Téllez Perezyera \n Rudolf Fanchini Reyes \n Luis Alfonoso Alcántara López Ortega"
+        android:text="Segundo prototipo por:\n \n Irving Fuentes \n Roberto Téllez Perezyera \n Rudolf Fanchini Reyes \n Luis Alfonoso Alcántara López Ortega\n---\nLifeHealth Solutions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,6 +31,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="AVISO:\nEsta aplicación NO debe considerarse o usarse como sustituto de consultar a un especialista para diagnósticos y mayor información sobre su condición. Esta aplicación está diseñada únicamente para dar seguimiento a su condición de salud, NO para brindar diagnóstisos médicos profesionales.\nEn caso de sufrir un expisodio de gravedad relacionado con su condición, acuda con un médico lo más pronto posible."
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -42,9 +44,22 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:onClick="signOut"
         android:text="Cerrar sesión"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:text="Aviso de privacidad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
