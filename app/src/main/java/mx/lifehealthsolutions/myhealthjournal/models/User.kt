@@ -6,6 +6,7 @@ import android.content.Context
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 object User: Comparable<User> {
@@ -28,10 +29,11 @@ object User: Comparable<User> {
 
     fun downloadConditionNames(context: Context): SpinnerAdapter {
         //download from the cloud
+        val user = FirebaseAuth.getInstance().currentUser?.email
         var adapter: SpinnerAdapter
         var conditions_string = ArrayList<String>()
         conditions_string.add("Conditions")
-        db.collection("Users/$email/Conditions")
+        db.collection("Users/$user/Conditions")
             .get()
             .addOnSuccessListener { documents ->
 
