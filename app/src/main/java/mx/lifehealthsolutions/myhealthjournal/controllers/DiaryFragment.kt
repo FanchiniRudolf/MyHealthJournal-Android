@@ -7,8 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.SpinnerAdapter
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,15 +16,15 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.fragment_diary.view.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.interfaces.ListenerRecycler
-import mx.lifehealthsolutions.myhealthjournal.models.AdapterViewEntry
-import mx.lifehealthsolutions.myhealthjournal.models.Entry
+import mx.lifehealthsolutions.myhealthjournal.models.AdapterViewCondition
+import mx.lifehealthsolutions.myhealthjournal.models.Condition
 
 
 /**
  * A simple [Fragment] subclass.
  */
 class DiaryFragment : Fragment(), ListenerRecycler {
-    var adaptadorEntrada: AdapterViewEntry = AdapterViewEntry(Entry.arrEntradas)
+    var adaptadorCondition: AdapterViewCondition ?= null
     lateinit var recyclerView: RecyclerView
     protected lateinit var rootView: View
 
@@ -44,37 +42,45 @@ class DiaryFragment : Fragment(), ListenerRecycler {
 
 
         val user = FirebaseAuth.getInstance().currentUser
-            user?.email?.let { getEntries(it) }
 
-        adaptadorEntrada = AdapterViewEntry(Entry.arrEntradas)
+        adaptadorCondition = FirebaseAuth.getInstance().currentUser?.email?.let {
+            AdapterViewCondition(Condition.arrCondiciones,
+                it
+            )
+        }
+
+
         val layout = LinearLayoutManager(activity)
         layout.orientation = LinearLayoutManager.VERTICAL
         recyclerView.layoutManager = layout
 
-        adaptadorEntrada?.listener =  this
-        recyclerView.adapter =  adaptadorEntrada
+        adaptadorCondition?.listener =  this
+        recyclerView.adapter =  adaptadorCondition
         // Return the fragment view/layout
+
+        downloadConditions()
+
         return view
     }
 
-    fun getEntries(email: String){
+    fun downloadConditions() {
         val db = FirebaseFirestore.getInstance()
         val user = FirebaseAuth.getInstance().currentUser?.email
-        var userStr =  "{${user}}"
-        var arrEntradas  =  ArrayList<Entry>()
-        var userRef = db.collection("Users/{$user}/Entries")
+        var userStr =  "{${email}}"
+        var arrConditions  =  mutableListOf<Condition>()
+        db.collection("Users/$userStr/Conditions")
             .get()
             .addOnSuccessListener { documents ->
-                var entries_string = ArrayList<String>()
                 for (document in documents) {
                     Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-                    entries_string.add(document.id)
+                    arrConditions.add(Condition(document.id))
                 }
+                adaptadorCondition?.conditions =  arrConditions.toTypedArray()
+                adaptadorCondition?.notifyDataSetChanged()
+
             }
             .addOnFailureListener { exception ->
-                var exceptionString = ArrayList<String>()
-                exceptionString.add("No entries found")
-                var adapter = ArrayAdapter(this.requireActivity(), android.R.layout.simple_spinner_item, exceptionString) as SpinnerAdapter
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
             }
     }
 
