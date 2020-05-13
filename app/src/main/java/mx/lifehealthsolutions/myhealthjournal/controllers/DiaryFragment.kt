@@ -69,7 +69,7 @@ class DiaryFragment : Fragment(), ListenerRecycler {
                 }
 
             } else {
-    
+
             }
         }
             .addOnFailureListener{ exception ->
