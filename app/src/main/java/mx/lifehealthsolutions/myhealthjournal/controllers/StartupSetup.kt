@@ -35,7 +35,7 @@ class StartupSetup : AppCompatActivity() {
         var email = intent.getStringExtra("email")
         var usrGender = getGender()
         var usrCondition = txtCondition?.text.toString()
-        var conditionDescription = txtCondition?.text.toString()
+        var conditionDescription = condDescription?.text.toString()
 
         if (usrName != null && usrAge != null && usrWeight != null && usrHeight != null && usrGender != null && usrCondition != null && conditionDescription != null) {
             val user = hashMapOf(
@@ -45,11 +45,14 @@ class StartupSetup : AppCompatActivity() {
                 "weight" to usrWeight,
                 "height" to usrHeight
             )
+            val condition = hashMapOf(
+                "description" to conditionDescription
+            )
             val db = FirebaseFirestore.getInstance()
             db.collection("Users").document(email)
                 .set(user)
             db.collection("Users/$email/Conditions").document(usrCondition)
-                .set("description" to conditionDescription)
+                .set(condition)
             val mainIntent = Intent(this, MainActivity::class.java)
             startActivity(mainIntent)
         }
