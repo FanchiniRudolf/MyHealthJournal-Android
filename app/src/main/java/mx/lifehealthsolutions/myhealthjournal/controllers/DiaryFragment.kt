@@ -26,6 +26,7 @@ class DiaryFragment : Fragment(), ListenerRecycler {
     var adaptadorCondition: AdapterViewCondition = AdapterViewCondition(FirebaseAuth.getInstance().currentUser?.email)
     lateinit var recyclerView: RecyclerView
     protected lateinit var rootView: View
+    var arrConditions  =  mutableListOf<Condition>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,33 +54,12 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         recyclerView.adapter =  adaptadorCondition
         // Return the fragment view/layout
 
-        downloadConditions()
         adaptadorCondition?.conditions =  Condition.arrCondiciones
         adaptadorCondition?.notifyDataSetChanged()
         return view
     }
 
-    fun downloadConditions() {
-        val db = FirebaseFirestore.getInstance()
-        val user = FirebaseAuth.getInstance().currentUser?.email
-        var userStr =  "{${user}}"
-        var arrConditions  =  mutableListOf<Condition>()
-        db.collection("Users/$userStr/Conditions")
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-                    var temp  = document.id
-                    arrConditions.add(Condition(temp))
 
-                }
-                adaptadorCondition?.conditions =  arrConditions.toTypedArray()
-                adaptadorCondition?.notifyDataSetChanged()
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
-    }
 
     override fun itemClicked(position: Int) {
 
