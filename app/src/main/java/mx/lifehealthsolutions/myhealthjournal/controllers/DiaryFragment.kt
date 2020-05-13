@@ -64,12 +64,12 @@ class DiaryFragment : Fragment(), ListenerRecycler {
                 // Si hubo informacion
                 for(document in documents){
                     println("/////////////////////////////////////")
-                    println("${document.id}=>${document.data}")
+                    println("${document.data}")
                     println("/////////////////////////////////////")
                 }
 
             } else {
-
+    
             }
         }
             .addOnFailureListener{ exception ->
