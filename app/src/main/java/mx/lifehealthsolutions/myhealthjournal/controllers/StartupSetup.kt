@@ -1,11 +1,13 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.RadioButton
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_startup_setup.*
 import mx.lifehealthsolutions.myhealthjournal.R
+
 
 class StartupSetup : AppCompatActivity() {
 
@@ -13,22 +15,38 @@ class StartupSetup : AppCompatActivity() {
     var usrAge = age.text.toString()
     var usrWeight = weight.text.toString()
     var usrHeight = height.text.toString()
+    var email = intent.getStringExtra("email")
+    var usrGender = getGender()
+    var usrCondition = txtCondition.text.toString()
+    var conditionDescription = txtCondition.text.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_startup_setup)
     }
 
-    private fun registerUserDB(email: String, displayName: String?) {
+    private fun getGender(): String{
+        val radioButtonID: Int = genderGroup.getCheckedRadioButtonId()
+        val radioButton: View = genderGroup.findViewById(radioButtonID)
+        val idx: Int = genderGroup.indexOfChild(radioButton)
+        val r = genderGroup.getChildAt(idx) as RadioButton
+        val gender = r.text.toString()
+
+        return gender
+    }
+
+    private fun registerUserDB() {
         val user = hashMapOf(
-            "name" to name,
-            "email" to email,
-            "age" to age,
-            "weight" to weight,
-            "height" to height
+            "name" to usrName,
+            "gender" to usrGender,
+            "age" to usrAge,
+            "weight" to usrWeight,
+            "height" to usrHeight
         )
         val db = FirebaseFirestore.getInstance()
-        db.collection("Users").document("{$email}")
+        db.collection("Users").document(email)
             .set(user)
+        db.collection("Users/$email/Conditions").document(usrCondition)
+            .set("description" to conditionDescription)
     }
 }
