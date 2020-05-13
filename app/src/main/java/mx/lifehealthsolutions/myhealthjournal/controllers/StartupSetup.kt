@@ -1,5 +1,6 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
@@ -35,18 +36,23 @@ class StartupSetup : AppCompatActivity() {
         return gender
     }
 
-    private fun registerUserDB() {
-        val user = hashMapOf(
-            "name" to usrName,
-            "gender" to usrGender,
-            "age" to usrAge,
-            "weight" to usrWeight,
-            "height" to usrHeight
-        )
-        val db = FirebaseFirestore.getInstance()
-        db.collection("Users").document(email)
-            .set(user)
-        db.collection("Users/$email/Conditions").document(usrCondition)
-            .set("description" to conditionDescription)
+    fun registerUserDB(v: View) {
+        if (usrName != null && usrAge != null && usrWeight != null && usrHeight != null && usrGender != null && usrCondition != null && conditionDescription != null) {
+            val user = hashMapOf(
+                "name" to usrName,
+                "gender" to usrGender,
+                "age" to usrAge,
+                "weight" to usrWeight,
+                "height" to usrHeight
+            )
+            val db = FirebaseFirestore.getInstance()
+            db.collection("Users").document(email)
+                .set(user)
+            db.collection("Users/$email/Conditions").document(usrCondition)
+                .set("description" to conditionDescription)
+            val mainIntent = Intent(this, MainActivity::class.java)
+            startActivity(mainIntent)
+        }
+
     }
 }

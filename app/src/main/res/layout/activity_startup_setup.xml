@@ -32,6 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -171,15 +172,20 @@
                 android:hint="Descripción..."
                 android:inputType="textMultiLine" />
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Terminado"
-                android:background="@drawable/button_color_light_blue"
-                />
-
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_color_light_blue"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:onClick="registerUserDB"
+        android:text="Terminado"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
