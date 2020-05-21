@@ -26,12 +26,14 @@ class AdapterViewCondition(var email: String?): RecyclerView.Adapter<AdapterView
             Condition("Migraña"),
             Condition("COVID-19")
         )
+        downloadConditions()
     }
 
-    private fun downloadConditions() {
+    fun downloadConditions() {
         val db = FirebaseFirestore.getInstance()
         val user = FirebaseAuth.getInstance().currentUser?.email
         var userStr =  "{${email}}"
+        var hola  = ""
         db.collection("Users/$userStr/Conditions")
             .get()
             .addOnSuccessListener { documents ->
@@ -39,14 +41,17 @@ class AdapterViewCondition(var email: String?): RecyclerView.Adapter<AdapterView
                     Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
                     var temp = document.id
                     arrConditions.add(Condition(document.id))
+                    hola = "asda"
                 }
-
-
+                notifyDataSetChanged()
+                var temp =  "Hello World"
+                println(temp)
             }
             .addOnFailureListener { exception ->
                 Log.w(ContentValues.TAG, "Error getting documents: ", exception)
             }
-        conditions = arrConditions.toTypedArray<Condition>()
+        arrCondiciones = arrConditions.toTypedArray<Condition>()
+        notifyDataSetChanged()
     }
 
     inner class RenglonCondicion(var vistaRenglon: View): RecyclerView.ViewHolder(vistaRenglon)

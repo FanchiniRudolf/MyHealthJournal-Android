@@ -54,12 +54,38 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         recyclerView.adapter =  adaptadorCondition
         // Return the fragment view/layout
 
-        adaptadorCondition?.conditions =  Condition.arrCondiciones
         adaptadorCondition?.notifyDataSetChanged()
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        val db = FirebaseFirestore.getInstance()
+        val user = FirebaseAuth.getInstance().currentUser?.email
+        var userStr =  "{${adaptadorCondition.email}}"
+        var hola  = ""
+        arrConditions.clear()
+        db.collection("Users/$userStr/Conditions")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                    var temp = document.id
+                    arrConditions.add(Condition(document.id))
+                    hola = "asda"
+                    Log.i("TAMAÑO", temp)
+                }
+                var temp =  "Hello World"
+                println(temp)
+                adaptadorCondition.arrCondiciones = arrConditions.toTypedArray<Condition>()
+                Log.i("TAMAÑO", adaptadorCondition.arrCondiciones!!.size.toString())
+                adaptadorCondition.notifyDataSetChanged()
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+            }
 
+    }
 
     override fun itemClicked(position: Int) {
 

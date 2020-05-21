@@ -25,6 +25,7 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_sign_in)
         auth = FirebaseAuth.getInstance()
         val  gso =  GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -38,11 +39,25 @@ class SignInActivity : AppCompatActivity() {
             startActivityForResult(signInIntent, RC_SIGN_IN);
 
         };
-
         buttonIniciar.setOnClickListener{
             signIn()
-        }
 
+        }
+        visible()
+
+    }
+
+    fun load(){
+        progressBar.visibility = View.VISIBLE
+        buttonIniciar.visibility = View.INVISIBLE
+        sign_in_button.visibility = View.INVISIBLE
+        buttonRegistrarse.visibility = View.INVISIBLE
+    }
+    fun visible(){
+        progressBar.visibility = View.INVISIBLE
+        buttonIniciar.visibility = View.VISIBLE
+        sign_in_button.visibility = View.VISIBLE
+        buttonRegistrarse.visibility = View.VISIBLE
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -69,9 +84,10 @@ class SignInActivity : AppCompatActivity() {
 
 
     fun signIn(){
-        var email = semail.text.toString()
-        var password = spassword.text.toString()
-        if(email != null && password != null){
+        if(semail.text?.isNotEmpty()!! && spassword.text?.isNotEmpty()!!){
+            load()
+            var email = semail.text.toString()
+            var password = spassword.text.toString()
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) {
 
@@ -79,15 +95,21 @@ class SignInActivity : AppCompatActivity() {
                         task ->
                     if (task.isSuccessful) {
                         // Si se inició correctamente la sesión vamos a la vista Home de la aplicación
+                        load()
                         val mainIntent = Intent(this, MainActivity::class.java)
                         startActivity(mainIntent)
-
+                        finish()
                     } else {
+                        visible()
                         // sino le avisamos el usuairo que orcurrio un problema
-                        Toast.makeText(this, "Authentication failed.",
+                        Toast.makeText(this, "Incorrect email or password",
                             Toast.LENGTH_SHORT).show()
                     }
                 }
+        }
+        else{
+            Toast.makeText(this, "Email or password are empty",
+                Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -109,11 +131,14 @@ class SignInActivity : AppCompatActivity() {
 
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
+        load()
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
+
                     val user = auth.currentUser
                     val email = user?.email
                     val name = user?.displayName
@@ -125,7 +150,6 @@ class SignInActivity : AppCompatActivity() {
 
                 } else {
                     // If sign in fails, display a message to the user.
-                    print("bitconeeeeeeeeect")
                 }
 
                 // ...
