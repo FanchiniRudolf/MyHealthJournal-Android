@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -80,5 +81,15 @@ class CreateEntryActiv : AppCompatActivity() {
 
     fun exitWithoutSavingData(v: View) {
         mostrarMensaje()
+    }
+
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            mostrarMensaje()
+            //moveTaskToBack(false);
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }
