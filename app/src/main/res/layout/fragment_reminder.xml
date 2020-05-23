@@ -42,15 +42,26 @@
             android:paddingLeft="32dp"
             android:paddingRight="32dp">
 
-            <EditText
-                android:id="@+id/startDateET"
-                android:layout_width="64dp"
+            <TextView
+                android:id="@+id/startDateTV"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:text="--/--/----"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <Button
+                android:id="@+id/btnStart"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/button_color_light_blue"
                 android:gravity="center"
-                android:hint="--/--/----"
-                android:theme="@style/Theme.Design.Light.NoActionBar" /><![CDATA[
+                android:text="Aplicar" /><![CDATA[
                 android:inputType="date" />
 
             ]]>
@@ -72,14 +83,26 @@
             android:paddingRight="32dp"
             android:paddingBottom="32dp">
 
-            <EditText
-                android:id="@+id/finishDate"
-                android:layout_width="64dp"
+            <TextView
+                android:id="@+id/finishDateTV"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:text="--/--/----"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <Button
+                android:id="@+id/btnFinish"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/button_color_light_blue"
                 android:gravity="center"
-                android:hint="--/--/----" />
+                android:text="Aplicar" />
 
         </LinearLayout>
 
