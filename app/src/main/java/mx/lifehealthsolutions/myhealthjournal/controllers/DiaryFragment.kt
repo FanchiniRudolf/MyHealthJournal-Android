@@ -62,7 +62,7 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         super.onResume()
         val db = FirebaseFirestore.getInstance()
         val user = FirebaseAuth.getInstance().currentUser?.email
-        var userStr =  "{${adaptadorCondition.email}}"
+        var userStr =  "${adaptadorCondition.email}"
         var hola  = ""
         arrConditions.clear()
         db.collection("Users/$userStr/Conditions")
