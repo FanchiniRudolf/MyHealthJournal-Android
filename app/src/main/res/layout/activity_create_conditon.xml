@@ -77,6 +77,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/button_color_dark_green"
+        android:onClick="exitSavingData"
         android:text="Listo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -88,6 +89,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/button_color_cancel_solid"
+        android:onClick="exitWithoutSavingData"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/btn_dialog" />

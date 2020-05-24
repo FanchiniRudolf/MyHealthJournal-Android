@@ -59,6 +59,12 @@ class CreateEntryActiv : AppCompatActivity() {
     }
 
 
+    fun createNewCondition(v: View) {
+        val newCondIntent = Intent(this, CreateConditonActiv::class.java)
+        startActivity(newCondIntent)
+    }
+
+
     fun exitSavingData(v: View) {
         registerEntryDB()
         finish()
