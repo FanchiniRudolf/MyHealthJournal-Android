@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
@@ -29,6 +30,19 @@ class CreateEntryActiv : AppCompatActivity() {
         etFecha.setText(todayDate)
         etHora.setText(currentTime)
     }
+
+
+    override fun onResume() {
+        super.onResume()
+        Log.w("idk", "Here we are")
+
+        // spinner i think
+        val spinner: Spinner = findViewById(R.id.spinnerTipo)
+        val adapter = User.downloadConditionNames(this)
+        spinnerTipo.adapter = adapter
+        //TODO spinnerTipo.selectedItem =
+    }
+
 
     fun registerEntryDB() {
         var entryDate = etFecha.text.toString()
