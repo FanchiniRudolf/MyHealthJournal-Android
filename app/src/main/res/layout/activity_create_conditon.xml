@@ -102,8 +102,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:text="Cuando termines de registrar tu nueva condición, no olvides seleccionarla
-         de la lista de condiciones."
+        android:text="Cuando termines de registrar tu nueva condición, la podrás seleccionar de la lista de condiciones."
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout16" />
