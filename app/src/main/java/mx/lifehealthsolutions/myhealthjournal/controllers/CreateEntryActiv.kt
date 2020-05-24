@@ -28,8 +28,6 @@ class CreateEntryActiv : AppCompatActivity() {
         val currentTime = "${thisMoment.hours}:${thisMoment.minutes}"
         etFecha.setText(todayDate)
         etHora.setText(currentTime)
-
-
     }
 
     fun registerEntryDB() {
