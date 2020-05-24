@@ -40,7 +40,7 @@ class CreateEntryActiv : AppCompatActivity() {
         val spinner: Spinner = findViewById(R.id.spinnerTipo)
         val adapter = User.downloadConditionNames(this)
         spinnerTipo.adapter = adapter
-        //TODO spinnerTipo.selectedItem =
+        // TODO (Bobby) spinnerTipo.setSelection(0)
     }
 
 
