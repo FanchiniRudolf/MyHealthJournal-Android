@@ -4,77 +4,141 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".controllers.SignInActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout11"
-        android:layout_width="400dp"
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:orientation="vertical"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
+        android:fontFamily="@font/adamina"
+        android:text="My Health Journal"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutUser"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:textColorHint="@color/contrast"
+        app:boxBackgroundMode="outline"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutPass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:passwordToggleTint="#FFFFFF">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/semail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="correo electrónico" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/spassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="contraseña"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/buttonIniciar"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/semail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Iniciar sesión" />
+            android:drawableBottom="@drawable/button_color_light_blue"
+            android:hint="correo electrónico"
+            android:singleLine="false"
+            android:textColor="#D0D0D0"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorHint="@color/contrast"
+            android:textColorLink="@color/contrast"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            android:visibility="visible" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutPass"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:textColorHint="@color/contrast"
+        app:layout_constraintBottom_toTopOf="@+id/buttonIniciar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        </com.google.android.gms.common.SignInButton>
-
-        <Button
-            android:id="@+id/buttonRegistrarse"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/spassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:onClick="register"
-            android:text="Registrarse" />
+            android:hint="contraseña"
+            android:inputType="textPassword"
+            android:textColor="#D0D0D0"
+            android:textColorHighlight="@color/contrast"
+            android:textColorHint="@color/contrast"
+            android:textColorLink="@color/contrast"
+            android:visibility="visible" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:visibility="gone" />
+    <Button
+        android:id="@+id/buttonRegistrarse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_rounded_sec"
+        android:onClick="register"
+        android:text="Registrarse"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@+id/sign_in_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/buttonIniciar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_rounded"
+        android:text="Iniciar sesión"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRegistrarse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </com.google.android.gms.common.SignInButton>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

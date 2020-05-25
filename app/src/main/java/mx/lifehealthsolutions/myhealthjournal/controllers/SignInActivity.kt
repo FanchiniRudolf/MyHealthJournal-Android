@@ -52,12 +52,16 @@ class SignInActivity : AppCompatActivity() {
         buttonIniciar.visibility = View.INVISIBLE
         sign_in_button.visibility = View.INVISIBLE
         buttonRegistrarse.visibility = View.INVISIBLE
+        textInputLayoutUser.visibility = View.INVISIBLE
+        textInputLayoutPass.visibility = View.INVISIBLE
     }
     fun visible(){
         progressBar.visibility = View.INVISIBLE
         buttonIniciar.visibility = View.VISIBLE
         sign_in_button.visibility = View.VISIBLE
         buttonRegistrarse.visibility = View.VISIBLE
+        textInputLayoutUser.visibility = View.VISIBLE
+        textInputLayoutPass.visibility = View.VISIBLE
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -119,7 +123,7 @@ class SignInActivity : AppCompatActivity() {
             "email" to email
         )
         val db = FirebaseFirestore.getInstance()
-        db.collection("Users").document("{$email}")
+        db.collection("Users").document("$email")
             .set(user)
     }
 
