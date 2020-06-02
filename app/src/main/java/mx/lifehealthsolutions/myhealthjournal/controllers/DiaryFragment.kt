@@ -61,9 +61,7 @@ class DiaryFragment : Fragment(), ListenerRecycler {
     override fun onResume() {
         super.onResume()
         val db = FirebaseFirestore.getInstance()
-        val user = FirebaseAuth.getInstance().currentUser?.email
         var userStr =  "${adaptadorCondition.email}"
-        var hola  = ""
         arrConditions.clear()
         db.collection("Users/$userStr/Conditions")
             .get()
@@ -72,7 +70,6 @@ class DiaryFragment : Fragment(), ListenerRecycler {
                     Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
                     var temp = document.id
                     arrConditions.add(Condition(document.id))
-                    hola = "asda"
                     Log.i("TAMAÑO", temp)
                 }
                 var temp =  "Hello World"
