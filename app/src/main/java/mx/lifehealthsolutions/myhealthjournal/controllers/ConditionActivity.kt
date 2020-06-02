@@ -13,8 +13,10 @@ class ConditionActivity : AppCompatActivity() {
         val condition_name = intent.getStringExtra("CONDITION")
 
         tvConditionName.text = condition_name
-        downloadEntries()
+        //todo
+        /*downloadEntries()
         updateListener()
         createChart()
+        */
     }
 }
