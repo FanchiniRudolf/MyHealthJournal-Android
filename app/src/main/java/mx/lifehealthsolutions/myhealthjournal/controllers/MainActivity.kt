@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
             PackageManager.PERMISSION_GRANTED){
             //have permit allowed
-            gps.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0f, this)
+            gps.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 1000f, this)
             onLocationChanged(gps.getLastKnownLocation(LocationManager.GPS_PROVIDER))
         } else{
             //ask for permit
@@ -158,6 +158,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     println("******************************************************")
                     println("error")
                     println("******************************************************")
+                    fragHome.setData("pmo10: NAN, aqi: NAN")
                 }
 
             })
@@ -167,6 +168,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
         //create sensor gps admin
         gps = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if(!gps.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+
             //open android settings
             turnOnGPS()
         }
