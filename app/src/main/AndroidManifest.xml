@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controllers.CreateConditonActiv"></activity>
+        <activity android:name=".controllers.ConditionActivity"></activity>
+        <activity android:name=".controllers.CreateConditonActiv" />
         <activity android:name=".controllers.StartupSetup" />
         <activity android:name=".controllers.SignUpActivity" />
         <activity android:name=".controllers.SignInActivity" />

@@ -88,6 +88,9 @@ class DiaryFragment : Fragment(), ListenerRecycler {
     }
 
     override fun itemClicked(position: Int) {
-
+        val intentConditionActivity = Intent(activity, ConditionActivity::class.java)
+        val condition = adaptadorCondition?.arrCondiciones?.get(position)?.name
+        intentConditionActivity.putExtra("CONDITION", condition)
+        startActivity(intentConditionActivity)
     }
 }
