@@ -1,8 +1,6 @@
 package mx.lifehealthsolutions.myhealthjournal.models
 
-import java.util.*
-
-class Entry(val condition: Condition, val date: Date, val scale: Int, val comment:String, val eventTime: String): Comparable<Entry>{
+class Entry(val condition: String, val date: String, val scale: Long, val comment:String, val eventTime: Long): Comparable<Entry>{
 
 
     override fun compareTo(other: Entry): Int {
@@ -14,9 +12,9 @@ class Entry(val condition: Condition, val date: Date, val scale: Int, val commen
     }
     companion object {
         val arrEntradas = arrayOf(
-            Entry(Condition.arrCondiciones[0], Date(), 5,"Detalles...", "ads"),
-            Entry(Condition.arrCondiciones[1], Date(), 7,"Detalles...", "ads"),
-            Entry(Condition.arrCondiciones[1], Date(), 7,"Detalles...", "ads")
+            Entry("migraña", "" , 5,"Detalles...", 1),
+            Entry("migraña", "", 7,"Detalles...", 1),
+            Entry("migraña", "", 0,"Detalles...", 1)
         )
     }
 }
