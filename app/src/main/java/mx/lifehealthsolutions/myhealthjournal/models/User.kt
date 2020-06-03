@@ -5,6 +5,7 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.SpinnerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -27,7 +28,7 @@ object User: Comparable<User> {
 
     }
 
-    fun downloadConditionNames(context: Context): SpinnerAdapter {
+    fun downloadConditionNames(context: Context, spinner: Spinner): SpinnerAdapter {
         //download from the cloud
         val user = FirebaseAuth.getInstance().currentUser?.email
         var adapter: SpinnerAdapter
@@ -41,12 +42,17 @@ object User: Comparable<User> {
                     Log.d(TAG, "${document.id} => ${document.data}")
                     conditions_string.add(document.id)
                 }
+                adapter = ArrayAdapter(context, R.layout.simple_spinner_item, conditions_string) as SpinnerAdapter
+                spinner.adapter = adapter
+                spinner.setSelection(2, false)
+
             }
             .addOnFailureListener { exception ->
 
                 conditions_string.add("No conditions found")
 
             }
+
         adapter = ArrayAdapter(context, R.layout.simple_spinner_item, conditions_string) as SpinnerAdapter
         return adapter
     }

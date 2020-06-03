@@ -22,7 +22,7 @@ class CreateEntryActiv : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_entrada)
         val spinner: Spinner = findViewById(R.id.spinnerTipo)
-        val adapter = User.downloadConditionNames(this)
+        val adapter = User.downloadConditionNames(this, spinner)
         spinnerTipo.adapter = adapter
         val thisMoment = Date()
         val todayDate = "${thisMoment.year+1900}-${thisMoment.month}-${thisMoment.date}"
@@ -33,14 +33,19 @@ class CreateEntryActiv : AppCompatActivity() {
 
 
     override fun onResume() {
+        // TODO (Bobby), verificar que se entra aqui cuando se regresa de crear nueva Condition
         super.onResume()
         Log.w("idk", "Here we are")
 
         // spinner i think
-        val spinner: Spinner = findViewById(R.id.spinnerTipo)
-        val adapter = User.downloadConditionNames(this)
-        spinnerTipo.adapter = adapter
+        //val spinner: Spinner = findViewById(R.id.spinnerTipo)
+        //val adapter = User.downloadConditionNames(this, spinner)
+        //spinnerTipo.adapter = adapter
         // TODO (Bobby) spinnerTipo.setSelection(0)
+        // NO se puede porque aun no tiene datos
+        // creo que es overridden por lo que esta en User.kt
+        //spinnerTipo.setSelection(1, false)
+
     }
 
 
