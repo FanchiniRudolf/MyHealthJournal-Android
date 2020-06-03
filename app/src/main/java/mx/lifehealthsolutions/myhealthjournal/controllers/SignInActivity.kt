@@ -148,9 +148,23 @@ class SignInActivity : AppCompatActivity() {
                     val name = user?.displayName
                     val mainActivity = Intent(this, MainActivity::class.java)
 
-                    registerUserDB(email, name)
-                    startActivity(mainActivity)
-                    finish()
+                    val db = FirebaseFirestore.getInstance()
+                    val userRef = db.collection("Users/").document("$email")
+
+                    userRef.get()
+                        .addOnSuccessListener { document ->
+                            if(document.data == null){
+                                val  setupIntent = Intent(this, StartupSetup::class.java).putExtra("email",email)
+                                startActivity(setupIntent)
+                            }
+                            else{
+                                print("----------------------")
+                                print("${document.id}")
+                                print("${document.data}")
+                                startActivity(mainActivity)
+                                finish()
+                            }
+                        }
 
                 } else {
                     // If sign in fails, display a message to the user.
