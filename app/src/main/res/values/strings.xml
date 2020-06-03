@@ -18,9 +18,9 @@
         <item>😭</item>
     </array>
     <array name="arrEventTimeValues">
-        <item>Before</item>
-        <item>During</item>
-        <item>After</item>
+        <item>Antes</item>
+        <item>Durante</item>
+        <item>Después</item>
     </array>
 
     <!-- TODO: Remove or change this placeholder text -->

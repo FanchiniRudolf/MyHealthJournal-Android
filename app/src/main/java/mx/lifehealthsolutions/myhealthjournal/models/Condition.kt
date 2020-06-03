@@ -16,9 +16,6 @@ class Condition(val name: String) {
         )
     }
 
-    fun graph(){
-        //TODO add later
-    }
 
     fun add_entry(entry: Entry){
         entry_values.add(entry)
