@@ -34,7 +34,7 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChart"
+            android:id="@+id/lcGraph"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

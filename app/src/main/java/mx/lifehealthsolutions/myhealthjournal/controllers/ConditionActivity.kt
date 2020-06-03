@@ -6,9 +6,11 @@ import android.util.Log
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.mikephil.charting.charts.LineChart
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_condition.*
+import kotlinx.android.synthetic.main.activity_condition.view.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.interfaces.ListenerRecycler
 import mx.lifehealthsolutions.myhealthjournal.models.AdapterViewEntry
@@ -32,13 +34,13 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
 
         downloadEntries(condition_name)
         createRecycler()
-
-
-
-
-        /*
         createChart()
-        */
+
+    }
+
+    private fun createChart() {
+        var  chart: LineChart = lcGraph
+        //todo
     }
 
     private fun createRecycler() {
