@@ -38,18 +38,18 @@ class DiaryFragment : Fragment(), ListenerRecycler {
             val intent = Intent(activity, CreateEntryActiv::class.java)
             startActivity(intent)
         }
-        recyclerView = view.recyclerEntradas
+
 
 
         val user = FirebaseAuth.getInstance().currentUser?.email
-
         adaptadorCondition = AdapterViewCondition(user)
 
 
         val layout = LinearLayoutManager(activity)
         layout.orientation = LinearLayoutManager.VERTICAL
-        recyclerView.layoutManager = layout
 
+        recyclerView = view.recyclerEntradas
+        recyclerView.layoutManager = layout
         adaptadorCondition?.listener =  this
         recyclerView.adapter =  adaptadorCondition
         // Return the fragment view/layout
@@ -72,8 +72,6 @@ class DiaryFragment : Fragment(), ListenerRecycler {
                     arrConditions.add(Condition(document.id))
                     Log.i("TAMAÑO", temp)
                 }
-                var temp =  "Hello World"
-                println(temp)
                 adaptadorCondition.arrCondiciones = arrConditions.toTypedArray<Condition>()
                 Log.i("TAMAÑO", adaptadorCondition.arrCondiciones!!.size.toString())
                 adaptadorCondition.notifyDataSetChanged()
