@@ -42,18 +42,18 @@ object User: Comparable<User> {
                     Log.d(TAG, "${document.id} => ${document.data}")
                     conditions_string.add(document.id)
                 }
-                adapter = ArrayAdapter(context, R.layout.simple_spinner_item, conditions_string) as SpinnerAdapter
-                spinner.adapter = adapter
-                spinner.setSelection(2, false)
+                //adapter = ArrayAdapter(context, R.layout.simple_spinner_item, conditions_string) as SpinnerAdapter
+                //spinner.adapter = adapter
+                //spinner.setSelection(2, false)
 
             }
             .addOnFailureListener { exception ->
-
                 conditions_string.add("No conditions found")
-
             }
 
         adapter = ArrayAdapter(context, R.layout.simple_spinner_item, conditions_string) as SpinnerAdapter
+        //spinner.adapter = adapter
+        //spinner.setSelection(2, false)
         return adapter
     }
 

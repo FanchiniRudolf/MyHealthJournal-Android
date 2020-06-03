@@ -20,6 +20,7 @@ class CreateEntryActiv : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.w("onCreate", "Se ha llamado a onCreate")
         setContentView(R.layout.activity_crear_entrada)
         val spinner: Spinner = findViewById(R.id.spinnerTipo)
         val adapter = User.downloadConditionNames(this, spinner)
@@ -35,13 +36,15 @@ class CreateEntryActiv : AppCompatActivity() {
     override fun onResume() {
         // TODO (Bobby), verificar que se entra aqui cuando se regresa de crear nueva Condition
         super.onResume()
-        Log.w("idk", "Here we are")
+        Log.w("onResume", "Se ha llamado a onResume")
 
         // spinner i think
         //val spinner: Spinner = findViewById(R.id.spinnerTipo)
         //val adapter = User.downloadConditionNames(this, spinner)
         //spinnerTipo.adapter = adapter
-        // TODO (Bobby) spinnerTipo.setSelection(0)
+        // TODO (Bobby) spinnerTipo.setSelection(last)
+        // TODO, index other than 0 causes IndexOutOfBoundsException
+        spinnerTipo.setSelection(0, false)
         // NO se puede porque aun no tiene datos
         // creo que es overridden por lo que esta en User.kt
         //spinnerTipo.setSelection(1, false)
