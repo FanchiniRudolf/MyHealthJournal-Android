@@ -146,11 +146,11 @@ class MainActivity : AppCompatActivity(), LocationListener {
                 override fun onResponse(response: JSONObject?) {
                     println(response)
                     val  aqi = response?.getJSONObject("data")?.getString("aqi")
-                    val pmo10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
+                    val pm10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
                     println(aqi)
-                    println(pmo10)
+                    println(pm10)
                     //textView15.setText("pmo10: $pmo10, aqi: $aqi")
-                    fragHome.setData("pmo10: $pmo10, aqi: $aqi")
+                    fragHome.setData("pm10: $pm10, aqi: $aqi")
 
                 }
 

@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.renglon_entrada.view.*
 import mx.lifehealthsolutions.myhealthjournal.interfaces.ListenerRecycler
 import mx.lifehealthsolutions.myhealthjournal.R
 
-class AdapterViewEntry(var arrEntradas:Array<Entry>):
+class AdapterViewEntry(var arrEntradas:ArrayList<Entry>):
     RecyclerView.Adapter<AdapterViewEntry.RenglonEntrada>() {
 
     var listener: ListenerRecycler? = null
