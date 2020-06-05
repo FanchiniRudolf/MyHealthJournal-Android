@@ -1,5 +1,6 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
+import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -79,9 +80,30 @@ class CreateEntryActiv : AppCompatActivity() {
     }
 
 
+    private val CREATE_CONDITION_CODE = 600
+
     fun createNewCondition(v: View) {
         val newCondIntent = Intent(this, CreateConditonActiv::class.java)
-        startActivity(newCondIntent)
+        startActivityForResult(newCondIntent, CREATE_CONDITION_CODE)
+    }
+
+
+    // TODO (Bobby)
+    // se activa cuadno la segunda actividad diga ya termine y te estoy regresando un resultado
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CREATE_CONDITION_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Log.w("resultCode", "Result code is RESULT_OK")
+                if (data != null) {
+                    // el -1 se regresa si no se encuentra la llave
+                    //val lastIndex = adapter
+                    spinnerTipo.setSelection(0, false)
+                    val numItems = spinnerTipo.count
+                    Log.w("onActivityResult", "El spinner tiene ${numItems} valores")
+                }
+            }
+        }
     }
 
 
