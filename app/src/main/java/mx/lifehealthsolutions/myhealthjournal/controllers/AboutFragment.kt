@@ -1,5 +1,6 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,6 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.fragment_about.view.*
@@ -26,6 +30,9 @@ class AboutFragment : Fragment() {
     ): View? {
         val view: View = inflater!!.inflate(R.layout.fragment_about, container, false)
         auth = FirebaseAuth.getInstance()
+
+
+
 
         view.btn_logout.setOnClickListener { view ->
             auth.signOut()

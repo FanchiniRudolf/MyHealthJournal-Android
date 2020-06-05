@@ -65,10 +65,10 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
 
         <TextView
-            android:id="@+id/tvUltimaEntrada"
+            android:id="@+id/Clima"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Última Entrada:"
+            android:text="Clima:"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <TextView
@@ -91,7 +91,7 @@
             android:id="@+id/tvProximaMedicina"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Próxima Medicina:"
+            android:text="Indice UV:"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <TextView

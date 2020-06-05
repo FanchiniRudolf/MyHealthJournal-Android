@@ -18,11 +18,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.fragment_home.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.models.Condition
 import mx.lifehealthsolutions.myhealthjournal.models.User
@@ -66,7 +63,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                         .addToBackStack(null)
                         .commit()
-                    setClimate()
+                    downloadData()
                 }
 
                 R.id.navigation_reminders -> {
@@ -108,6 +105,70 @@ class MainActivity : AppCompatActivity(), LocationListener {
         test_user.conditions_list.add(Condition("asma"))
     }
 
+    private fun downloadData() {
+        setAir()
+        setWeather()
+        setUV()
+    }
+
+    private fun setWeather() {
+        val latitud = position.latitude
+        val longitude = position.longitude
+        val address = "https://api.openweathermap.org/data/2.5/weather?lat=$latitud&lon=$longitude&appid=5b8f0f3d234586f344b2a966a5650aa9"
+        print(address)
+        AndroidNetworking.get(address)
+            .build()
+            .getAsJSONObject(object: JSONObjectRequestListener {
+                override fun onResponse(response: JSONObject?) {
+                    println(response)
+                    val  temp = response?.getJSONObject("main")?.getString("temp")
+                    val humidity = response?.getJSONObject("main")?.getString("humidity")
+                    println(temp)
+                    println(humidity)
+                    //textView15.setText("pmo10: $pmo10, aqi: $aqi")
+                    fragHome.setClimate("temp: $temp, humidity: $humidity")
+
+                }
+
+                override fun onError(anError: ANError?) {
+                    println("******************************************************")
+                    println(anError)
+                    println("******************************************************")
+                    fragHome.setClimate("pmo10: NAN, aqi: NAN")
+                }
+
+            })
+    }
+
+    private fun setUV() {
+        val latitud = position.latitude
+        val longitude = position.longitude
+        val address = "https://api.openweathermap.org/data/2.5/uvi?lat=$latitud&lon=$longitude&appid=5b8f0f3d234586f344b2a966a5650aa9"
+        print(address)
+        AndroidNetworking.get(address)
+            .build()
+            .getAsJSONObject(object: JSONObjectRequestListener {
+                override fun onResponse(response: JSONObject?) {
+                    println(response)
+                    val  uvi = response?.getString("value")
+
+                    println(uvi)
+                    //textView15.setText("pmo10: $pmo10, aqi: $aqi")
+                    fragHome.setUV("Indice: $uvi")
+
+                }
+
+                override fun onError(anError: ANError?) {
+                    println("******************************************************")
+                    println(anError)
+                    println("******************************************************")
+                    fragHome.setUV("pmo10: NAN, aqi: NAN")
+                }
+
+            })
+
+    }
+
     override fun onStart() {
         super.onStart()
         configureGPS()
@@ -120,7 +181,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
             PackageManager.PERMISSION_GRANTED){
             //have permit allowed
-            gps.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0f, this)
+            gps.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 1000f, this)
             onLocationChanged(gps.getLastKnownLocation(LocationManager.GPS_PROVIDER))
         } else{
             //ask for permit
@@ -136,7 +197,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
     }
 
 
-    private fun setClimate() {
+    private fun setAir() {
         val latitud = position.latitude
         val longitude = position.longitude
         val address = "https://api.waqi.info/feed/geo:$latitud;$longitude/?token=c77ba1b4e5441ffaaec07a8cb58efc3307bdf850"
@@ -146,11 +207,11 @@ class MainActivity : AppCompatActivity(), LocationListener {
                 override fun onResponse(response: JSONObject?) {
                     println(response)
                     val  aqi = response?.getJSONObject("data")?.getString("aqi")
-                    val pmo10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
+                    val pm10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
                     println(aqi)
-                    println(pmo10)
+                    println(pm10)
                     //textView15.setText("pmo10: $pmo10, aqi: $aqi")
-                    fragHome.setData("pmo10: $pmo10, aqi: $aqi")
+                    fragHome.setAir("pm10: $pm10, aqi: $aqi")
 
                 }
 
@@ -158,6 +219,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     println("******************************************************")
                     println("error")
                     println("******************************************************")
+                    fragHome.setAir("pmo10: NAN, aqi: NAN")
                 }
 
             })
@@ -167,6 +229,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
         //create sensor gps admin
         gps = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if(!gps.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+
             //open android settings
             turnOnGPS()
         }
@@ -194,7 +257,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
     override fun onLocationChanged(location: Location?) {
         if(location != null){
             position = location
-            setClimate()
+            downloadData()
         }
     }
 

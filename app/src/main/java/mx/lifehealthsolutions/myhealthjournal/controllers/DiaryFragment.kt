@@ -38,18 +38,18 @@ class DiaryFragment : Fragment(), ListenerRecycler {
             val intent = Intent(activity, CreateEntryActiv::class.java)
             startActivity(intent)
         }
-        recyclerView = view.recyclerEntradas
+
 
 
         val user = FirebaseAuth.getInstance().currentUser?.email
-
         adaptadorCondition = AdapterViewCondition(user)
 
 
         val layout = LinearLayoutManager(activity)
         layout.orientation = LinearLayoutManager.VERTICAL
-        recyclerView.layoutManager = layout
 
+        recyclerView = view.recyclerEntradas
+        recyclerView.layoutManager = layout
         adaptadorCondition?.listener =  this
         recyclerView.adapter =  adaptadorCondition
         // Return the fragment view/layout
@@ -61,9 +61,7 @@ class DiaryFragment : Fragment(), ListenerRecycler {
     override fun onResume() {
         super.onResume()
         val db = FirebaseFirestore.getInstance()
-        val user = FirebaseAuth.getInstance().currentUser?.email
         var userStr =  "${adaptadorCondition.email}"
-        var hola  = ""
         arrConditions.clear()
         db.collection("Users/$userStr/Conditions")
             .get()
@@ -72,11 +70,8 @@ class DiaryFragment : Fragment(), ListenerRecycler {
                     Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
                     var temp = document.id
                     arrConditions.add(Condition(document.id))
-                    hola = "asda"
                     Log.i("TAMAÑO", temp)
                 }
-                var temp =  "Hello World"
-                println(temp)
                 adaptadorCondition.arrCondiciones = arrConditions.toTypedArray<Condition>()
                 Log.i("TAMAÑO", adaptadorCondition.arrCondiciones!!.size.toString())
                 adaptadorCondition.notifyDataSetChanged()
@@ -88,6 +83,9 @@ class DiaryFragment : Fragment(), ListenerRecycler {
     }
 
     override fun itemClicked(position: Int) {
-
+        val intentConditionActivity = Intent(activity, ConditionActivity::class.java)
+        val condition = adaptadorCondition?.arrCondiciones?.get(position)?.name
+        intentConditionActivity.putExtra("CONDITION", condition)
+        startActivity(intentConditionActivity)
     }
 }

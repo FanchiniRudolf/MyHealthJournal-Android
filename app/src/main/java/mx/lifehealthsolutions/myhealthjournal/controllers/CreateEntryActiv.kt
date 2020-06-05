@@ -1,5 +1,6 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
+import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -20,9 +21,10 @@ class CreateEntryActiv : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.w("onCreate", "Se ha llamado a onCreate")
         setContentView(R.layout.activity_crear_entrada)
         val spinner: Spinner = findViewById(R.id.spinnerTipo)
-        val adapter = User.downloadConditionNames(this)
+        val adapter = User.downloadConditionNames(this, spinner)
         spinnerTipo.adapter = adapter
         val thisMoment = Date()
         val todayDate = "${thisMoment.year+1900}-${thisMoment.month}-${thisMoment.date}"
@@ -33,14 +35,21 @@ class CreateEntryActiv : AppCompatActivity() {
 
 
     override fun onResume() {
+        // TODO (Bobby), verificar que se entra aqui cuando se regresa de crear nueva Condition
         super.onResume()
-        Log.w("idk", "Here we are")
+        Log.w("onResume", "Se ha llamado a onResume")
 
         // spinner i think
-        val spinner: Spinner = findViewById(R.id.spinnerTipo)
-        val adapter = User.downloadConditionNames(this)
-        spinnerTipo.adapter = adapter
-        // TODO (Bobby) spinnerTipo.setSelection(0)
+        //val spinner: Spinner = findViewById(R.id.spinnerTipo)
+        //val adapter = User.downloadConditionNames(this, spinner)
+        //spinnerTipo.adapter = adapter
+        // TODO (Bobby) spinnerTipo.setSelection(last)
+        // TODO, index other than 0 causes IndexOutOfBoundsException
+        spinnerTipo.setSelection(0, false)
+        // NO se puede porque aun no tiene datos
+        // creo que es overridden por lo que esta en User.kt
+        //spinnerTipo.setSelection(1, false)
+
     }
 
 
@@ -71,9 +80,30 @@ class CreateEntryActiv : AppCompatActivity() {
     }
 
 
+    private val CREATE_CONDITION_CODE = 600
+
     fun createNewCondition(v: View) {
         val newCondIntent = Intent(this, CreateConditonActiv::class.java)
-        startActivity(newCondIntent)
+        startActivityForResult(newCondIntent, CREATE_CONDITION_CODE)
+    }
+
+
+    // TODO (Bobby)
+    // se activa cuadno la segunda actividad diga ya termine y te estoy regresando un resultado
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CREATE_CONDITION_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Log.w("resultCode", "Result code is RESULT_OK")
+                if (data != null) {
+                    // el -1 se regresa si no se encuentra la llave
+                    //val lastIndex = adapter
+                    spinnerTipo.setSelection(0, false)
+                    val numItems = spinnerTipo.count
+                    Log.w("onActivityResult", "El spinner tiene ${numItems} valores")
+                }
+            }
+        }
     }
 
 

@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.renglon_entrada.view.*
 import mx.lifehealthsolutions.myhealthjournal.interfaces.ListenerRecycler
 import mx.lifehealthsolutions.myhealthjournal.R
 
-class AdapterViewEntry(var arrEntradas:Array<Entry>):
+class AdapterViewEntry(var arrEntradas:ArrayList<Entry>):
     RecyclerView.Adapter<AdapterViewEntry.RenglonEntrada>() {
 
     var listener: ListenerRecycler? = null
@@ -36,7 +36,6 @@ class AdapterViewEntry(var arrEntradas:Array<Entry>):
         val entrada = arrEntradas[position]
 
         holder.vistaRenglon.tvFechaEntrada.text = entrada.date.toString()
-        holder.vistaRenglon.tvTipoEntrada.text = entrada.condition.name.toString()
 
         holder.vistaRenglon.setOnClickListener{
             listener?.itemClicked(position)

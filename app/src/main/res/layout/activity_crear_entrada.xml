@@ -205,18 +205,19 @@
             android:text="Indica el tiempo del evento:"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-        <Spinner
-            android:id="@+id/spinnerTiempoEvento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/arrEventTimeValues" />
-
         <TextView
             android:id="@+id/tvHelperText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="¿El evento ya pasó o está pasando?"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <Spinner
+            android:id="@+id/spinnerTiempoEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/arrEventTimeValues" />
+
     </LinearLayout>
 
     <Button

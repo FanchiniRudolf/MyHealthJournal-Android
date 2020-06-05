@@ -38,12 +38,34 @@ class HomeFragment : Fragment() {
     }
 
 
-    fun setData(data: String){
+    fun setAir(data: String){
         if (textView15 != null){
             textView15.setText(data)
         }else{
             println("******************************************************")
             println("No text view 15")
+            println("******************************************************")
+        }
+
+    }
+
+    fun setClimate(data: String){
+        if (textView17 != null){
+            textView17.setText(data)
+        }else{
+            println("******************************************************")
+            println("No text view 17")
+            println("******************************************************")
+        }
+
+    }
+
+    fun setUV(data: String){
+        if (textView19 != null){
+            textView19.setText(data)
+        }else{
+            println("******************************************************")
+            println("No text view 17")
             println("******************************************************")
         }
 
