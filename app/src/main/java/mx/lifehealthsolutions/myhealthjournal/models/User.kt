@@ -29,7 +29,7 @@ object User: Comparable<User> {
 
     }
     init {
-        nombre = "Test"
+        nombre = "undefined"
     }
 
     fun downloadConditionNames(context: Context) {
@@ -44,7 +44,6 @@ object User: Comparable<User> {
         db.collection("Users/$user/Conditions")
             .get()
             .addOnSuccessListener { documents ->
-                Log.w("successlistener", "********entra al onSuccessListener")
                 // descarga de datos
                 for (document in documents) {
                     Log.d(TAG, "${document.id} => ${document.data}")
@@ -54,7 +53,6 @@ object User: Comparable<User> {
                 //spinner.adapter = adapter
                 val listener = context as DownloadedDataListener
                 listener.didFinishDownload(adapter)
-                Log.w("didFinish", "********Se ha llamado al listener")
 
 
             }

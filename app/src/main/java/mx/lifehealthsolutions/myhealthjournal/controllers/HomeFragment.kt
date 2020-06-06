@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import mx.lifehealthsolutions.myhealthjournal.R
@@ -38,6 +40,16 @@ class HomeFragment : Fragment() {
             //configureGPS()
         if(User.nombre != "undefined"){
             setWelcomeMessage("${User.nombre}")
+        }
+        if(tvHomeTitle.text  == "Hola de nuevo"){
+            val db = FirebaseFirestore.getInstance()
+            val userRef = db.collection("Users/").document("${FirebaseAuth.getInstance().currentUser?.email}")
+            userRef.get()
+                .addOnSuccessListener { document ->
+                    if(document.data != null){
+                        setWelcomeMessage(document.data!!.get("name") as String)
+                    }
+                }
         }
     }
 
