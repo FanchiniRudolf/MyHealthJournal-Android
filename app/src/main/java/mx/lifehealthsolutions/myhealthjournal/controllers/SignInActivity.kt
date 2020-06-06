@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -34,7 +35,12 @@ class SignInActivity : AppCompatActivity() {
             .build();
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        sign_in_button.setOnClickListener{
+        val regText = findViewById(R.id.registrate) as TextView
+        regText.setOnClickListener{
+            val regIntent = Intent(this, SignUpActivity::class.java)
+            startActivity(regIntent)
+        }
+        googleButton.setOnClickListener{
             val signInIntent = mGoogleSignInClient.getSignInIntent();
             startActivityForResult(signInIntent, RC_SIGN_IN);
 
@@ -50,16 +56,22 @@ class SignInActivity : AppCompatActivity() {
     fun load(){
         progressBar.visibility = View.VISIBLE
         buttonIniciar.visibility = View.INVISIBLE
-        sign_in_button.visibility = View.INVISIBLE
-        buttonRegistrarse.visibility = View.INVISIBLE
+        googleButton.visibility = View.INVISIBLE
         textInputLayoutUser.visibility = View.INVISIBLE
         textInputLayoutPass.visibility = View.INVISIBLE
+        reg1.visibility = View.INVISIBLE
+        iniciacon.visibility = View.INVISIBLE
+        circle.visibility = View.INVISIBLE
+        registrate.visibility = View.INVISIBLE
     }
     fun visible(){
         progressBar.visibility = View.INVISIBLE
         buttonIniciar.visibility = View.VISIBLE
-        sign_in_button.visibility = View.VISIBLE
-        buttonRegistrarse.visibility = View.VISIBLE
+        googleButton.visibility = View.VISIBLE
+        reg1.visibility = View.VISIBLE
+        iniciacon.visibility = View.VISIBLE
+        circle.visibility = View.VISIBLE
+        registrate.visibility = View.VISIBLE
         textInputLayoutUser.visibility = View.VISIBLE
         textInputLayoutPass.visibility = View.VISIBLE
     }
@@ -100,13 +112,23 @@ class SignInActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Si se inició correctamente la sesión vamos a la vista Home de la aplicación
                         load()
+                        val db = FirebaseFirestore.getInstance()
+
+                        val userRef = db.collection("Users/").document("$email")
+                        userRef.get()
+                            .addOnSuccessListener { document ->
+                                if(document.data != null){
+                                    User.nombre = document.data?.get("name").toString()
+                                }
+                            }
+
                         val mainIntent = Intent(this, MainActivity::class.java)
                         startActivity(mainIntent)
                         finish()
                     } else {
                         visible()
-                        // sino le avisamos el usuairo que orcurrio un problema
-                        Toast.makeText(this, "Incorrect email or password",
+                        // sino le avisamos el usuario que ocurrió un problema
+                        Toast.makeText(this, "Usuario o contraseña incorrecto(s)",
                             Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -117,21 +139,6 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    fun registerUserDB(email: String?, name: String?){
-        val user = hashMapOf(
-            "name" to name,
-            "email" to email
-        )
-        val db = FirebaseFirestore.getInstance()
-        db.collection("Users").document("$email")
-            .set(user)
-    }
-
-
-    fun register(v: View){
-        val regIntent = Intent(this, SignUpActivity::class.java)
-        startActivity(regIntent)
-    }
 
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
@@ -158,11 +165,21 @@ class SignInActivity : AppCompatActivity() {
                                 startActivity(setupIntent)
                             }
                             else{
-                                print("----------------------")
-                                print("${document.id}")
-                                print("${document.data}")
-                                startActivity(mainActivity)
-                                finish()
+                                val db = FirebaseFirestore.getInstance()
+                                User.nombre = "undefined"
+                                val userRef = db.collection("Users/").document("$email")
+                                userRef.get()
+                                    .addOnSuccessListener { document ->
+                                        if(document.data != null){
+                                            User.nombre = document.data?.get("name").toString()
+                                            startActivity(mainActivity)
+                                            finish()
+                                        }
+                                        else{
+                                            startActivity(mainActivity)
+                                            finish()
+                                        }
+                                    }
                             }
                         }
 

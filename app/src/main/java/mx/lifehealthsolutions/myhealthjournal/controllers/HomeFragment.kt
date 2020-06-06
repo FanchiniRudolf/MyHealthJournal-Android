@@ -10,6 +10,7 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import mx.lifehealthsolutions.myhealthjournal.R
+import mx.lifehealthsolutions.myhealthjournal.models.User
 
 /**
  * A simple [Fragment] subclass.
@@ -35,9 +36,14 @@ class HomeFragment : Fragment() {
     override fun onStart() {
             super.onStart()
             //configureGPS()
+        if(User.nombre != "undefined"){
+            setWelcomeMessage("${User.nombre}")
+        }
     }
 
-
+    fun setWelcomeMessage(data:String){
+        tvHomeTitle.text  = "Hola de nuevo, $data"
+    }
     fun setAir(data: String){
         if (textView15 != null){
             textView15.setText(data)

@@ -38,15 +38,10 @@ class MainActivity : AppCompatActivity(), LocationListener {
         setContentView(R.layout.activity_main)
 
         AndroidNetworking.initialize(this)
-
-
-
-
         fragHome = HomeFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.contenedorFragmentos, fragHome)
             .commit()
-
         if(FirebaseAuth.getInstance().getCurrentUser() == null){
             val signinIntent = Intent(this, SignInActivity::class.java)
             startActivity(signinIntent)

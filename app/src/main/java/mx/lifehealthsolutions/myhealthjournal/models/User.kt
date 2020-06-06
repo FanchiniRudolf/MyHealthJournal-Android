@@ -28,6 +28,9 @@ object User: Comparable<User> {
         //upload to the cloud
 
     }
+    init {
+        nombre = "Test"
+    }
 
     fun downloadConditionNames(context: Context) {
         //download from the cloud
