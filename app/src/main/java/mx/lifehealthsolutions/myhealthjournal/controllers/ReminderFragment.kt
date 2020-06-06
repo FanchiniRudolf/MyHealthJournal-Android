@@ -43,8 +43,9 @@ class ReminderFragment : Fragment() {
         val view: View = inflater!!.inflate(R.layout.fragment_reminder, container, false)
 
         spinner = view.conditionSpinner
-        var adapter = User.downloadConditionNames(this.requireActivity(), spinner)
-        spinner.adapter = adapter // se esta regresando un adaptador vacio !!
+        var adapter = User.downloadConditionNames(this.requireActivity())
+        // esto se manejará con un listener
+        //spinner.adapter = adapter // se esta regresando un adaptador vacio !!
         //spinner.setSelection(1, false)
 
         val dateSetListenerStart = object: DatePickerDialog.OnDateSetListener{

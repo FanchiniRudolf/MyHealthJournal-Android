@@ -9,6 +9,7 @@ import android.widget.Spinner
 import android.widget.SpinnerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import mx.lifehealthsolutions.myhealthjournal.interfaces.DownloadedDataListener
 
 object User: Comparable<User> {
 
@@ -28,33 +29,35 @@ object User: Comparable<User> {
 
     }
 
-    fun downloadConditionNames(context: Context, spinner: Spinner): SpinnerAdapter {
+    fun downloadConditionNames(context: Context) {
         //download from the cloud
+        Log.w("download", "********entra al metodo de descarga")
         val user = FirebaseAuth.getInstance().currentUser?.email
         var adapter: SpinnerAdapter
         var conditions_string = ArrayList<String>()
         conditions_string.add("Conditions")
+
+        // leer de la db
         db.collection("Users/$user/Conditions")
             .get()
             .addOnSuccessListener { documents ->
-
+                Log.w("successlistener", "********entra al onSuccessListener")
+                // descarga de datos
                 for (document in documents) {
                     Log.d(TAG, "${document.id} => ${document.data}")
                     conditions_string.add(document.id)
                 }
-                //adapter = ArrayAdapter(context, R.layout.simple_spinner_item, conditions_string) as SpinnerAdapter
+                adapter = ArrayAdapter(context, R.layout.simple_spinner_item, conditions_string) as SpinnerAdapter
                 //spinner.adapter = adapter
-                //spinner.setSelection(2, false)
+                val listener = context as DownloadedDataListener
+                listener.didFinishDownload(adapter)
+                Log.w("didFinish", "********Se ha llamado al listener")
+
 
             }
             .addOnFailureListener { exception ->
                 conditions_string.add("No conditions found")
             }
-
-        adapter = ArrayAdapter(context, R.layout.simple_spinner_item, conditions_string) as SpinnerAdapter
-        //spinner.adapter = adapter
-        //spinner.setSelection(2, false)
-        return adapter
     }
 
     fun delete(){

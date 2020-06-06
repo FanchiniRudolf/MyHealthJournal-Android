@@ -35,16 +35,20 @@ class CreateConditonActiv : AppCompatActivity() {
             )
             val db = FirebaseFirestore.getInstance()
             db.collection("Users/$user/Conditions").document("$newCondition")
-                .set(newCond)
+                .set(newCond).addOnCompleteListener {
+                    // podrían encapsularse en una funcion
+                    val intRegreso = Intent()
+                    // entrega datos
+                    setResult(RESULT_OK, intRegreso)
+                    finish()
+                }
         }
     }
 
 
     fun exitSavingData(v: View) {
         registerConditionDB()
-        val intRegreso = Intent()
-        setResult(RESULT_OK, intRegreso)
-        finish()
+
     }
 
 
