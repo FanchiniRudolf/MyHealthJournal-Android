@@ -5,13 +5,16 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
@@ -20,6 +23,7 @@ import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_home.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.models.Condition
 import mx.lifehealthsolutions.myhealthjournal.models.User
@@ -100,6 +104,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
         test_user.conditions_list.add(Condition("asma"))
     }
 
+
     private fun downloadData() {
         setAir()
         setWeather()
@@ -116,12 +121,21 @@ class MainActivity : AppCompatActivity(), LocationListener {
             .getAsJSONObject(object: JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject?) {
                     println(response)
-                    val  temp = response?.getJSONObject("main")?.getString("temp")
-                    val humidity = response?.getJSONObject("main")?.getString("humidity")
-                    println(temp)
-                    println(humidity)
+                    var  temp = response?.getJSONObject("main")?.getString("temp")?.toFloat()?.toInt()
+                    if(temp != null){
+                        temp -= 273
+                        var temperature = temp.toString()
+                        fragHome.temperature.text = "${temperature}ºC"
+                    }
+                    var humidity = response?.getJSONObject("main")?.getString("humidity")?.toInt()
+                    if(humidity != null){
+                        fragHome.humidity.text = "${humidity}%"
+                    }
+                    val place = response?.getString("name")
+                    if(place != null){
+                        fragHome.place_name.text = place
+                    }
                     //textView15.setText("pmo10: $pmo10, aqi: $aqi")
-                    fragHome.setClimate("temp: $temp, humidity: $humidity")
 
                 }
 
@@ -145,11 +159,27 @@ class MainActivity : AppCompatActivity(), LocationListener {
             .getAsJSONObject(object: JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject?) {
                     println(response)
-                    val  uvi = response?.getString("value")
+                    var  uvi = response?.getString("value")
 
                     println(uvi)
                     //textView15.setText("pmo10: $pmo10, aqi: $aqi")
-                    fragHome.setUV("Indice: $uvi")
+                    if(uvi != null){
+                        fragHome.setUV("Indice: $uvi")
+
+                        if(uvi.toFloat().toInt() > 6){
+                            fragHome.airCard.setBackgroundColor(Color.rgb(255,0,0))
+                            fragHome.uvDetail.text = "¡Alto! No salir"
+                        }
+                        else if(uvi.toFloat().toInt() > 3){
+                            fragHome.airCard.setBackgroundColor(Color.rgb(255,200,0))
+                            uvDetail.text = "Moderado"
+                        }
+                        else{
+                            fragHome.airCard.setBackgroundColor(Color.rgb(0,186,0))
+                            fragHome.uvDetail.text = "¡Bajo!"
+                        }
+                    }
+                    fragHome.uvIndex.text = uvi
 
                 }
 
@@ -207,6 +237,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     println(pm10)
                     //textView15.setText("pmo10: $pmo10, aqi: $aqi")
                     fragHome.setAir("pm10: $pm10, aqi: $aqi")
+                    fragHome.pm.text  = pm10
+                    fragHome.aqi.text  = aqi
 
                 }
 

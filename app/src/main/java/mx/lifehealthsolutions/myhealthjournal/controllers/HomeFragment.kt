@@ -1,6 +1,7 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -30,6 +31,7 @@ class HomeFragment : Fragment() {
             val intentNewEntry = Intent(activity, CreateEntryActiv::class.java)
             startActivity(intentNewEntry)
         }
+
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_home, container, false)
         return view
@@ -54,22 +56,16 @@ class HomeFragment : Fragment() {
     }
 
     fun setWelcomeMessage(data:String){
-        tvHomeTitle.text  = "Hola de nuevo, $data"
+        tvHomeTitle.text  = "¡Hola de nuevo, $data!"
     }
     fun setAir(data: String){
-        if (textView15 != null){
-            textView15.setText(data)
-        }else{
-            println("******************************************************")
-            println("No text view 15")
-            println("******************************************************")
-        }
+
 
     }
 
     fun setClimate(data: String){
-        if (textView17 != null){
-            textView17.setText(data)
+        if (temperature != null){
+            temperature.setText(data)
         }else{
             println("******************************************************")
             println("No text view 17")
@@ -79,13 +75,7 @@ class HomeFragment : Fragment() {
     }
 
     fun setUV(data: String){
-        if (textView19 != null){
-            textView19.setText(data)
-        }else{
-            println("******************************************************")
-            println("No text view 17")
-            println("******************************************************")
-        }
+
 
     }
 
