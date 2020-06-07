@@ -28,6 +28,7 @@ import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.models.Condition
 import mx.lifehealthsolutions.myhealthjournal.models.User
 import org.json.JSONObject
+import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity(), LocationListener {
@@ -125,7 +126,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     if(temp != null){
                         temp -= 273
                         var temperature = temp.toString()
-                        fragHome.temperature.text = "${temperature}ºC"
+                        fragHome.temperature.text = "${temperature}"
                     }
                     var humidity = response?.getJSONObject("main")?.getString("humidity")?.toInt()
                     if(humidity != null){
@@ -231,14 +232,21 @@ class MainActivity : AppCompatActivity(), LocationListener {
             .getAsJSONObject(object: JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject?) {
                     println(response)
-                    val  aqi = response?.getJSONObject("data")?.getString("aqi")
-                    val pm10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
-                    println(aqi)
-                    println(pm10)
-                    //textView15.setText("pmo10: $pmo10, aqi: $aqi")
-                    fragHome.setAir("pm10: $pm10, aqi: $aqi")
-                    fragHome.pm.text  = pm10
-                    fragHome.aqi.text  = aqi
+                    var pm10 =  ""
+                    var  aqi = response?.getJSONObject("data")?.getString("aqi")
+                    try{
+                        var pm10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
+                        fragHome.pm.text  = pm10
+
+                    }
+                    catch (e:Exception){
+                        fragHome.pm.text  = "NA"
+                    }
+                    fragHome.aqi.text  = "NA"
+
+                    if(aqi !=  null){
+                        fragHome.aqi.text  = aqi
+                    }
 
                 }
 
