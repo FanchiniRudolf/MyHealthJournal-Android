@@ -25,6 +25,7 @@ import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.pm
 import kotlinx.android.synthetic.main.fragment_reminder.*
@@ -178,17 +179,12 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
                         fragHome.setUV("Indice: $uvi")
 
                         if(uvi.toFloat().toInt() > 6){
-                            fragHome.setBg(airCard, Color.rgb(255,0,0))
                             fragHome.uvDetail.text = "¡Alto! No salir"
                         }
                         else if(uvi.toFloat().toInt() > 3){
-                            fragHome.setBg(airCard, Color.rgb(255,200,0))
-
                             uvDetail.text = "Moderado"
                         }
                         else{
-                            fragHome.setBg(airCard, Color.rgb(0,186,0))
-
                             fragHome.uvDetail.text = "¡Bajo!"
                         }
                     }
@@ -301,9 +297,15 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
     }
 
     override fun onLocationChanged(location: Location?) {
-        if(location != null){
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        if(location != null &&  navView.selectedItemId.equals(R.id.navigation_home) ){
             position = location
-            downloadData()
+            try{
+                downloadData()
+            }
+            catch(e:Exception){
+                print("NADA")
+            }
         }
     }
 

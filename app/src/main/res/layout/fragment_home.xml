@@ -154,7 +154,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:text="Índice UV"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
 
             <TextView
@@ -164,7 +164,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
                 android:text="..."
-                android:textColor="#FFFFFF"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="40sp" />
 
             <TextView
@@ -174,7 +174,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
                 android:text="..."
-                android:textColor="#FFFFFF"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
