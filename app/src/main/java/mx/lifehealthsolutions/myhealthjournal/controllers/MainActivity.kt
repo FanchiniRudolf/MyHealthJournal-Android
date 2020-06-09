@@ -172,6 +172,7 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
                     if(uvi != null){
                         fragHome.setUV("Indice: $uvi")
 
+                        // TODO: change attribute calls to function calls - Rudy
                         if(uvi.toFloat().toInt() > 6){
                             fragHome.airCard.setBackgroundColor(Color.rgb(255,0,0))
                             fragHome.uvDetail.text = "¡Alto! No salir"

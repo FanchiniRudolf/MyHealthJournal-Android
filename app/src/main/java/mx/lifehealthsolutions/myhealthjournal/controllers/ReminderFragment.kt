@@ -46,10 +46,8 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
         val view: View = inflater!!.inflate(R.layout.fragment_reminder, container, false)
 
         spinner = view.conditionSpinner
-        var adapter = User.downloadConditionNames(this.requireActivity())
-        // esto se manejará con un listener
-        //spinner.adapter = adapter // se esta regresando un adaptador vacio !!
-        //spinner.setSelection(1, false)
+        User.downloadConditionNames(this.requireActivity())
+
 
         val dateSetListenerStart = object: DatePickerDialog.OnDateSetListener{
             override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -85,7 +83,6 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
         view.registerBtn.setOnClickListener { view ->
             saveChanges()
         }
-
         return view
     }
 
@@ -94,7 +91,6 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
         super.onResume()
         Log.w("onResume", "Se ha llamado a onResume")
         User.downloadConditionNames(this.requireActivity())
-
     }
 
     private fun saveChanges() {
@@ -156,6 +152,7 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
                 .set(newEntry)
         }
     }
+
 
     override fun didFinishDownload(adapter: SpinnerAdapter) {
         Log.w("didFinishDownload", "********Ha entrado a didFinishDownload")
