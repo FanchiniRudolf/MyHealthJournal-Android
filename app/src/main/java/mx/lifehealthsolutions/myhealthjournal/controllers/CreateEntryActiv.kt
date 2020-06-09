@@ -103,8 +103,8 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
 
 
     fun exitSavingData(v: View) {
-        // TODO: SI descr esta vacia tambien mostrar aviso
-        if (spinner.selectedItemPosition != 0) {
+        // TODO: conditions for date and time too
+        if (spinner.selectedItemPosition != 0 && etDescripcion.text.toString().isNotEmpty()) {
             registerEntryDB()
             finish()
         } else {
@@ -115,7 +115,7 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
 
     private fun mostrarMensajeError() {
         val alerta = AlertDialog.Builder(this)
-        alerta.setMessage("Error:\n¡Falta información por llenar!")
+        alerta.setMessage("Error:\nFaltan campos por llenar.")
             .setPositiveButton("Entendido", null)
             .setCancelable(false)
             .create()
