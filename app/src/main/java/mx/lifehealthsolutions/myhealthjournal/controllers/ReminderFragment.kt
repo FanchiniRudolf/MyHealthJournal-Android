@@ -6,6 +6,7 @@ import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.Spinner
+import android.widget.SpinnerAdapter
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_reminder.*
 import kotlinx.android.synthetic.main.fragment_reminder.view.*
 import kotlinx.android.synthetic.main.fragment_reminder.view.conditionSpinner
 import mx.lifehealthsolutions.myhealthjournal.R
+import mx.lifehealthsolutions.myhealthjournal.interfaces.DownloadedDataListener
 import mx.lifehealthsolutions.myhealthjournal.models.Condition
 import mx.lifehealthsolutions.myhealthjournal.models.User
 import java.text.SimpleDateFormat
@@ -29,7 +32,7 @@ import java.util.*
 /**
  * A simple [Fragment] subclass.
  */
-class ReminderFragment : Fragment() {
+class ReminderFragment : Fragment(), DownloadedDataListener {
 
     lateinit var spinner: Spinner
     var cal = Calendar.getInstance()
@@ -84,6 +87,14 @@ class ReminderFragment : Fragment() {
         }
 
         return view
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        Log.w("onResume", "Se ha llamado a onResume")
+        User.downloadConditionNames(this.requireActivity())
+
     }
 
     private fun saveChanges() {
@@ -144,6 +155,15 @@ class ReminderFragment : Fragment() {
             db.collection("Users/$user/Conditions/$entryCondition/Medicines").document("$startDate-$medicine")
                 .set(newEntry)
         }
+    }
+
+    override fun didFinishDownload(adapter: SpinnerAdapter) {
+        Log.w("didFinishDownload", "********Ha entrado a didFinishDownload")
+        print(adapter)
+        spinner.adapter = adapter
+        print(adapter)
+        val numberConditions = spinner.count
+        Log.w("onActivityResult", "El spinner tiene ${numberConditions} valores")
     }
 
 }
