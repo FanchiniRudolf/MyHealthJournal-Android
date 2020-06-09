@@ -50,6 +50,7 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
 
     fun registerEntryDB() {
         var entryDate = etFecha.text.toString()
+        entryDate = entryDate.replace('/', '-')
         var entryTime = etHora.text.toString()
         var entryCondition = spinnerTipo.selectedItem
         var entryDescription = etDescripcion.text.toString()
@@ -104,7 +105,8 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
 
     fun exitSavingData(v: View) {
         // TODO: conditions for date and time too
-        if (spinner.selectedItemPosition != 0 && etDescripcion.text.toString().isNotEmpty()) {
+        if (spinner.selectedItemPosition != 0 && etDescripcion.text.toString().isNotEmpty()
+            && etFecha.text.toString().isNotEmpty() && etHora.text.toString().isNotEmpty()) {
             registerEntryDB()
             finish()
         } else {
