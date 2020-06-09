@@ -42,29 +42,15 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
 
 
     override fun onResume() {
-        // TODO (Bobby), verificar que se entra aqui cuando se regresa de crear nueva Condition
         super.onResume()
         Log.w("onResume", "Se ha llamado a onResume")
-
-        // spinner i think
-        //val spinner: Spinner = findViewById(R.id.spinnerTipo)
-
-
         User.downloadConditionNames(this)
-
-        //spinnerTipo.adapter = adapter
-        // TODO (Bobby) spinnerTipo.setSelection(last)
-        // TODO, index other than 0 causes IndexOutOfBoundsException
-        //spinnerTipo.setSelection(0, false)
-        // NO se puede porque aun no tiene datos
-        // creo que es overridden por lo que esta en User.kt
-        //spinnerTipo.setSelection(1, false)
-
     }
 
 
     fun registerEntryDB() {
         var entryDate = etFecha.text.toString()
+        entryDate = entryDate.replace('/', '-')
         var entryTime = etHora.text.toString()
         var entryCondition = spinnerTipo.selectedItem
         var entryDescription = etDescripcion.text.toString()
@@ -118,8 +104,24 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
 
 
     fun exitSavingData(v: View) {
-        registerEntryDB()
-        finish()
+        // TODO: conditions for date and time too
+        if (spinner.selectedItemPosition != 0 && etDescripcion.text.toString().isNotEmpty()
+            && etFecha.text.toString().isNotEmpty() && etHora.text.toString().isNotEmpty()) {
+            registerEntryDB()
+            finish()
+        } else {
+            mostrarMensajeError()
+        }
+    }
+
+
+    private fun mostrarMensajeError() {
+        val alerta = AlertDialog.Builder(this)
+        alerta.setMessage("Error:\nFaltan campos por llenar.")
+            .setPositiveButton("Entendido", null)
+            .setCancelable(false)
+            .create()
+        alerta.show()
     }
 
 

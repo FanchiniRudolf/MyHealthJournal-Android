@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -13,10 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
-import android.widget.LinearLayout
 import android.widget.SpinnerAdapter
 import androidx.appcompat.app.AlertDialog
-import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
@@ -26,7 +23,6 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.pm
 import kotlinx.android.synthetic.main.fragment_reminder.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.interfaces.DownloadedDataListener
@@ -89,8 +85,8 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
                         .commit()
                 }
 
-                R.id.navigation_about -> {
-                    val fragAbout = AboutFragment()
+                R.id.navigation_profile -> {
+                    val fragAbout = ProfileFragment()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.contenedorFragmentos, fragAbout)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
@@ -131,15 +127,20 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
                     if(temp != null){
                         temp -= 273
                         var temperature = temp.toString()
-                        fragHome.temperature.text = "${temperature}"
+                        try{
+                            fragHome.setWeather(temperature)
+                        }
+                        catch (e:Exception){
+                            fragHome.setWeather("...")
+                        }
                     }
-                    var humidity = response?.getJSONObject("main")?.getString("humidity")?.toInt()
+                    var humidity = response?.getJSONObject("main")?.getString("humidity")?.toInt().toString()
                     if(humidity != null){
-                        fragHome.humidity.text = "${humidity}%"
+                        fragHome.setHumidity(humidity)
                     }
                     val place = response?.getString("name")
                     if(place != null){
-                        fragHome.place_name.text = place
+                        fragHome.setPlaceName(place)
                     }
                     //textView15.setText("pmo10: $pmo10, aqi: $aqi")
 
@@ -172,16 +173,14 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
                     if(uvi != null){
                         fragHome.setUV("Indice: $uvi")
 
+                        // TODO: change attribute calls to function calls - Rudy
                         if(uvi.toFloat().toInt() > 6){
-                            fragHome.airCard.setBackgroundColor(Color.rgb(255,0,0))
                             fragHome.uvDetail.text = "¡Alto! No salir"
                         }
                         else if(uvi.toFloat().toInt() > 3){
-                            fragHome.airCard.setBackgroundColor(Color.rgb(255,200,0))
                             uvDetail.text = "Moderado"
                         }
                         else{
-                            fragHome.airCard.setBackgroundColor(Color.rgb(0,186,0))
                             fragHome.uvDetail.text = "¡Bajo!"
                         }
                     }
@@ -219,7 +218,6 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), GPS_PERMIT)
         }
-
     }
 
     override fun onPause() {
@@ -241,16 +239,16 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
                     var  aqi = response?.getJSONObject("data")?.getString("aqi")
                     try{
                         var pm10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
-                        fragHome.pm.text  = pm10
+                        fragHome.setPM(pm10)
 
                     }
                     catch (e:Exception){
-                        fragHome.pm.text  = "NA"
-                    }
-                    fragHome.aqi.text  = "NA"
+                        fragHome.setPM("NA")
 
+                    }
+                    fragHome.setAQI("NA")
                     if(aqi !=  null){
-                        fragHome.aqi.text  = aqi
+                        fragHome.setAQI(aqi)
                     }
 
                 }
@@ -295,9 +293,15 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
     }
 
     override fun onLocationChanged(location: Location?) {
-        if(location != null){
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        if(location != null &&  navView.selectedItemId.equals(R.id.navigation_home) ){
             position = location
-            downloadData()
+            try{
+                downloadData()
+            }
+            catch(e:Exception){
+                print("NADA")
+            }
         }
     }
 

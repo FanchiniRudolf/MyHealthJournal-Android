@@ -33,7 +33,7 @@ class SignInActivity : AppCompatActivity() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build();
-        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        val GoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         val regText = findViewById(R.id.registrate) as TextView
         regText.setOnClickListener{
@@ -41,7 +41,7 @@ class SignInActivity : AppCompatActivity() {
             startActivity(regIntent)
         }
         googleButton.setOnClickListener{
-            val signInIntent = mGoogleSignInClient.getSignInIntent();
+            val signInIntent = GoogleSignInClient.getSignInIntent();
             startActivityForResult(signInIntent, RC_SIGN_IN);
 
         };
@@ -118,7 +118,7 @@ class SignInActivity : AppCompatActivity() {
                         userRef.get()
                             .addOnSuccessListener { document ->
                                 if(document.data != null){
-                                    User.nombre = document.data?.get("name").toString()
+                                    User.name = document.data?.get("name").toString()
                                 }
                             }
 
@@ -166,12 +166,13 @@ class SignInActivity : AppCompatActivity() {
                             }
                             else{
                                 val db = FirebaseFirestore.getInstance()
-                                User.nombre = "undefined"
+                                User.name = "undefined"
                                 val userRef = db.collection("Users/").document("$email")
                                 userRef.get()
                                     .addOnSuccessListener { document ->
                                         if(document.data != null){
-                                            User.nombre = document.data?.get("name").toString()
+                                            User.name = document.data?.get("name").toString()
+                                            User.email = email.toString()
                                             startActivity(mainActivity)
                                             finish()
                                         }

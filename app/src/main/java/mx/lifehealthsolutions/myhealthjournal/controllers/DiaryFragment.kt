@@ -17,6 +17,7 @@ import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.interfaces.ListenerRecycler
 import mx.lifehealthsolutions.myhealthjournal.models.AdapterViewCondition
 import mx.lifehealthsolutions.myhealthjournal.models.Condition
+import mx.lifehealthsolutions.myhealthjournal.models.User
 
 
 /**
@@ -40,7 +41,7 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         }
 
         val user = FirebaseAuth.getInstance().currentUser?.email
-        adaptadorCondition = AdapterViewCondition(user)
+        adaptadorCondition = AdapterViewCondition(User.email)
 
         val layout = LinearLayoutManager(activity)
         layout.orientation = LinearLayoutManager.VERTICAL

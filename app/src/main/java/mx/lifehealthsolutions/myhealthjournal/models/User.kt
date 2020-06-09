@@ -4,24 +4,32 @@ import android.R
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.SpinnerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 import mx.lifehealthsolutions.myhealthjournal.interfaces.DownloadedDataListener
 
 object User: Comparable<User> {
 
     val conditions_list =  ArrayList<Condition>()
     val medicine_list = ArrayList<Medicine>()
-    lateinit var nombre: String
-    lateinit var email: String
+    var name: String
+    var email: String
     lateinit var password: String
+    var sex: String
+    var age: String
+    var height: String
+    var weight: String
+
+
     var db = FirebaseFirestore.getInstance()
 
     override fun compareTo(other: User): Int {
-        return nombre.compareTo(other.nombre)
+        return name.compareTo(other.name)
     }
 
     fun upload(){
@@ -29,7 +37,12 @@ object User: Comparable<User> {
 
     }
     init {
-        nombre = "undefined"
+        name = ""
+        sex = ""
+        age = ""
+        email = ""
+        height = ""
+        weight = ""
     }
 
     fun downloadConditionNames(context: Context) {
@@ -38,7 +51,7 @@ object User: Comparable<User> {
         val user = FirebaseAuth.getInstance().currentUser?.email
         var adapter: SpinnerAdapter
         var conditions_string = ArrayList<String>()
-        conditions_string.add("Conditions")
+        conditions_string.add("Condiciones")
 
         // leer de la db
         db.collection("Users/$user/Conditions")
@@ -57,8 +70,50 @@ object User: Comparable<User> {
 
             }
             .addOnFailureListener { exception ->
-                conditions_string.add("No conditions found")
+                conditions_string.add("No se encontraron condiciones")
+                adapter = ArrayAdapter(context, R.layout.simple_spinner_item, conditions_string) as SpinnerAdapter
+                val listener = context as DownloadedDataListener
+                listener.didFinishDownload(adapter)
             }
+    }
+
+    fun downloadInfo(view: View) {
+        //download from the cloud
+        var user = FirebaseAuth.getInstance().currentUser?.email
+        if(user == null) {
+            user = User.email
+        }
+        // leer de la db
+        if(user != null){
+            db.collection("Users/").document("$user")
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        Log.d(TAG, "${document.id} => ${document.data}")
+                        name = document.data!!.get("name").toString()
+                        email = document.id
+                        sex = document.data!!.get("gender").toString()
+                        age = document.data!!.get("age").toString()
+                        height = document.data!!.get("height").toString()
+                        weight = document.data!!.get("weight").toString()
+
+                        view.emailUser.text = email
+                        view.nameUser.text = User.name
+                        view.genderUser.text = User.sex
+                        view.ageUser.text = User.age
+                        view.heightUser.text = User.height + " cms"
+                        view.weightUser.text = User.weight +  " kgs"
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    name = ""
+                    sex = ""
+                    age = ""
+                    height = ""
+                    weight = ""
+                }
+        }
+
     }
 
     fun delete(){

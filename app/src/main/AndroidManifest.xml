@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controllers.MainActivity2"></activity>
+        <activity android:name=".controllers.AboutActivity" ></activity>
         <activity android:name=".controllers.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,7 @@
         <activity android:name=".controllers.SignInActivity" />
         <activity android:name=".controllers.EntryDataActiv" />
         <activity android:name=".controllers.CreateEntryActiv" />
-        <activity android:name=".controllers.MainActivity"></activity>
+        <activity android:name=".controllers.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

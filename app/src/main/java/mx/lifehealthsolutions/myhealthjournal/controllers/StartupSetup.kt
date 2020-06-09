@@ -55,7 +55,7 @@ class StartupSetup : AppCompatActivity() {
             db.collection("Users/$email/Conditions").document(usrCondition)
                 .set(condition)
             val mainIntent = Intent(this, MainActivity::class.java)
-            User.nombre = usrName
+            User.name = usrName
             startActivity(mainIntent)
         }
 

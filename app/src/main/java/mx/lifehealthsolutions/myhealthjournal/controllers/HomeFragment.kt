@@ -40,8 +40,8 @@ class HomeFragment : Fragment() {
     override fun onStart() {
             super.onStart()
             //configureGPS()
-        if(User.nombre != "undefined"){
-            setWelcomeMessage("${User.nombre}")
+        if(User.name != "undefined"){
+            setWelcomeMessage("${User.name}")
         }
         if(tvHomeTitle.text  == "Hola de nuevo"){
             val db = FirebaseFirestore.getInstance()
@@ -77,6 +77,31 @@ class HomeFragment : Fragment() {
     fun setUV(data: String){
 
 
+    }
+
+    fun setWeather(t:String) {
+        temperature.text = t
+    }
+
+    fun setHumidity(h: String) {
+        humidity.text = h
+    }
+
+    fun setPlaceName(p: String) {
+        place_name.text = p
+    }
+
+    fun setPM(pm10: String?) {
+        pm.text  = pm10
+
+    }
+
+    fun setAQI(s: String) {
+        aqi.text = s
+    }
+
+    fun setBg(v: View, color: Int) {
+        v.setBackgroundColor(color)
     }
 
 }

@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_crear_entrada.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_reminder.*
 import kotlinx.android.synthetic.main.fragment_reminder.view.*
 import kotlinx.android.synthetic.main.fragment_reminder.view.conditionSpinner
@@ -46,10 +47,9 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
         val view: View = inflater!!.inflate(R.layout.fragment_reminder, container, false)
 
         spinner = view.conditionSpinner
-        var adapter = User.downloadConditionNames(this.requireActivity())
-        // esto se manejará con un listener
-        //spinner.adapter = adapter // se esta regresando un adaptador vacio !!
-        //spinner.setSelection(1, false)
+        User.downloadConditionNames(this.requireActivity())
+
+
 
         val dateSetListenerStart = object: DatePickerDialog.OnDateSetListener{
             override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -59,13 +59,14 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
                 updateDateInViewStart()
             }
         }
-
-        view.btnStart.setOnClickListener{view->
+        view.startDateTV.setOnClickListener{view->
             DatePickerDialog(this.requireContext(), dateSetListenerStart,
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)).show()
         }
+
+
 
         val dateSetListenerFinish = object: DatePickerDialog.OnDateSetListener{
             override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -75,8 +76,7 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
                 updateDateInViewFinish()
             }
         }
-
-        view.btnFinish.setOnClickListener{view->
+        view.finishDateTV.setOnClickListener{view->
             DatePickerDialog(this.requireContext(), dateSetListenerFinish,
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
@@ -85,7 +85,6 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
         view.registerBtn.setOnClickListener { view ->
             saveChanges()
         }
-
         return view
     }
 
@@ -94,7 +93,6 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
         super.onResume()
         Log.w("onResume", "Se ha llamado a onResume")
         User.downloadConditionNames(this.requireActivity())
-
     }
 
     private fun saveChanges() {
@@ -103,7 +101,7 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
 
     private fun mostrarMensaje() {
         val alerta = AlertDialog.Builder(requireContext())
-        alerta.setMessage("¿Deseas guardar los cambios hechos?")
+        alerta.setMessage("¿Deseas agregar este tratamiento?")
             .setPositiveButton("Sí", DialogInterface.OnClickListener{
                     dialog, which ->
                 registerMedicineDB()
@@ -156,6 +154,7 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
                 .set(newEntry)
         }
     }
+
 
     override fun didFinishDownload(adapter: SpinnerAdapter) {
         Log.w("didFinishDownload", "********Ha entrado a didFinishDownload")

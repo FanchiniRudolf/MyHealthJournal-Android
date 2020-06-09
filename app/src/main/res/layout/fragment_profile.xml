@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:background="@drawable/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controllers.ProfileFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linearLayout12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/et_bg_2"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="79dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="16dp"
+                        app:srcCompat="@drawable/profile" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="18dp"
+                        android:text="Perfil"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/nameUser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="18dp"
+                        android:text="Luis Alfonso Alcántara"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/et_bg_2"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:text="Correo electrónico"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/emailUser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="18dp"
+                        android:text="correo@dominio.com"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/et_bg_2"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginBottom="18dp"
+                        android:text="Información personal"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:layout_weight="1"
+                            android:text="Sexo: "
+                            android:layout_marginRight="8dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/genderUser"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:layout_weight="1"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:layout_weight="1"
+                            android:text="Edad: "
+                            android:layout_marginRight="8dp"
+
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/ageUser"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:layout_weight="1"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:layout_weight="1"
+                            android:text="Altura:"
+                            android:layout_marginRight="8dp"
+
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/heightUser"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:layout_weight="1"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:layout_weight="1"
+                            android:text="Peso: "
+                            android:layout_marginRight="8dp"
+
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/weightUser"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:layout_weight="1"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_privacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_rounded"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="Aviso de Privacidad" />
+            <Button
+                android:id="@+id/btn_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_rounded"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="Acerca de" />
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:background="@drawable/button_rounded"
+                android:textColor="#FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="Cerrar Sesión" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
