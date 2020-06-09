@@ -39,11 +39,8 @@ class DiaryFragment : Fragment(), ListenerRecycler {
             startActivity(intent)
         }
 
-
-
         val user = FirebaseAuth.getInstance().currentUser?.email
         adaptadorCondition = AdapterViewCondition(user)
-
 
         val layout = LinearLayoutManager(activity)
         layout.orientation = LinearLayoutManager.VERTICAL

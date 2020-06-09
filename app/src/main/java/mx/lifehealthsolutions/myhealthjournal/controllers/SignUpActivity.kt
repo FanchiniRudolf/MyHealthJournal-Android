@@ -3,6 +3,7 @@ package mx.lifehealthsolutions.myhealthjournal.controllers
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -20,6 +21,9 @@ class SignUpActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+
+
+
     }
     fun load(){
         progressBar2.visibility = View.VISIBLE
@@ -32,7 +36,7 @@ class SignUpActivity : AppCompatActivity() {
 
         if( email.text.isNullOrEmpty() || password.text.isNullOrEmpty() || cpassword.text.isNullOrEmpty()){
             Toast.makeText(
-                baseContext, "Required fields are empty",
+                baseContext, "¡Hay campos vacíos!",
                 Toast.LENGTH_SHORT
             ).show()
             return
@@ -46,14 +50,14 @@ class SignUpActivity : AppCompatActivity() {
 
         if(cpassword != password){
             Toast.makeText(
-                baseContext, " Passwords do not match.",
+                baseContext, "Las contraseñas no coinciden",
                 Toast.LENGTH_SHORT
             ).show()
         }
         else {
             if(password.length < 8){
                 Toast.makeText(
-                    baseContext, " Password must be at least 8 characters",
+                    baseContext, "La contraseña debe de ser de al menos 8 caracteres",
                     Toast.LENGTH_SHORT
                 ).show()
                 return
@@ -64,7 +68,7 @@ class SignUpActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Toast.makeText(
-                            baseContext, "Signup Successful",
+                            baseContext, "Registro exitoso",
                             Toast.LENGTH_SHORT
                         ).show()
                         val user = auth.currentUser
@@ -74,7 +78,7 @@ class SignUpActivity : AppCompatActivity() {
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(
-                            baseContext, "Signup Failure",
+                            baseContext, "Error al registrar, es posible que exista ya un usuario con el correo",
                             Toast.LENGTH_SHORT
                         ).show()
                         visible()

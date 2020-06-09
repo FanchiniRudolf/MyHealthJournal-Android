@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_startup_setup.*
 import mx.lifehealthsolutions.myhealthjournal.R
+import mx.lifehealthsolutions.myhealthjournal.models.User
 
 
 class StartupSetup : AppCompatActivity() {
@@ -54,6 +55,7 @@ class StartupSetup : AppCompatActivity() {
             db.collection("Users/$email/Conditions").document(usrCondition)
                 .set(condition)
             val mainIntent = Intent(this, MainActivity::class.java)
+            User.nombre = usrName
             startActivity(mainIntent)
         }
 

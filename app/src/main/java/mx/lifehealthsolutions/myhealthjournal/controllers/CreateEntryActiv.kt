@@ -1,5 +1,7 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
+import android.app.Activity
+import android.app.DownloadManager
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,21 +12,27 @@ import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import android.widget.Spinner
+import android.widget.SpinnerAdapter
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_crear_entrada.*
 import mx.lifehealthsolutions.myhealthjournal.R
+import mx.lifehealthsolutions.myhealthjournal.interfaces.DownloadedDataListener
 import mx.lifehealthsolutions.myhealthjournal.models.User
 import java.util.*
 
-class CreateEntryActiv : AppCompatActivity() {
+class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
+
+    private lateinit var spinner: Spinner
+    private var did_return_from_activity = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.w("onCreate", "Se ha llamado a onCreate")
+        Log.w("onCreate", "********Se ha llamado a onCreate")
         setContentView(R.layout.activity_crear_entrada)
-        val spinner: Spinner = findViewById(R.id.spinnerTipo)
-        val adapter = User.downloadConditionNames(this, spinner)
-        spinnerTipo.adapter = adapter
+        spinner = findViewById(R.id.spinnerTipo)
+        // redundant
+        //val adapter = User.downloadConditionNames(this, spinner)
+        //spinnerTipo.adapter = adapter
         val thisMoment = Date()
         val todayDate = "${thisMoment.year+1900}-${thisMoment.month}-${thisMoment.date}"
         val currentTime = "${thisMoment.hours}:${thisMoment.minutes}"
@@ -40,11 +48,14 @@ class CreateEntryActiv : AppCompatActivity() {
 
         // spinner i think
         //val spinner: Spinner = findViewById(R.id.spinnerTipo)
-        //val adapter = User.downloadConditionNames(this, spinner)
+
+
+        User.downloadConditionNames(this)
+
         //spinnerTipo.adapter = adapter
         // TODO (Bobby) spinnerTipo.setSelection(last)
         // TODO, index other than 0 causes IndexOutOfBoundsException
-        spinnerTipo.setSelection(0, false)
+        //spinnerTipo.setSelection(0, false)
         // NO se puede porque aun no tiene datos
         // creo que es overridden por lo que esta en User.kt
         //spinnerTipo.setSelection(1, false)
@@ -79,9 +90,30 @@ class CreateEntryActiv : AppCompatActivity() {
     }
 
 
+    private val CREATE_CONDITION_CODE = 600
+
     fun createNewCondition(v: View) {
         val newCondIntent = Intent(this, CreateConditonActiv::class.java)
-        startActivity(newCondIntent)
+        startActivityForResult(newCondIntent, CREATE_CONDITION_CODE)
+    }
+
+
+    // TODO (Bobby)
+    // se activa cuadno la segunda actividad diga ya termine y te estoy regresando un resultado
+    // sabemos que regreso de otra actividad
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CREATE_CONDITION_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Log.w("resultCode", "Result code is RESULT_OK")
+                if (data != null) {
+                    // el -1 se regresa si no se encuentra la llave
+                    //val lastIndex = adapter
+                    // NO poner lo de que ponga le ultimo
+                    did_return_from_activity = true
+                }
+            }
+        }
     }
 
 
@@ -117,5 +149,20 @@ class CreateEntryActiv : AppCompatActivity() {
             return true
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    override fun didFinishDownload(adapter: SpinnerAdapter) {
+        // la funcion ha terminado y está regresando el adapter
+        Log.w("CreateEntryActiv", "********se ha llamado a didFinishDownload")
+        print(adapter)
+        spinner.adapter = adapter
+        print(adapter)
+        if (did_return_from_activity) {
+            val numberConditions = spinner.count
+            val lastIndex = numberConditions - 1
+            spinner.setSelection(lastIndex, false)
+            Log.w("onActivityResult", "El spinner tiene ${numberConditions} valores")
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
@@ -12,6 +13,8 @@ import kotlinx.android.synthetic.main.activity_create_conditon.*
 import mx.lifehealthsolutions.myhealthjournal.R
 
 class CreateConditonActiv : AppCompatActivity() {
+
+    private var didCreateConditionFlag: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,14 +35,20 @@ class CreateConditonActiv : AppCompatActivity() {
             )
             val db = FirebaseFirestore.getInstance()
             db.collection("Users/$user/Conditions").document("$newCondition")
-                .set(newCond)
+                .set(newCond).addOnCompleteListener {
+                    // podrían encapsularse en una funcion
+                    val intRegreso = Intent()
+                    // entrega datos
+                    setResult(RESULT_OK, intRegreso)
+                    finish()
+                }
         }
     }
 
 
     fun exitSavingData(v: View) {
         registerConditionDB()
-        finish()
+
     }
 
 
