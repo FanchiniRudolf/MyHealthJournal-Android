@@ -12,7 +12,9 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.LinearLayout
+import android.widget.SpinnerAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
@@ -24,14 +26,17 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.pm
+import kotlinx.android.synthetic.main.fragment_reminder.*
 import mx.lifehealthsolutions.myhealthjournal.R
+import mx.lifehealthsolutions.myhealthjournal.interfaces.DownloadedDataListener
 import mx.lifehealthsolutions.myhealthjournal.models.Condition
 import mx.lifehealthsolutions.myhealthjournal.models.User
 import org.json.JSONObject
 import java.lang.Exception
 
 
-class MainActivity : AppCompatActivity(), LocationListener {
+class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListener {
 
     private val GPS_PERMIT: Int = 200
     private lateinit var gps: LocationManager
@@ -325,6 +330,14 @@ class MainActivity : AppCompatActivity(), LocationListener {
     }
 
     override fun onProviderDisabled(provider: String?) {
+    }
+
+    override fun didFinishDownload(adapter: SpinnerAdapter) {
+        // TODO: not sure if code should go here
+        Log.w("*EN MainActivity.kt*", "********se ha llamado a didFinishDownload")
+        print(adapter)
+        conditionSpinner.adapter = adapter
+        print(adapter)
     }
 
 }
