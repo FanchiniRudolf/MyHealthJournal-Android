@@ -101,32 +101,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/logo_transparente" />
 
-    <TextView
-        android:id="@+id/reg1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="16dp"
-        android:text="¿No tienes cuenta?"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/iniciacon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonIniciar" />
-
-    <TextView
-        android:id="@+id/registrate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Regístrate"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/iniciacon"
-        app:layout_constraintStart_toEndOf="@+id/reg1"
-        app:layout_constraintTop_toBottomOf="@+id/buttonIniciar" />
-
     <Button
         android:id="@+id/circle"
         android:layout_width="50dp"
@@ -175,5 +149,32 @@
         app:layout_constraintBottom_toTopOf="@+id/textInputLayoutUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonIniciar">
+
+        <TextView
+            android:id="@+id/reg1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿No tienes cuenta?"
+            android:layout_marginRight="5dp"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/registrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Regístrate"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

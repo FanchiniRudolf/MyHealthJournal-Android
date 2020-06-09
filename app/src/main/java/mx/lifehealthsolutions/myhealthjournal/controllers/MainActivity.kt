@@ -126,15 +126,20 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     if(temp != null){
                         temp -= 273
                         var temperature = temp.toString()
-                        fragHome.temperature.text = "${temperature}"
+                        try{
+                            fragHome.setWeather(temperature)
+                        }
+                        catch (e:Exception){
+                            fragHome.setWeather("...")
+                        }
                     }
-                    var humidity = response?.getJSONObject("main")?.getString("humidity")?.toInt()
+                    var humidity = response?.getJSONObject("main")?.getString("humidity")?.toInt().toString()
                     if(humidity != null){
-                        fragHome.humidity.text = "${humidity}%"
+                        fragHome.setHumidity(humidity)
                     }
                     val place = response?.getString("name")
                     if(place != null){
-                        fragHome.place_name.text = place
+                        fragHome.setPlaceName(place)
                     }
                     //textView15.setText("pmo10: $pmo10, aqi: $aqi")
 
@@ -168,15 +173,17 @@ class MainActivity : AppCompatActivity(), LocationListener {
                         fragHome.setUV("Indice: $uvi")
 
                         if(uvi.toFloat().toInt() > 6){
-                            fragHome.airCard.setBackgroundColor(Color.rgb(255,0,0))
+                            fragHome.setBg(airCard, Color.rgb(255,0,0))
                             fragHome.uvDetail.text = "¡Alto! No salir"
                         }
                         else if(uvi.toFloat().toInt() > 3){
-                            fragHome.airCard.setBackgroundColor(Color.rgb(255,200,0))
+                            fragHome.setBg(airCard, Color.rgb(255,200,0))
+
                             uvDetail.text = "Moderado"
                         }
                         else{
-                            fragHome.airCard.setBackgroundColor(Color.rgb(0,186,0))
+                            fragHome.setBg(airCard, Color.rgb(0,186,0))
+
                             fragHome.uvDetail.text = "¡Bajo!"
                         }
                     }
@@ -214,7 +221,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), GPS_PERMIT)
         }
-
     }
 
     override fun onPause() {
@@ -236,16 +242,16 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     var  aqi = response?.getJSONObject("data")?.getString("aqi")
                     try{
                         var pm10 = response?.getJSONObject("data")?.getJSONObject("iaqi")?.getJSONObject("pm10")?.getString("v")
-                        fragHome.pm.text  = pm10
+                        fragHome.setPM(pm10)
 
                     }
                     catch (e:Exception){
-                        fragHome.pm.text  = "NA"
-                    }
-                    fragHome.aqi.text  = "NA"
+                        fragHome.setPM("NA")
 
+                    }
+                    fragHome.setAQI("NA")
                     if(aqi !=  null){
-                        fragHome.aqi.text  = aqi
+                        fragHome.setAQI(aqi)
                     }
 
                 }

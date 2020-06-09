@@ -7,16 +7,25 @@
     android:background="@drawable/blue_background"
     tools:context=".controllers.SignUpActivity">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="209dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_transparente" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/Contraseña"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView28"
         app:passwordToggleTint="#FFFFFF"
         app:startIconTint="#FFFFFF">
 
@@ -24,9 +33,9 @@
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
             android:background="@drawable/et_bg"
             android:hint="Correo"
+            android:inputType="textEmailAddress"
             android:padding="16dp"
             android:textColorHint="@color/colorPrimaryDark" />
 
@@ -37,11 +46,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/ConfirmarContraseña"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Usuario">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
@@ -59,11 +68,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Contraseña">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/cpassword"
@@ -81,16 +90,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="128dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="128dp"
-        android:layout_marginBottom="128dp"
         android:background="@drawable/button_rounded"
         android:onClick="addUser"
         android:text="Registrarse"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ConfirmarContraseña" />
 
     <ProgressBar
         android:id="@+id/progressBar2"
@@ -108,14 +117,13 @@
         android:layout_width="387dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="64dp"
         android:layout_marginEnd="64dp"
         android:text="Únete a My Health Journal"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="#FFFFFF"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
