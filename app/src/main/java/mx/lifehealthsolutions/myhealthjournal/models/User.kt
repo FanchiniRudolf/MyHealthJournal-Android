@@ -38,7 +38,7 @@ object User: Comparable<User> {
         val user = FirebaseAuth.getInstance().currentUser?.email
         var adapter: SpinnerAdapter
         var conditions_string = ArrayList<String>()
-        conditions_string.add("Conditions")
+        conditions_string.add("Condiciones")
 
         // leer de la db
         db.collection("Users/$user/Conditions")
@@ -57,7 +57,7 @@ object User: Comparable<User> {
 
             }
             .addOnFailureListener { exception ->
-                conditions_string.add("No conditions found")
+                conditions_string.add("No se encontraron condiciones")
             }
     }
 
