@@ -1,6 +1,5 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,19 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.google.android.gms.auth.api.Auth
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_sign_in.*
-import kotlinx.android.synthetic.main.fragment_about.view.*
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 import mx.lifehealthsolutions.myhealthjournal.R
 
 /**
  * A simple [Fragment] subclass.
  */
-class AboutFragment : Fragment() {
+class ProfileFragment : Fragment() {
     protected lateinit var rootView: View
     private lateinit var auth: FirebaseAuth
 
@@ -28,7 +22,7 @@ class AboutFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater!!.inflate(R.layout.fragment_about, container, false)
+        val view: View = inflater!!.inflate(R.layout.fragment_profile, container, false)
         auth = FirebaseAuth.getInstance()
 
 

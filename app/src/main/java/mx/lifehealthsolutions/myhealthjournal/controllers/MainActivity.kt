@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -13,10 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
-import android.widget.LinearLayout
 import android.widget.SpinnerAdapter
 import androidx.appcompat.app.AlertDialog
-import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
@@ -25,9 +22,7 @@ import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.pm
 import kotlinx.android.synthetic.main.fragment_reminder.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.interfaces.DownloadedDataListener
@@ -91,7 +86,7 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
                 }
 
                 R.id.navigation_about -> {
-                    val fragAbout = AboutFragment()
+                    val fragAbout = ProfileFragment()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.contenedorFragmentos, fragAbout)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)

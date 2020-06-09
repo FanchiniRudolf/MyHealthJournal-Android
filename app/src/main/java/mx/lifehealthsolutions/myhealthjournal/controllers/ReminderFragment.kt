@@ -57,13 +57,14 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
                 updateDateInViewStart()
             }
         }
-
-        view.btnStart.setOnClickListener{view->
+        view.startDateTV.setOnClickListener{view->
             DatePickerDialog(this.requireContext(), dateSetListenerStart,
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)).show()
         }
+
+
 
         val dateSetListenerFinish = object: DatePickerDialog.OnDateSetListener{
             override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -73,8 +74,7 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
                 updateDateInViewFinish()
             }
         }
-
-        view.btnFinish.setOnClickListener{view->
+        view.finishDateTV.setOnClickListener{view->
             DatePickerDialog(this.requireContext(), dateSetListenerFinish,
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
@@ -99,7 +99,7 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
 
     private fun mostrarMensaje() {
         val alerta = AlertDialog.Builder(requireContext())
-        alerta.setMessage("¿Deseas guardar los cambios hechos?")
+        alerta.setMessage("¿Deseas agregar este tratamiento?")
             .setPositiveButton("Sí", DialogInterface.OnClickListener{
                     dialog, which ->
                 registerMedicineDB()
