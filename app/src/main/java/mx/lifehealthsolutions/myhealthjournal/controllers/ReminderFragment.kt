@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_crear_entrada.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_reminder.*
 import kotlinx.android.synthetic.main.fragment_reminder.view.*
 import kotlinx.android.synthetic.main.fragment_reminder.view.conditionSpinner
@@ -47,6 +48,7 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
 
         spinner = view.conditionSpinner
         User.downloadConditionNames(this.requireActivity())
+
 
 
         val dateSetListenerStart = object: DatePickerDialog.OnDateSetListener{

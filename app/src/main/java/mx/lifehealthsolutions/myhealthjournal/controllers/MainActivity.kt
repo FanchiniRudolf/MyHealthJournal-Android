@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
                         .commit()
                 }
 
-                R.id.navigation_about -> {
+                R.id.navigation_profile -> {
                     val fragAbout = ProfileFragment()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.contenedorFragmentos, fragAbout)

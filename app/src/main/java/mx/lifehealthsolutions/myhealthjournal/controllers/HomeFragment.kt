@@ -40,8 +40,8 @@ class HomeFragment : Fragment() {
     override fun onStart() {
             super.onStart()
             //configureGPS()
-        if(User.nombre != "undefined"){
-            setWelcomeMessage("${User.nombre}")
+        if(User.name != "undefined"){
+            setWelcomeMessage("${User.name}")
         }
         if(tvHomeTitle.text  == "Hola de nuevo"){
             val db = FirebaseFirestore.getInstance()
