@@ -36,6 +36,7 @@ class AdapterViewEntry(var arrEntradas:ArrayList<Entry>):
         val entrada = arrEntradas[position]
 
         holder.vistaRenglon.tvFechaEntrada.text = entrada.date.toString()
+        holder.vistaRenglon.tvTipoEntrada.text =  entrada.comment
 
         holder.vistaRenglon.setOnClickListener{
             listener?.itemClicked(position)
