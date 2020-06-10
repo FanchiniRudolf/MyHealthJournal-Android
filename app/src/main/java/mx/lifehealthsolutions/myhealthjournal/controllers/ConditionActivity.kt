@@ -19,9 +19,9 @@ import kotlin.collections.ArrayList
 
 class ConditionActivity : AppCompatActivity(), ListenerRecycler {
 
-    var entries =  ArrayList<Entry>()
-    var adapterEntries: AdapterViewEntry = AdapterViewEntry(entries)
-    lateinit var recyclerView: RecyclerView
+    private var entries =  ArrayList<Entry>()
+    private var adapterEntries: AdapterViewEntry = AdapterViewEntry(entries)
+    private lateinit var recyclerView: RecyclerView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

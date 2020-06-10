@@ -1,7 +1,6 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
 import android.app.Activity
-import android.app.DownloadManager
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -30,7 +29,6 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
         Log.w("onCreate", "********Se ha llamado a onCreate")
         setContentView(R.layout.activity_crear_entrada)
         spinner = findViewById(R.id.spinnerTipo)
-        // redundant
         //val adapter = User.downloadConditionNames(this, spinner)
         //spinnerTipo.adapter = adapter
         val thisMoment = Date()
@@ -77,15 +75,13 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
 
 
     private val CREATE_CONDITION_CODE = 600
-
     fun createNewCondition(v: View) {
         val newCondIntent = Intent(this, CreateConditonActiv::class.java)
         startActivityForResult(newCondIntent, CREATE_CONDITION_CODE)
     }
 
 
-    // TODO (Bobby)
-    // se activa cuadno la segunda actividad diga ya termine y te estoy regresando un resultado
+    // se activa cuadno la segunda actividad diga ya termine y este regresando un resultado
     // sabemos que regreso de otra actividad
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -104,18 +100,17 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
 
 
     fun exitSavingData(v: View) {
-        // TODO: conditions for date and time too
         if (spinner.selectedItemPosition != 0 && etDescripcion.text.toString().isNotEmpty()
             && etFecha.text.toString().isNotEmpty() && etHora.text.toString().isNotEmpty()) {
             registerEntryDB()
             finish()
         } else {
-            mostrarMensajeError()
+            alertForMissingFields()
         }
     }
 
 
-    private fun mostrarMensajeError() {
+    private fun alertForMissingFields() {
         val alerta = AlertDialog.Builder(this)
         alerta.setMessage("Error:\nFaltan campos por llenar.")
             .setPositiveButton("Entendido", null)
@@ -125,7 +120,7 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
     }
 
 
-    private fun mostrarMensaje() {
+    private fun alertForExit() {
         val alerta = AlertDialog.Builder(this)
         alerta.setMessage("¿Realmente deseas salir?\nNo se guardará la entrada.")
             .setPositiveButton("Sí", DialogInterface.OnClickListener{
@@ -140,13 +135,13 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
 
 
     fun exitWithoutSavingData(v: View) {
-        mostrarMensaje()
+        alertForExit()
     }
 
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            mostrarMensaje()
+            alertForExit()
             //moveTaskToBack(false);
             return true
         }
