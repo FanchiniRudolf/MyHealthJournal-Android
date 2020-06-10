@@ -21,6 +21,7 @@ import mx.lifehealthsolutions.myhealthjournal.models.AdapterViewEntry
 import mx.lifehealthsolutions.myhealthjournal.models.Entry
 import com.github.mikephil.charting.data.Entry as ChartEntry
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 import kotlin.collections.ArrayList
 
 class ConditionActivity : AppCompatActivity(), ListenerRecycler {
@@ -125,9 +126,11 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
         if (dateArr[2].length == 1) dateArr[2] = "0${dateArr[2]}"
         var dateTime = "${dateArr[0]}-${dateArr[1]}-${dateArr[2]}T${time}:00" //concatenation
         var date = LocalDateTime.parse(dateTime)
-        var seconds = date.second.toString().toFloat()
+        var seconds = date.toEpochSecond(ZoneOffset.MIN).toString().toFloat()
         if (seconds < chartEntryMinimum) chartEntryMinimum = seconds
         var entry = ChartEntry(seconds, severity)
+        Log.w("date", date.toString())
+        Log.w("seconds", date.toEpochSecond(ZoneOffset.MIN).toString())
         Log.w("chart-entry", entry.toString())
         chartEntries.add(entry)
     }
