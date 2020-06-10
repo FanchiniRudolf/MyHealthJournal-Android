@@ -1,5 +1,6 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -75,7 +76,6 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
             chart.axisLeft.axisMaximum = 3.5f
             chart.axisLeft.axisMinimum = -0.1f
             chart.axisLeft.setDrawLabels(false)
-            //todo change axis labels
         }
 
     }
@@ -142,7 +142,6 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
     fun downloadEntries(condition_name: String){
         val db = FirebaseFirestore.getInstance()
         var userStr =  FirebaseAuth.getInstance().getCurrentUser()?.email
-        val conditions = db.collection("Users/$userStr/Conditions/")
         val conditionRef =  db.collection("Users/$userStr/Conditions/").document("$condition_name")
 
         conditionRef.get()
@@ -158,6 +157,7 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
                                 print("-------")
                                 print("$document.data")
                                 entries.add(Entry(condition_name, document.data.get("date") as String,
+                                    document.data.get("time") as String,
                                     document.data.get("severity") as Long,
                                     document.data.get("description") as String,
                                     document.data.get("event-time") as Long
@@ -203,6 +203,13 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
     }
 
     override fun itemClicked(position: Int) {
-        //TODO go to details of entry screen use put extras
+        val intentConditionActivity = Intent(this, EntryDataActiv::class.java)
+        val conditionDate = adapterEntries?.arrEntradas?.get(position)?.date
+        val conditionTime = adapterEntries?.arrEntradas?.get(position)?.time
+
+        intentConditionActivity.putExtra("CONDITION", intent.getStringExtra("CONDITION"))
+        intentConditionActivity.putExtra("ENTRY", "${conditionDate}-${conditionTime}")
+
+        startActivity(intentConditionActivity)
     }
 }
