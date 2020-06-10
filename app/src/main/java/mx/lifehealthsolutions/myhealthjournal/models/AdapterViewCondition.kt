@@ -22,25 +22,25 @@ class AdapterViewCondition(var email: String?): RecyclerView.Adapter<AdapterView
 
         notifyDataSetChanged()
         arrCondiciones  = arrayOf(
-            Condition("Asma"),
-            Condition("Migraña"),
-            Condition("COVID-19")
+            Condition("Asma", "asdaasd"),
+            Condition("Migraña", "dsadas"),
+            Condition("COVID-19", "asdas")
         )
         downloadConditions()
     }
 
     fun downloadConditions() {
         val db = FirebaseFirestore.getInstance()
-        val user = FirebaseAuth.getInstance().currentUser?.email
-        var userStr =  "{${email}}"
+        var userStr =  "${User.email}"
         var hola  = ""
         db.collection("Users/$userStr/Conditions")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-                    var temp = document.id
-                    arrConditions.add(Condition(document.id))
+                    var temp = document.data.get("description").toString()
+
+                    arrConditions.add(Condition(document.id, temp))
                     hola = "asda"
                 }
                 notifyDataSetChanged()
@@ -72,6 +72,8 @@ class AdapterViewCondition(var email: String?): RecyclerView.Adapter<AdapterView
     override fun onBindViewHolder(holder: RenglonCondicion, position: Int) {
         val condicion = arrCondiciones?.get(position) // arrPaises.get(position)
         holder.vistaRenglon.tvSintoma.text = condicion?.name
+        holder.vistaRenglon.shortSintoma.text = condicion?.name?.take(1)
+        holder.vistaRenglon.tvDetalleSintoma.text = condicion?.description
         //holder.vistaRenglon.tInputSintoma.toString()
         holder.vistaRenglon.setOnClickListener{
             listener?.itemClicked(position)

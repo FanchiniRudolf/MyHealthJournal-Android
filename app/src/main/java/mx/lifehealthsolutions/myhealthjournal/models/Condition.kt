@@ -4,15 +4,15 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class Condition(val name: String) {
+class Condition(val name: String, val description: String) {
 
     val entry_values =  ArrayList<Entry>()
 
     companion object {
         val arrCondiciones = arrayOf(
-            Condition("Asma"),
-            Condition("Migraña"),
-            Condition("COVID-19")
+            Condition("Asma", "asdaasd"),
+            Condition("Migraña", "dsadas"),
+            Condition("COVID-19", "asdas")
         )
     }
 

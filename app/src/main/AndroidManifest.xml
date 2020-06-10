@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controllers.AboutActivity" ></activity>
+        <activity android:name=".controllers.ReminderActivity"></activity>
+        <activity android:name=".controllers.AboutActivity" />
         <activity android:name=".controllers.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_create_conditon.*
 import mx.lifehealthsolutions.myhealthjournal.R
+import mx.lifehealthsolutions.myhealthjournal.models.User
 
 class CreateConditonActiv : AppCompatActivity() {
 
@@ -19,6 +20,9 @@ class CreateConditonActiv : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_conditon)
+        btn_back.setOnClickListener{
+            finish()
+        }
     }
 
 
@@ -26,8 +30,10 @@ class CreateConditonActiv : AppCompatActivity() {
         var newCondition = txtNewCondition?.text.toString()
         var newConditionDescription = newCondDescription?.text.toString()
 
-        val user = FirebaseAuth.getInstance().currentUser?.email
-
+        var user = FirebaseAuth.getInstance().currentUser?.email
+        if(user == ""){
+            user = User.email
+        }
         if (newCondition != null && newConditionDescription != null) {
             val newCond = hashMapOf(
                 "description" to newConditionDescription
@@ -46,8 +52,22 @@ class CreateConditonActiv : AppCompatActivity() {
 
 
     fun exitSavingData(v: View) {
-        registerConditionDB()
+        if (txtNewCondition.text.toString().isNotEmpty() &&
+            newCondDescription.text.toString().isNotEmpty()) {
+            registerConditionDB()
+        } else {
+            alertForMissingFields()
+        }
+    }
 
+
+    private fun alertForMissingFields() {
+        val alerta = AlertDialog.Builder(this)
+        alerta.setMessage("Error:\nFaltan campos por llenar.")
+            .setPositiveButton("Entendido", null)
+            .setCancelable(false)
+            .create()
+        alerta.show()
     }
 
 

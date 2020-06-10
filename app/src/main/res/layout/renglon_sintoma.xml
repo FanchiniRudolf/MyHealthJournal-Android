@@ -2,31 +2,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="horizontal"
-    android:scrollbarSize="30dp">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:scrollbarSize="24dp"
-        app:srcCompat="@drawable/notebook" />
-
+    android:layout_height="60dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:orientation="horizontal">
+        <TextView
+            android:id="@+id/shortSintoma"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/circle_condition"
+            android:gravity="center"
+            android:text="A"
+            android:textColor="#FFFFFF" />
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-
         <TextView
             android:id="@+id/tvSintoma"
             android:layout_width="match_parent"
+            android:layout_marginLeft="12dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/lato"
             android:text="someSymptom"
-            android:textSize="24sp" />
 
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/tvDetalleSintoma"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato"
+            android:text="someSymptom"
+
+            android:textSize="14sp" />
     </LinearLayout>
+
+
+
 </LinearLayout>

@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
                 }
 
                 R.id.navigation_reminders -> {
-                    val fragReminders = ReminderFragment()
+                    val fragReminders = MedicineFragment()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.contenedorFragmentos, fragReminders)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
         }
 
         val test_user = User
-        test_user.conditions_list.add(Condition("asma"))
+        test_user.conditions_list.add(Condition("asma", "adsdsa"))
     }
 
 

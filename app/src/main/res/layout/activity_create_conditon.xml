@@ -2,19 +2,30 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controllers.CreateConditonActiv">
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="141dp"
+        android:layout_height="153dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSaveExit"
+        app:srcCompat="@drawable/termometer" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Nueva condición"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="70dp"
+        android:text="Agregar condición"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,23 +41,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout16"
-        android:layout_width="409dp"
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:orientation="vertical"
+        android:layout_marginEnd="16dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="Indica la nueva condición crónica a la que deseas darle seguimiento."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24">
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:text="Indica la nueva condición crónica a la que deseas darle seguimiento." />
+    <LinearLayout
+        android:id="@+id/linearLayout16"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView25">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -56,18 +76,24 @@
                 android:id="@+id/txtNewCondition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ej. Alergia al polvo" />
+                android:background="@drawable/et_bg"
+                android:hint="Nombre"
+                android:padding="20dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <EditText
             android:id="@+id/newCondDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="140dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/et_bg"
             android:ems="10"
             android:gravity="start|top"
             android:hint="Descripción..."
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:padding="20dp" />
+
 
     </LinearLayout>
 
@@ -75,25 +101,24 @@
         android:id="@+id/btnSaveExit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/button_color_dark_green"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_rounded"
         android:onClick="exitSavingData"
         android:text="Listo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/button_color_cancel_solid"
-        android:onClick="exitWithoutSavingData"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/btn_dialog" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout16" />
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cancel" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,6 +36,15 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
         val currentTime = "${thisMoment.hours}:${thisMoment.minutes}"
         etFecha.setText(todayDate)
         etHora.setText(currentTime)
+
+        btn_back.setOnClickListener{
+            if (spinner.selectedItemPosition != 0 && etDescripcion.text.toString().isNotEmpty()
+                && etFecha.text.toString().isNotEmpty() && etHora.text.toString().isNotEmpty()) {
+                alertForExit()
+            } else {
+                finish()
+            }
+        }
     }
 
 
