@@ -39,11 +39,17 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
         setContentView(R.layout.activity_condition)
 
         val condition_name = intent.getStringExtra("CONDITION")
+        val condition_description = intent.getStringExtra("DESC")
         tvConditionName.text = condition_name
+        tvDetailCondition.text = condition_description
 
+        btn_back.setOnClickListener{
+            finish()
+        }
 
         downloadEntries(condition_name)
         createRecycler()
+
 
 
     }

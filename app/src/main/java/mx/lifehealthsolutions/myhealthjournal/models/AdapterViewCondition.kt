@@ -32,6 +32,9 @@ class AdapterViewCondition(var email: String?): RecyclerView.Adapter<AdapterView
     fun downloadConditions() {
         val db = FirebaseFirestore.getInstance()
         var userStr =  "${User.email}"
+        if(userStr == ""){
+            userStr  = FirebaseAuth.getInstance().currentUser?.email.toString()
+        }
         db.collection("Users/$userStr/Conditions")
             .get()
             .addOnSuccessListener { documents ->
