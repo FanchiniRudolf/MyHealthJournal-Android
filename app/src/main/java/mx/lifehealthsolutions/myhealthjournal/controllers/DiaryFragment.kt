@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_diary.view.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.interfaces.ListenerRecycler
 import mx.lifehealthsolutions.myhealthjournal.models.AdapterViewCondition
@@ -35,9 +36,10 @@ class DiaryFragment : Fragment(), ListenerRecycler {
     ): View? {
         val view: View = inflater!!.inflate(R.layout.fragment_diary, container, false)
 
-        view.btnNewEvent.setOnClickListener { view ->
-            val intent = Intent(activity, CreateEntryActiv::class.java)
-            startActivity(intent)
+
+        view.fab_new_event.setOnClickListener { view ->
+            val intentNewEntry = Intent(activity, CreateEntryActiv::class.java)
+            startActivity(intentNewEntry)
         }
 
         val user = FirebaseAuth.getInstance().currentUser?.email
@@ -71,8 +73,8 @@ class DiaryFragment : Fragment(), ListenerRecycler {
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-                    var temp = document.id
-                    arrConditions.add(Condition(document.id))
+                    var temp = document.data.get("description").toString()
+                    arrConditions.add(Condition(document.id, temp))
                     Log.i("TAMAÑO", temp)
                 }
                 adaptadorCondition.arrCondiciones = arrConditions.toTypedArray<Condition>()

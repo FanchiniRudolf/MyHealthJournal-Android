@@ -19,6 +19,9 @@ class CreateConditonActiv : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_conditon)
+        btn_back.setOnClickListener{
+            finish()
+        }
     }
 
 

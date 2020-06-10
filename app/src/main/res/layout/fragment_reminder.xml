@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/background">
@@ -8,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:orientation="vertical">
 
         <TextView
@@ -149,7 +151,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/et_bg"
                     android:hint="Nombre del medicamento"
-                    android:padding="7dp" />
+                    android:padding="7dp"
+                    android:textColorHighlight="#FFFFFF" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

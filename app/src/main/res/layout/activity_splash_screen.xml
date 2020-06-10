@@ -22,7 +22,7 @@
         android:id="@+id/txtSplash"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="casual"
+        android:fontFamily="@font/lato"
         android:text="My Health Journal"
         android:textAlignment="center"
         android:textColor="#FFFFFF"

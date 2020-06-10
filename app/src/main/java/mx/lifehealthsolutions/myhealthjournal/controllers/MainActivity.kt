@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
         }
 
         val test_user = User
-        test_user.conditions_list.add(Condition("asma"))
+        test_user.conditions_list.add(Condition("asma", "adsdsa"))
     }
 
 
