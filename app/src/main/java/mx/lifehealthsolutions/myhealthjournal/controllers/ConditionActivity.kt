@@ -1,10 +1,9 @@
 package mx.lifehealthsolutions.myhealthjournal.controllers
 
-import android.os.Build
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +20,7 @@ import mx.lifehealthsolutions.myhealthjournal.models.AdapterViewEntry
 import mx.lifehealthsolutions.myhealthjournal.models.Entry
 import com.github.mikephil.charting.data.Entry as ChartEntry
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 import kotlin.collections.ArrayList
 
 class ConditionActivity : AppCompatActivity(), ListenerRecycler {
@@ -28,6 +28,7 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
     private var entries =  ArrayList<Entry>()
     private var chartEntries =  ArrayList<ChartEntry>()
     private var chartEntryMinimum = Float.MAX_VALUE
+    private var chartEntryMaximum = Float.MIN_VALUE
     private var adapterEntries: AdapterViewEntry = AdapterViewEntry(entries)
     private lateinit var recyclerView: RecyclerView
 
@@ -48,16 +49,32 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
 
     private fun createChart() {
         val  chart: LineChart = lcGraph
-        print("*****************************************")
-        print(chartEntries)
+
+
+        //reduceData()
+        Log.w("chartmax", (chartEntryMaximum-chartEntryMinimum).toString())
+        Log.w("chartmax", (chartEntryMaximum).toString())
+        Log.w("chartmini", (chartEntryMinimum).toString())
         Log.w("chart", chartEntries.toString())
-        print("*****************************************")
         val data = LineDataSet(chartEntries, "Histórico")
         data.setDrawValues(true)
+        data.color = Color.GREEN
+        data.setDrawFilled(true)
         chart.data = LineData(data)
+        data.fillColor = Color.GREEN
         chart.description.text = "Historico"
         chart.animateX(1000, Easing.EaseInCubic)
+        chart.xAxis.axisMaximum = chartEntryMaximum+100
+        chart.xAxis.axisMinimum = chartEntryMinimum-100
+        //todo agrupar datos
 
+
+    }
+
+    private fun reduceData() {
+        for (chartEntry in chartEntries){
+            chartEntry.x = chartEntry.x - chartEntryMinimum
+        }
     }
 
     private fun createRecycler() {
@@ -123,12 +140,12 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
         val dateArr = date.split("-").toMutableList()
         if (dateArr[1].length == 1) dateArr[1] = "0${dateArr[1]}"
         if (dateArr[2].length == 1) dateArr[2] = "0${dateArr[2]}"
-        var dateTime = "${dateArr[0]}-${dateArr[1]}-${dateArr[2]}T${time}:00" //concatenation
-        var date = LocalDateTime.parse(dateTime)
-        var seconds = date.second.toString().toFloat()
+        val dateTime = "${dateArr[0]}-${dateArr[1]}-${dateArr[2]}T${time}:00" //concatenation
+        val date = LocalDateTime.parse(dateTime)
+        val seconds = date.toEpochSecond(ZoneOffset.MIN).toString().toFloat()/60*60*24
         if (seconds < chartEntryMinimum) chartEntryMinimum = seconds
+        if (seconds > chartEntryMaximum) chartEntryMaximum = seconds
         var entry = ChartEntry(seconds, severity)
-        Log.w("chart-entry", entry.toString())
         chartEntries.add(entry)
     }
 
