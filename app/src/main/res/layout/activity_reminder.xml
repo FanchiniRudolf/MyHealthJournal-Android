@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical">
+
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="?attr/actionModeCloseDrawable" />
+
+            <TextView
+                android:id="@+id/AboutTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="25dp"
+                android:text="Agregar tratamiento"
+                android:textSize="22sp"
+                android:textColor="#FFFFFF"
+                app:layout_constraintStart_toEndOf="@+id/btn_back"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/pm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:paddingTop="16dp"
+            android:text="A continuación puedes establecer recordatorios para las medicinas que debes tomar"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/box1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/et_bg_2"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="32dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:text="Duración del tratamiento"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:text="Fecha de inicio:"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp">
+
+                <TextView
+                    android:id="@+id/startDateTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="--/--/----"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="@color/colorPrimaryDark" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="32dp"
+                android:text="Fecha de finalización:"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/finishDateTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="--/--/----"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="@color/colorPrimaryDark" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/box2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="16dp"
+            android:background="@drawable/et_bg_2"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:text="Detalles del tratamiento"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="32dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputMedicine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/et_bg"
+                    android:hint="Nombre del medicamento"
+                    android:padding="7dp"
+                    android:textColorHighlight="#FFFFFF" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/frequencySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:background="@drawable/et_bg"
+                android:entries="@array/arrFrequencyValues" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/box3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/et_bg_2"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:text="Especificar condición"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/conditionSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:background="@drawable/et_bg" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_rounded"
+            android:gravity="center"
+            android:text="Añadir"
+            android:textColor="#FFFFFF" />
+
+
+    </LinearLayout>
+</ScrollView>

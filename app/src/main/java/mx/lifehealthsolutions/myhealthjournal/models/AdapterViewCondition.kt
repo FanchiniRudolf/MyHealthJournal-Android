@@ -31,8 +31,7 @@ class AdapterViewCondition(var email: String?): RecyclerView.Adapter<AdapterView
 
     fun downloadConditions() {
         val db = FirebaseFirestore.getInstance()
-        val user = FirebaseAuth.getInstance().currentUser?.email
-        var userStr =  "{${email}}"
+        var userStr =  "${User.email}"
         var hola  = ""
         db.collection("Users/$userStr/Conditions")
             .get()

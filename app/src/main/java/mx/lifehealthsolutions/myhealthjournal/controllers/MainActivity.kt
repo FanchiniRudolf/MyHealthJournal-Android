@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
                 }
 
                 R.id.navigation_reminders -> {
-                    val fragReminders = ReminderFragment()
+                    val fragReminders = MedicineFragment()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.contenedorFragmentos, fragReminders)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
