@@ -45,21 +45,12 @@ class EntryDataActiv : AppCompatActivity() {
                             for (document in documents) {
                                 print("-------")
                                 print("$document.data")
-                                entries.add(
-                                    Entry(condition_name, document.data.get("date") as String,
-                                    document.data.get("time") as String,
-                                    document.data.get("severity") as Long,
-                                    document.data.get("description") as String,
-                                    document.data.get("event-time") as Long
-                                )
-                                )
-                                addEntry(document.data.get("severity").toString().toFloat(), document.data.get("date")  as String, document.data.get("time") as String)
-                            }
-                            createChart()
-                            print("--------------")
-                            Log.d("entries", "TAMAÑO: ${entries.size}")
-                            print(entries.toString())
-                            updateRecycler()
+                                //entry = Entry()
+                             }
+
+                            setData()
+                            
+
                         }
 
                 }
@@ -69,6 +60,10 @@ class EntryDataActiv : AppCompatActivity() {
                 }
             }
 
+    }
+
+    private fun setData() {
+        //todo
     }
 
 }
