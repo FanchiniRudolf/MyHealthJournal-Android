@@ -2,9 +2,11 @@ package mx.lifehealthsolutions.myhealthjournal.controllers
 
 import android.app.DatePickerDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.AlarmClock
 import android.util.Log
 import android.widget.DatePicker
 import android.widget.Spinner
@@ -106,12 +108,12 @@ class ReminderActivity : AppCompatActivity(), DownloadedDataListener {
             .setPositiveButton("Sí", DialogInterface.OnClickListener{
                     dialog, which ->
                 registerMedicineDB()
+                createAlarm()
                 startDateTV.text = "--/--/----"
                 finishDateTV.text = "--/--/----"
                 inputMedicine.getText()?.clear()
                 spinner.setSelection(0)
                 frequencySpinner.setSelection(0)
-                createNotification(startDateTV.text.toString(), cal.time.toString())
             })
             .setNegativeButton("No", null)
             .setCancelable(false)
@@ -171,13 +173,40 @@ class ReminderActivity : AppCompatActivity(), DownloadedDataListener {
         Log.w("onActivityResult", "El spinner tiene ${numberConditions} valores")
     }
 
-    fun createNotification(date: String, hour: String){
-        Log.w("createNotification", "Ha entrado a createNotification")
-        val not = NotificationUtils()
-        val time = "${Calendar.HOUR_OF_DAY}:${Calendar.MINUTE}"
-        val tempDate = "10/06/2020"
-        //not.setNotification(java.util.Calendar.getInstance().timeInMillis, time, date, this.requireActivity())
-        not.setNotification(java.util.Calendar.getInstance().timeInMillis, time, tempDate, this)
+    fun createAlarm(){
+        var hour = Calendar.HOUR_OF_DAY
+        var currentTime = cal.get(Calendar.HOUR_OF_DAY)
+        var currentMinute = cal.get(Calendar.MINUTE)
+        val position = frequencySpinner.selectedItemPosition
+        val days = ArrayList<Int>()
+        days.add(Calendar.SATURDAY)
+        days.add(Calendar.SUNDAY)
+        days.add(Calendar.MONDAY)
+        days.add(Calendar.THURSDAY)
+        days.add(Calendar.TUESDAY)
+        days.add(Calendar.WEDNESDAY)
+        days.add(Calendar.THURSDAY)
+        days.add(Calendar.FRIDAY)
+        when(position){
+            0 ->if(currentTime+4<=24){
+                hour = (currentTime+4)
+            }else hour = (currentTime+4)%4
+            1 -> if(currentTime+8<=24){
+                hour = (currentTime+8)
+            }else hour = (currentTime+8)%8
+            2 -> if(currentTime+12<=24){
+                hour = (currentTime+12)
+            }else hour = (currentTime+12)
+            3 -> hour = (currentTime+24)%24
+        }
+        var intent = Intent(AlarmClock.ACTION_SET_ALARM)
+        intent.putExtra(AlarmClock.EXTRA_HOUR, hour)
+        intent.putExtra(AlarmClock.EXTRA_MINUTES, currentMinute)
+        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Hora de tomar tu medicina")
+        intent.putExtra(AlarmClock.EXTRA_DAYS, days)
+        intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true)
+        startActivity(intent)
+
     }
 
 
