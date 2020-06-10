@@ -48,7 +48,10 @@ object User: Comparable<User> {
     fun downloadConditionNames(context: Context) {
         //download from the cloud
         Log.w("download", "********entra al metodo de descarga")
-        val user = FirebaseAuth.getInstance().currentUser?.email
+        var user = FirebaseAuth.getInstance().currentUser?.email
+        if(user == null) {
+            user = User.email
+        }
         var adapter: SpinnerAdapter
         var conditions_string = ArrayList<String>()
         conditions_string.add("Condiciones")
