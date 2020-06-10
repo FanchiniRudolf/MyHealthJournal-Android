@@ -50,26 +50,33 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
     private fun createChart() {
         val  chart: LineChart = lcGraph
 
+        if (!entries.isEmpty()) {
+            reduceData()
+            Log.w("chartmax", (chartEntryMaximum - chartEntryMinimum).toString())
+            Log.w("chartmax", (chartEntryMaximum).toString())
+            Log.w("chartmini", (chartEntryMinimum).toString())
+            Log.w("chart", chartEntries.toString())
 
-        reduceData()
-        Log.w("chartmax", (chartEntryMaximum-chartEntryMinimum).toString())
-        Log.w("chartmax", (chartEntryMaximum).toString())
-        Log.w("chartmini", (chartEntryMinimum).toString())
-        Log.w("chart", chartEntries.toString())
+            val data = LineDataSet(chartEntries, "Histórico")
+            data.setDrawValues(false)
+            data.color = Color.GREEN
+            data.fillColor = Color.GREEN
+            data.setDrawFilled(true)
+            data.cubicIntensity = 1f
 
-        val data = LineDataSet(chartEntries, "Histórico")
-        data.setDrawValues(true)
-        data.color = Color.GREEN
-        data.fillColor = Color.GREEN
-        data.setDrawFilled(true)
-        data.cubicIntensity = 1f
-        
-        chart.data = LineData(data)
-        chart.description.text = "Severidad"
-        chart.animateX(1000, Easing.EaseInCubic)
-        chart.xAxis.axisMaximum = chartEntryMaximum+100
-        chart.xAxis.axisMinimum = chartEntryMinimum-100
-
+            chart.data = LineData(data)
+            chart.description.text = "Severidad"
+            chart.animateX(1000, Easing.EaseInCubic)
+            chart.xAxis.axisMaximum = chartEntryMaximum + 100
+            chart.xAxis.axisMinimum = chartEntryMinimum - 100
+            chart.xAxis.setDrawLabels(false)
+            chart.axisRight.axisMaximum = 3.5f
+            chart.axisRight.axisMinimum = -0.1f
+            chart.axisLeft.axisMaximum = 3.5f
+            chart.axisLeft.axisMinimum = -0.1f
+            chart.axisLeft.setDrawLabels(false)
+            //todo change axis labels
+        }
 
     }
 
