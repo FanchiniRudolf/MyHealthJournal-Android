@@ -11,7 +11,9 @@ class AboutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_about)
 
 
-
+        btn_back2.setOnClickListener{
+            finish()
+        }
 
     }
 }
