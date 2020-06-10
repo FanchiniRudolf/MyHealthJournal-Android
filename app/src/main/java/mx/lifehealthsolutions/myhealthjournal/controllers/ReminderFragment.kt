@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_reminder.*
 import kotlinx.android.synthetic.main.fragment_reminder.view.*
 import kotlinx.android.synthetic.main.fragment_reminder.view.conditionSpinner
+import mx.lifehealthsolutions.myhealthjournal.models.NotificationUtils
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.interfaces.DownloadedDataListener
 import mx.lifehealthsolutions.myhealthjournal.models.Condition
@@ -110,6 +111,7 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
                 inputMedicine.getText()?.clear()
                 spinner.setSelection(0)
                 frequencySpinner.setSelection(0)
+                createNotification(startDateTV.text.toString(), cal.time.toString())
             })
             .setNegativeButton("No", null)
             .setCancelable(false)
@@ -163,6 +165,16 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
         print(adapter)
         val numberConditions = spinner.count
         Log.w("onActivityResult", "El spinner tiene ${numberConditions} valores")
+    }
+
+
+    fun createNotification(date: String, hour: String){
+        Log.w("createNotification", "Ha entrado a createNotification")
+        val not = NotificationUtils()
+        val time = "${Calendar.HOUR_OF_DAY}:${Calendar.MINUTE}"
+        val tempDate = "10/06/2020"
+        //not.setNotification(java.util.Calendar.getInstance().timeInMillis, time, date, this.requireActivity())
+        not.setNotification(java.util.Calendar.getInstance().timeInMillis, time, tempDate, this.requireActivity())
     }
 
 }
