@@ -30,7 +30,6 @@ class CreateConditonActiv : AppCompatActivity() {
 
         if (newCondition != null && newConditionDescription != null) {
             val newCond = hashMapOf(
-                //"condition" to newCondition,
                 "description" to newConditionDescription
             )
             val db = FirebaseFirestore.getInstance()
