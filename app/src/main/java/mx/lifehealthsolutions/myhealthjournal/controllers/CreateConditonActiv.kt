@@ -31,7 +31,7 @@ class CreateConditonActiv : AppCompatActivity() {
         var newConditionDescription = newCondDescription?.text.toString()
 
         var user = FirebaseAuth.getInstance().currentUser?.email
-        if(user == ""){
+        if(user == null){
             user = User.email
         }
         if (newCondition != null && newConditionDescription != null) {
