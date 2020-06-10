@@ -138,6 +138,11 @@ class ReminderActivity : AppCompatActivity(), DownloadedDataListener {
             val db = FirebaseFirestore.getInstance()
             db.collection("Users/$user/Conditions/$entryCondition/Medicines").document("$startDate-$medicine")
                 .set(newEntry)
+
+            db.collection("Users/$user/Conditions/$entryCondition/Medicines").document("$startDate-$medicine")
+                .set(newEntry)
+            db.collection("Users/$user/Medicines").document("$startDate-$medicine")
+                .set(newEntry)
         }
     }
     override fun didFinishDownload(adapter: SpinnerAdapter) {
@@ -157,4 +162,6 @@ class ReminderActivity : AppCompatActivity(), DownloadedDataListener {
         //not.setNotification(java.util.Calendar.getInstance().timeInMillis, time, date, this.requireActivity())
         not.setNotification(java.util.Calendar.getInstance().timeInMillis, time, tempDate, this)
     }
+
+
 }

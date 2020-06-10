@@ -24,41 +24,34 @@ class AdapterViewMedicine(var email: String?): RecyclerView.Adapter<AdapterViewM
         notifyDataSetChanged()
         arrMedicinas  = arrayOf(
             Medicine("4", "06-09-2020",  "06-09-2020", "Paracetamlo", "Migraña")
-
         )
+        downloadMedicines()
     }
 
     private fun downloadMedicines() {
         val db = FirebaseFirestore.getInstance()
         var userStr =  email
-        var hola  = ""
-        db.collection("Users/$userStr/Conditions")
+
+        db.collection("Users/$userStr/Medicines")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
-                    // Loop through each medicine
-                    db.collection("Users/$userStr/Condition/${document.id}/Medicines")
-                        .get()
-                        .addOnSuccessListener { medicines  ->
-                            for(medicine in medicines){
-                                val freq = medicine.data.get("frequency").toString()
-                                val start_date = medicine.data.get("treatment_start").toString()
-                                val finish_date = medicine.data.get("treatment_finish").toString()
-                                val name = medicine.data.get("medicine").toString()
-                                val condition = medicine.data.get("medicine").toString()
-                                arrMedicines.add(Medicine(freq, start_date, finish_date, name, condition))
-                            }
-                        }
-
-
+                    val freq = document.data.get("frequency").toString()
+                    val start_date = document.data.get("treatment_start").toString()
+                    val finish_date = document.data.get("treatment_finish").toString()
+                    val name = document.data.get("medicine").toString()
+                    val condition = document.data.get("medicine").toString()
+                    arrMedicines.add(Medicine(freq, start_date, finish_date, name, condition))
                 }
-                arrMedicinas = arrMedicines.toTypedArray<Medicine>()
+
                 notifyDataSetChanged()
             }
             .addOnFailureListener { exception ->
                 Log.w(ContentValues.TAG, "Error getting documents: ", exception)
             }
+
+        arrMedicinas = arrMedicines.toTypedArray<Medicine>()
+        notifyDataSetChanged()
 
     }
     inner class RenglonMedicina(var vistaRenglon: View): RecyclerView.ViewHolder(vistaRenglon)

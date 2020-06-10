@@ -32,7 +32,6 @@ class AdapterViewCondition(var email: String?): RecyclerView.Adapter<AdapterView
     fun downloadConditions() {
         val db = FirebaseFirestore.getInstance()
         var userStr =  "${User.email}"
-        var hola  = ""
         db.collection("Users/$userStr/Conditions")
             .get()
             .addOnSuccessListener { documents ->
@@ -41,11 +40,8 @@ class AdapterViewCondition(var email: String?): RecyclerView.Adapter<AdapterView
                     var temp = document.data.get("description").toString()
 
                     arrConditions.add(Condition(document.id, temp))
-                    hola = "asda"
                 }
                 notifyDataSetChanged()
-                var temp =  "Hello World"
-                println(temp)
             }
             .addOnFailureListener { exception ->
                 Log.w(ContentValues.TAG, "Error getting documents: ", exception)

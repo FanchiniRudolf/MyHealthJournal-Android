@@ -9,7 +9,7 @@ data class Medicine(val frequency: String, val start_date: String, val end_date:
 
     companion object {
         val arrMedicinas = arrayOf(
-            Medicine("4", "06-09-2020",  "06-09-2020", "Paracetamlo", "Migraña")
+            Medicine("4", "06-09-2020",  "06-09-2020", "Paracetamol", "Migraña")
         )
     }
 

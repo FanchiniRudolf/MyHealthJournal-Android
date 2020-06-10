@@ -71,5 +71,31 @@ class MedicineFragment : Fragment(), ListenerRecycler {
         return
     }
 
+    override fun onResume() {
+        super.onResume()
+        val db = FirebaseFirestore.getInstance()
+        var userStr =  "${adaptadorMedicine.email}"
+        arrMedicines.clear()
+        db.collection("Users/$userStr/Medicines/")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                    val freq = document.data.get("frequency").toString()
+                    val start_date = document.data.get("treatment_start").toString()
+                    val finish_date = document.data.get("treatment_finish").toString()
+                    val name = document.data.get("medicine").toString()
+                    val condition = document.data.get("condition").toString()
+                    arrMedicines.add(Medicine(freq, start_date, finish_date, name, condition))
+                }
+                adaptadorMedicine.arrMedicinas = arrMedicines.toTypedArray<Medicine>()
+                Log.i("TAMAÑO", adaptadorMedicine.arrMedicinas!!.size.toString())
+                adaptadorMedicine.notifyDataSetChanged()
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+            }
+
+    }
 
 }
