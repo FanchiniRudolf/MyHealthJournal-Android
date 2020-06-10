@@ -6,6 +6,7 @@ import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
+import android.provider.AlarmClock
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -110,7 +111,6 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
                 inputMedicine.getText()?.clear()
                 spinner.setSelection(0)
                 frequencySpinner.setSelection(0)
-                createNotification(startDateTV.text.toString(), cal.time.toString())
             })
             .setNegativeButton("No", null)
             .setCancelable(false)
@@ -169,15 +169,4 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
         val numberConditions = spinner.count
         Log.w("onActivityResult", "El spinner tiene ${numberConditions} valores")
     }
-
-
-    fun createNotification(date: String, hour: String){
-        Log.w("createNotification", "Ha entrado a createNotification")
-        val not = NotificationUtils()
-        val time = "${Calendar.HOUR_OF_DAY}:${Calendar.MINUTE}"
-        val tempDate = "10/06/2020"
-        //not.setNotification(java.util.Calendar.getInstance().timeInMillis, time, date, this.requireActivity())
-        not.setNotification(java.util.Calendar.getInstance().timeInMillis, time, tempDate, this.requireActivity())
-    }
-
 }
