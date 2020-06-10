@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity(), LocationListener, DownloadedDataListen
             finish()
         }
 
+        User.email = FirebaseAuth.getInstance().currentUser?.email.toString()
+
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         navView.setOnNavigationItemSelectedListener{ menuItem ->

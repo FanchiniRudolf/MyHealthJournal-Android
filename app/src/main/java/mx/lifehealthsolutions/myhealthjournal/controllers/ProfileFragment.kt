@@ -29,7 +29,7 @@ class ProfileFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         if(auth != null){
-            if(User.name == "" && User.email == "" && User.age == ""  && User.sex == ""  && User.height == "" && User.weight == "")
+            if(User.age == ""  && User.sex == ""  && User.height == "" && User.weight == "")
             User.downloadInfo(view)
         }
 
