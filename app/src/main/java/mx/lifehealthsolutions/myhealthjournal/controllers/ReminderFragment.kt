@@ -50,7 +50,6 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
         User.downloadConditionNames(this.requireActivity())
 
 
-
         val dateSetListenerStart = object: DatePickerDialog.OnDateSetListener{
             override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
                 cal.set(Calendar.YEAR, year)
@@ -138,7 +137,10 @@ class ReminderFragment : Fragment(), DownloadedDataListener {
         var entryCondition = conditionSpinner.selectedItem
         var frequency = frequencySpinner.selectedItem
 
-        val user = FirebaseAuth.getInstance().currentUser?.email
+        var user = FirebaseAuth.getInstance().currentUser?.email
+        if(user == ""){
+            user = User.email
+        }
 
         if (startDate != null && finishDate != null && entryCondition != null &&
             medicine != null && frequency != null) {
