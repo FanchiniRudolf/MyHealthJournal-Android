@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_crear_entrada.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.interfaces.DownloadedDataListener
 import mx.lifehealthsolutions.myhealthjournal.models.User
+import java.time.LocalDateTime
 import java.util.*
 
 class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
@@ -31,9 +32,9 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
         spinner = findViewById(R.id.spinnerTipo)
         //val adapter = User.downloadConditionNames(this, spinner)
         //spinnerTipo.adapter = adapter
-        val thisMoment = Date()
-        val todayDate = "${thisMoment.year+1900}-${thisMoment.month}-${thisMoment.date}"
-        val currentTime = "${thisMoment.hours}:${thisMoment.minutes}"
+        val thisMoment = LocalDateTime.now()
+        val todayDate = "${thisMoment.year}-${thisMoment.monthValue}-${thisMoment.dayOfMonth}"
+        val currentTime = "${thisMoment.hour}:${thisMoment.minute}"
         etFecha.setText(todayDate)
         etHora.setText(currentTime)
 
