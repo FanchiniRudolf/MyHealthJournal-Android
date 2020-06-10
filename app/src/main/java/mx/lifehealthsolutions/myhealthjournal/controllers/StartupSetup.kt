@@ -57,6 +57,7 @@ class StartupSetup : AppCompatActivity() {
             val mainIntent = Intent(this, MainActivity::class.java)
             User.name = usrName
             startActivity(mainIntent)
+            finish()
         }
 
     }
