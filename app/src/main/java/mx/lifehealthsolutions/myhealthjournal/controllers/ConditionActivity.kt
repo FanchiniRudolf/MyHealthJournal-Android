@@ -51,7 +51,7 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
         val  chart: LineChart = lcGraph
 
 
-        //reduceData()
+        reduceData()
         Log.w("chartmax", (chartEntryMaximum-chartEntryMinimum).toString())
         Log.w("chartmax", (chartEntryMaximum).toString())
         Log.w("chartmini", (chartEntryMinimum).toString())
@@ -66,14 +66,49 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
         chart.animateX(1000, Easing.EaseInCubic)
         chart.xAxis.axisMaximum = chartEntryMaximum+100
         chart.xAxis.axisMinimum = chartEntryMinimum-100
-        //todo agrupar datos
 
 
     }
 
     private fun reduceData() {
+        val todaySeconds = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59).toEpochSecond(ZoneOffset.MIN)
+        val lastMonthSeconds = LocalDateTime.now().minusMonths(1).toEpochSecond(ZoneOffset.MIN)
+        val month = ArrayList<Long>()
+        val secondsInADay = 86400 //60*60*24
+        var currentDay = lastMonthSeconds
+        var chartEntriesMonth =  ArrayList<ChartEntry>()
+        val averageSeverityArray = ArrayList<ArrayList<Float>>()
+
+        while (currentDay < todaySeconds){
+            month.add(currentDay)
+            averageSeverityArray.add(ArrayList<Float>())
+            chartEntriesMonth.add(ChartEntry(currentDay +0f, 0f))
+            currentDay += secondsInADay
+        }
+
+
         for (chartEntry in chartEntries){
-            chartEntry.x = chartEntry.x - chartEntryMinimum
+            val seconds = chartEntry.x
+            val severity = chartEntry.y
+            var day = 0
+            if (seconds > lastMonthSeconds){
+                while (seconds > month[day]){
+                        day++
+                }
+                averageSeverityArray[day-1].add(severity)
+            }
+        }
+        chartEntries.removeAll(chartEntries)
+
+        for (dayIndex in 0..month.size-1){
+            val average: Float
+            if (averageSeverityArray[dayIndex].size!=0){
+                average = averageSeverityArray[dayIndex].average().toFloat()
+            }else{
+                average = 0f
+            }
+            val chartEntry = ChartEntry(month[dayIndex]+0f, average)
+            chartEntries.add(chartEntry)
         }
     }
 
@@ -138,11 +173,14 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
 
     private fun addEntry(severity: Float, date: String, time: String) {
         val dateArr = date.split("-").toMutableList()
+        val timeArr = time.split(":").toMutableList()
         if (dateArr[1].length == 1) dateArr[1] = "0${dateArr[1]}"
         if (dateArr[2].length == 1) dateArr[2] = "0${dateArr[2]}"
-        val dateTime = "${dateArr[0]}-${dateArr[1]}-${dateArr[2]}T${time}:00" //concatenation
+        if (timeArr[0].length == 1) timeArr[0] = "0${timeArr[0]}"
+        if (timeArr[1].length == 1) timeArr[1] = "0${timeArr[1]}"
+        val dateTime = "${dateArr[0]}-${dateArr[1]}-${dateArr[2]}T${timeArr[0]}:${timeArr[1]}:00" //concatenation
         val date = LocalDateTime.parse(dateTime)
-        val seconds = date.toEpochSecond(ZoneOffset.MIN).toString().toFloat()/60*60*24
+        val seconds = date.toEpochSecond(ZoneOffset.MIN).toString().toFloat()
         if (seconds < chartEntryMinimum) chartEntryMinimum = seconds
         if (seconds > chartEntryMaximum) chartEntryMaximum = seconds
         var entry = ChartEntry(seconds, severity)
