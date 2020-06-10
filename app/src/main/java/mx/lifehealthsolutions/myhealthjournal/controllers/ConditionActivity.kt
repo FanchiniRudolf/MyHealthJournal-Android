@@ -56,13 +56,16 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
         Log.w("chartmax", (chartEntryMaximum).toString())
         Log.w("chartmini", (chartEntryMinimum).toString())
         Log.w("chart", chartEntries.toString())
+
         val data = LineDataSet(chartEntries, "Histórico")
         data.setDrawValues(true)
         data.color = Color.GREEN
-        data.setDrawFilled(true)
-        chart.data = LineData(data)
         data.fillColor = Color.GREEN
-        chart.description.text = "Historico"
+        data.setDrawFilled(true)
+        data.cubicIntensity = 1f
+        
+        chart.data = LineData(data)
+        chart.description.text = "Severidad"
         chart.animateX(1000, Easing.EaseInCubic)
         chart.xAxis.axisMaximum = chartEntryMaximum+100
         chart.xAxis.axisMinimum = chartEntryMinimum-100
