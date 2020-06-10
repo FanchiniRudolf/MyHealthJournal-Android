@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Spinner
 import com.google.firebase.auth.FirebaseAuth
@@ -36,23 +37,18 @@ class EntryDataActiv : AppCompatActivity() {
         conditionRef.get()
             .addOnSuccessListener { document ->
                 if (document != null){
-                    //print(typeOf(document.data))
-
-
-                    db.collection("Users/$userStr/Conditions/$condition_name/Entries/$entry_name")
+                    db.collection("Users/$userStr/Conditions/$condition_name/Entries")
+                        .document("$entry_name")
                         .get()
-                        .addOnSuccessListener { documents ->
-                            for (document in documents) {
+                        .addOnSuccessListener { document ->
+                            if (document != null) {
                                 print("-------")
                                 print("$document.data")
+                                Log.w("document", "$document.doc")
                                 //entry = Entry()
                              }
-
                             setData()
-                            
-
                         }
-
                 }
                 else{
                     //Empty Recycler
@@ -66,4 +62,12 @@ class EntryDataActiv : AppCompatActivity() {
         //todo
     }
 
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(false);
+            finish()
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
+    }
 }
