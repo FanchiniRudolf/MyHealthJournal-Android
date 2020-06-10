@@ -52,8 +52,22 @@ class CreateConditonActiv : AppCompatActivity() {
 
 
     fun exitSavingData(v: View) {
-        registerConditionDB()
+        if (txtNewCondition.text.toString().isNotEmpty() &&
+            newCondDescription.text.toString().isNotEmpty()) {
+            registerConditionDB()
+        } else {
+            alertForMissingFields()
+        }
+    }
 
+
+    private fun alertForMissingFields() {
+        val alerta = AlertDialog.Builder(this)
+        alerta.setMessage("Error:\nFaltan campos por llenar.")
+            .setPositiveButton("Entendido", null)
+            .setCancelable(false)
+            .create()
+        alerta.show()
     }
 
 
