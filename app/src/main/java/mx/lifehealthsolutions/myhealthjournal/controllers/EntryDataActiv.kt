@@ -24,10 +24,14 @@ class EntryDataActiv : AppCompatActivity() {
         setContentView(R.layout.activity_entry_data)
         Log.w("Entry Name", intent.getStringExtra("ENTRY"))
         Log.w("Condition Name", intent.getStringExtra("CONDITION"))
+
         val entry_name = intent.getStringExtra("ENTRY")
         val condition_name = intent.getStringExtra("CONDITION")
         downloadEntries(condition_name, entry_name)
 
+        btn_back4.setOnClickListener{
+            finish()
+        }
     }
 
     fun downloadEntries(condition_name: String, entry_name: String){

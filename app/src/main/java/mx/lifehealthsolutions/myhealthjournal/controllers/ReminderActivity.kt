@@ -21,12 +21,8 @@ import kotlinx.android.synthetic.main.activity_reminder.frequencySpinner
 import kotlinx.android.synthetic.main.activity_reminder.inputMedicine
 import kotlinx.android.synthetic.main.activity_reminder.registerBtn
 import kotlinx.android.synthetic.main.activity_reminder.startDateTV
-import kotlinx.android.synthetic.main.fragment_reminder.*
-import kotlinx.android.synthetic.main.fragment_reminder.view.*
-import kotlinx.android.synthetic.main.fragment_reminder.view.conditionSpinner
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.interfaces.DownloadedDataListener
-import mx.lifehealthsolutions.myhealthjournal.models.NotificationUtils
 import mx.lifehealthsolutions.myhealthjournal.models.User
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,7 +39,7 @@ class ReminderActivity : AppCompatActivity(), DownloadedDataListener {
         spinner = conditionSpinner
         User.downloadConditionNames(this)
 
-        btn_back.setOnClickListener{
+        btn_back2.setOnClickListener{
             finish()
         }
 

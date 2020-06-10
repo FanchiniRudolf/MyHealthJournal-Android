@@ -31,7 +31,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/btn_back"
+                    android:id="@+id/btn_back2"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
                     android:layout_marginLeft="25dp"
                     android:text="Acerca de"
                     android:textSize="22sp"
-                    app:layout_constraintStart_toEndOf="@+id/btn_back"
+                    app:layout_constraintStart_toEndOf="@+id/btn_back1"
                     app:layout_constraintTop_toTopOf="parent" />
             </LinearLayout>
 

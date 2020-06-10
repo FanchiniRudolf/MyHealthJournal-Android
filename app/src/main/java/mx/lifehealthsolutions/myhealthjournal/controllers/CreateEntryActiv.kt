@@ -18,7 +18,6 @@ import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.interfaces.DownloadedDataListener
 import mx.lifehealthsolutions.myhealthjournal.models.User
 import java.time.LocalDateTime
-import java.util.*
 
 class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
 
@@ -38,7 +37,7 @@ class CreateEntryActiv : AppCompatActivity(), DownloadedDataListener {
         etFecha.setText(todayDate)
         etHora.setText(currentTime)
 
-        btn_back.setOnClickListener{
+        btn_back2.setOnClickListener{
             if (spinner.selectedItemPosition != 0 && etDescripcion.text.toString().isNotEmpty()
                 && etFecha.text.toString().isNotEmpty() && etHora.text.toString().isNotEmpty()) {
                 alertForExit()

@@ -43,7 +43,7 @@ class ConditionActivity : AppCompatActivity(), ListenerRecycler {
         tvConditionName.text = condition_name
         tvDetailCondition.text = condition_description
 
-        btn_back.setOnClickListener{
+        btn_back2.setOnClickListener{
             finish()
         }
 
