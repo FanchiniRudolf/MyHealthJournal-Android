@@ -81,9 +81,26 @@ class ReminderActivity : AppCompatActivity(), DownloadedDataListener {
         }
     }
 
-    private fun saveChanges() {
-        mostrarMensaje()
+
+    private fun alertForMissingFields() {
+        val alerta = AlertDialog.Builder(this)
+        alerta.setMessage("Error:\nFaltan campos por llenar.")
+            .setPositiveButton("Entendido", null)
+            .setCancelable(false)
+            .create()
+        alerta.show()
     }
+
+
+    private fun saveChanges() {
+        if (conditionSpinner.selectedItemPosition != 0 &&
+            inputMedicine.text.toString().isNotEmpty()) {
+            mostrarMensaje()
+        } else {
+            alertForMissingFields()
+        }
+    }
+
 
     private fun mostrarMensaje() {
         val alerta = AlertDialog.Builder(this)
