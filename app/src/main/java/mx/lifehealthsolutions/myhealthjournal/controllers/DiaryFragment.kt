@@ -41,8 +41,11 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         }
 
         val user = FirebaseAuth.getInstance().currentUser?.email
-        adaptadorCondition = AdapterViewCondition(User.email)
+        if(User.email != ""){
+            adaptadorCondition = AdapterViewCondition(User.email)
+        }
 
+        adaptadorCondition = AdapterViewCondition(user)
         val layout = LinearLayoutManager(activity)
         layout.orientation = LinearLayoutManager.VERTICAL
 
@@ -61,7 +64,7 @@ class DiaryFragment : Fragment(), ListenerRecycler {
         val db = FirebaseFirestore.getInstance()
         var userStr =  "${adaptadorCondition.email}"
         arrConditions.clear()
-        db.collection("Users/$userStr/Conditions")
+        db.collection("Users/$userStr/Conditions/")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
