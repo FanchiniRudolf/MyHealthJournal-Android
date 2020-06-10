@@ -11,6 +11,7 @@ import android.widget.Spinner
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_crear_entrada.*
+import kotlinx.android.synthetic.main.activity_entry_data.*
 import mx.lifehealthsolutions.myhealthjournal.R
 import mx.lifehealthsolutions.myhealthjournal.models.Entry
 import mx.lifehealthsolutions.myhealthjournal.models.User
@@ -45,9 +46,13 @@ class EntryDataActiv : AppCompatActivity() {
                                 print("-------")
                                 print("$document.data")
                                 Log.w("document", "$document.doc")
-                                //entry = Entry()
+                                val data = document.getData()
+                                entry = Entry(data?.get("condition") as String,
+                                    data?.get("date") as String, data?.get("time") as String,
+                                    data?.get("severity") as Long, data?.get("description") as String,
+                                    data?.get("event-time") as Long)
+                                setData()
                              }
-                            setData()
                         }
                 }
                 else{
@@ -59,7 +64,13 @@ class EntryDataActiv : AppCompatActivity() {
     }
 
     private fun setData() {
-        //todo
+        tvDatoFecha.text = entry.date
+        tvDatoHora.text = entry.time
+        tvDatoTipo.text = entry.condition
+        tvDatoDescripcion.text = entry.comment
+        tvDatoSeveridad.text = resources.getStringArray(R.array.arrSeverityValues)[entry.scale.toInt()]
+        tvDatoReporteEvento.text = resources.getStringArray(R.array.arrEventTimeValues)[entry.eventTime.toInt()]
+
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
